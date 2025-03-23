@@ -1,0 +1,63 @@
+@charset "UTF-8";
+@use "@/styles/base/reset" as *;
+@use "@/styles/base/mixins" as *;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* content */
+  --content-width: 1280px;
+
+  /* Color */
+  --main-color: #232b65;
+  --gray-color: #f3f3f3;
+  --notice-color: #ec5655;
+
+  /* Font Family */
+  --font-ja:
+    "Noto Sans JP", "Hiragino Sans", "BIZ UDPGothic", "Meiryo", sans-serif;
+  --font-en: "Inter", "Arial", system-ui, sans-serif;
+
+  /* animation */
+  --dulation: 0.6s;
+  --ease-in-out: cubic-bezier(0.11, 0.7, 0.43, 0.98);
+}
+
+html {
+  scroll-behavior: auto; /* Lenis が管理するので自動スクロールは無効にする */
+}
+
+body {
+  margin-top: 4.5rem;
+  font-family: var(--font-ja);
+  line-height: 1.625;
+  color: var(--main-color);
+  letter-spacing: 0.05rem;
+
+  @include md {
+    margin-top: 3.5rem;
+  }
+
+  @include sp {
+    margin-top: 3rem;
+  }
+}
+
+*[lang="en"] {
+  font-family: var(--font-en);
+  text-transform: uppercase;
+}
+
+.l-container {
+  width: min(92%, var(--content-width));
+  margin: 0 auto;
+}
+
+.l-container__pl {
+  margin-left: calc((100% - min(92%, var(--content-width))) / 2);
+}
+
+.l-container__pr {
+  margin-right: calc((100% - min(92%, var(--content-width))) / 2);
+}

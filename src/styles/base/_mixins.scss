@@ -1,0 +1,19 @@
+@use "variables" as *;
+
+@mixin sp {
+  @media (max-width: #{$breakpoint-sp}) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (max-width: #{$breakpoint-md}) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: #{$breakpoint-lg}) {
+    @content;
+  }
+}

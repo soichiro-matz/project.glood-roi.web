@@ -1,0 +1,135 @@
+/*! Oreset.css v2.0.0 | MIT License | https://github.com/hirosiva/Oreset.css */
+
+/*
+  # Global
+---------------------------------------------- */
+*,
+::before,
+::after {
+  min-inline-size: 0;
+}
+
+/*
+  # Document & Sections
+---------------------------------------------- */
+:where(html) {
+  block-size: 100%;
+}
+
+:where(body) {
+  min-block-size: 100%;
+  overflow-x: clip;
+  font-feature-settings: "pkna";
+  color: theme("colors.dark");
+  text-rendering: optimizelegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/*
+  # Text-level semantics
+---------------------------------------------- */
+:where(a:not([class])) {
+  text-decoration-skip-ink: auto;
+}
+
+/*
+  # Embedded content
+---------------------------------------------- */
+:where(img, picture, svg) {
+  max-inline-size: 100%;
+  block-size: auto;
+}
+
+:where(svg:not([fill])) {
+  fill: currentcolor;
+}
+
+/*
+  # Forms
+---------------------------------------------- */
+
+:where(button, label, select, summary, [role="button"], [role="option"]) {
+  cursor: pointer;
+}
+
+:where(input[type="file"])::-webkit-file-upload-button,
+:where(input[type="file"])::file-selector-button {
+  cursor: pointer;
+}
+
+:where(:disabled) {
+  cursor: not-allowed;
+}
+
+:where(label:has(> input:disabled), label:has(+ input:disabled)) {
+  cursor: not-allowed;
+}
+
+:where(button) {
+  border-style: solid;
+}
+
+/*
+  # Interactive & Misc
+---------------------------------------------- */
+:where(template, [hidden]:not([hidden="until-found"])) {
+  display: none;
+}
+
+:where(summary) {
+  display: block;
+}
+
+:where(summary)::-webkit-details-marker {
+  display: none;
+}
+
+/*
+  # Accessibility
+---------------------------------------------- */
+:where([disabled], [aria-disabled="true"]) {
+  cursor: not-allowed;
+}
+
+:where([aria-busy="true"]) {
+  cursor: progress;
+}
+
+:where([aria-controls]) {
+  cursor: pointer;
+}
+
+:where([aria-hidden="false"][hidden]) {
+  display: initial;
+}
+
+:where([aria-hidden="false"][hidden]):not(:focus) {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+}
+
+:where(
+  :focus:not(:focus-visible),
+  ::before:focus:not(:focus-visible),
+  ::after:focus:not(:focus-visible)
+) {
+  outline: none;
+}
+
+abbr:where([title]),
+abbr[title] {
+  text-decoration: none;
+}
+
+/**
+ * Prettier ignore
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}

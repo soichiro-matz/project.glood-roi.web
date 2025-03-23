@@ -1,0 +1,93 @@
+{
+  "parser": {
+    "\\.jsx?$": "@markuplint/jsx-parser"
+  },
+  "extends": [
+    "markuplint:recommended-react"
+  ],
+  "nodeRules": [
+    {
+      "selector": "[async]",
+      "rules": {
+        "required-attr": false
+      }
+    },
+    {
+      "selector": "link[href^='https://fonts.googleapis.com']",
+      "rules": {
+        "character-reference": false
+      }
+    },
+    {
+      "selector": "Script",
+      "rules": {
+        "invalid-attr": {
+          "options": {
+            "allowAttrs": [
+              {
+                "name": "src",
+                "value": "string"
+              },
+              {
+                "name": "strategy",
+                "value": {
+                  "enum": [
+                    "afterInteractive",
+                    "beforeInteractive",
+                    "lazyOnload"
+                  ]
+                }
+              },
+              {
+                "name": "dangerouslySetInnerHTML",
+                "value": {
+                  "type": "JSON"
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "selector": "Script[id='gtag-init']",
+      "rules": {
+        "no-hard-code-id": false
+      }
+    }
+  ],
+  "overrides": {
+    "./src/pages/_document.js": {
+      "rules": {
+        "doctype": false
+      }
+    },
+    "./src/components/*": {
+      "rules": {
+        "permitted-contents": [
+          {
+            "tag": "picture",
+            "contents": [
+              {
+                "oneOrMore": "source"
+              },
+              {
+                "choice": [
+                  {
+                    "optional": "img"
+                  },
+                  {
+                    "optional": "Image"
+                  },
+                  {
+                    "optional": "NextImage"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

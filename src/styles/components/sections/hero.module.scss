@@ -1,0 +1,44 @@
+@charset "UTF-8";
+@use "@/styles/base/mixins" as *;
+
+.hero {
+  position: relative;
+
+  // height: 200vh;
+  padding-bottom: 200vh;
+  background-color: bisque;
+
+  .aaa {
+    background-color: red;
+  }
+
+  .slideWrapper {
+    // height: 150vh;
+  }
+
+  .fixed {
+    position: fixed;
+    top: 500px;
+    left: 0;
+    z-index: 100;
+    font-size: 4rem;
+    content: "★";
+  }
+
+  [data-rola-trigger] {
+    border: 1px solid #000;
+  }
+
+  .section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-size: 3rem;
+    font-weight: 700;
+
+    span.red {
+      background-color: red;
+    }
+  }
+}
