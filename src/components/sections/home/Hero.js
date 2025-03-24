@@ -91,9 +91,7 @@ export default function Hero() {
           Second
         </span>
       </div>
-      <p className={styles.fixed} id="target" data-rola-effect="text-clip">
-        ★
-      </p>
+
     </div>
   );
 }

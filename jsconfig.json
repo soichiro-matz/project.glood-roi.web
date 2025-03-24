@@ -6,7 +6,8 @@
       "@data/*": ["./src/data/*"],
       "@hooks/*": ["./src/js/hooks/*"],
       "@libs/*": ["./src/js/libs/*"],
-      "@scss/*": ["./src/styles/*"]
+      "@scss/*": ["./src/styles/*"],
+      "@ui/*": ["./src/components/ui/*"]
     }
   }
 }

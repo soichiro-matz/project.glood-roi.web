@@ -1,0 +1,92 @@
+@charset "UTF-8";
+@use "@/styles/base/mixins" as *;
+
+/*
+  Button
+*/
+
+.c-button {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  appearance: none;
+  cursor: pointer;
+  background-color: transparent;
+  border: 0;
+}
+
+.p-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 17rem;
+  padding: 0.5rem;
+  color: #fff;
+  border: 1px solid currentcolor;
+  border-radius: 30px;
+  transition:
+    background-color 0.3s ease-in-out,
+    color 0.3s ease-in-out;
+
+  &.-primary {
+    background: var(--main-color);
+    border-color: var(--main-color);
+  }
+
+  .p-btnText {
+    flex-grow: 1;
+    font-weight: 500;
+  }
+
+  .p-btnIcon {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    background-color: #fff;
+    border-radius: 50%;
+    transition: background-color 0.3s ease-in-out;
+
+    &::before,
+    &::after {
+      position: absolute;
+      inset: 0;
+      content: "";
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: 65%;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    &::before {
+      background-color: #fff;
+      background-image: url("/assets/img/common/icon-arrow.svg");
+      opacity: 1; /* デフォルトで表示 */
+    }
+
+    &::after {
+      background-color: var(--main-color);
+      background-image: url("/assets/img/common/icon-arrow-white.svg");
+      opacity: 0; /* デフォルトで非表示 */
+    }
+  }
+
+  &:hover,
+  &:focus-visible {
+    &.-primary {
+      color: var(--main-color);
+      background-color: #fff;
+
+      .p-btnIcon {
+        &::before {
+          opacity: 0; /* 非表示 */
+        }
+
+        &::after {
+          opacity: 1; /* 表示 */
+        }
+      }
+    }
+  }
+}

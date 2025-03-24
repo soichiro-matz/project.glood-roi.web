@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import "@/styles/globals.scss";
 import "@/styles/components/layout/_header.scss";
+import "@/styles/components/ui/ui.scss";
 import "@scss/libs/Rola.scss";
 import useRola from "@hooks/useRola";
 

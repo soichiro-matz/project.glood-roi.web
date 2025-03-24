@@ -1,6 +1,16 @@
 @charset "UTF-8";
 @use "@/styles/base/mixins" as *;
 
+/* スクロールを無効化するクラス */
+.no-scroll {
+  overflow: hidden;
+}
+
+/* スクロールバー幅の調整を行うクラス */
+.no-scroll-fix {
+  padding-right: var(--scrollbar-width);
+}
+
 .p-header {
   height: 4.5rem;
   padding: 0 3rem;
@@ -17,19 +27,25 @@
 
 /* ナビゲーションのデフォルト表示 */
 .nav-menus {
-  @apply fixed inset-0 flex items-center justify-center bg-opacity-90 lg:visible lg:relative lg:bg-transparent lg:opacity-100;
+  @apply fixed inset-0 flex lg:visible lg:relative lg:bg-transparent lg:opacity-100;
 
   transition:
     opacity 0.3s ease-in-out,
     visibility 0.3s ease-in-out;
+
+  @include md {
+    padding-right: 4%;
+    padding-left: 4%;
+    background-color: var(--base-gray-color);
+  }
 
   /* ドロワーメニュー（SP） */
   &:not(.open) {
     @apply invisible opacity-0 lg:visible lg:opacity-100;
   }
 
-  .nav-menu{
-    .nav-link{
+  .nav-menu {
+    .nav-link {
       position: relative;
       font-size: 0.9375rem;
       font-weight: 500;
@@ -38,7 +54,7 @@
 
       &::before {
         position: absolute;
-        right:0;
+        right: 0;
         bottom: -0.75rem;
         left: 0;
         display: flex;
@@ -46,14 +62,14 @@
         width: 2.25rem;
         height: 4px;
         margin: 0 auto;
-        content: '';
+        content: "";
         background: var(--main-color);
         border-radius: 2px;
         transform: scale(0, 1);
 
         // transform: translateX(-50%);
         transform-origin: center top;
-        transition: transform .2s;
+        transition: transform 0.2s;
       }
 
       .c-txt.line:hover::before {
@@ -61,23 +77,24 @@
         transform-origin: left top;
       }
 
-
       &:hover,
-      &:focus-visible{
+      &:focus-visible {
         // color: var(--aqua-blue-color);
 
         &::before {
-        transform: scale(1, 1);
-        transform-origin: center top;
+          transform: scale(1, 1);
+          transform-origin: center top;
+
+          @include md {
+            display: none;
+          }
+        }
       }
 
-      }
-
-
-      &.has-children{
+      &.has-children {
         margin-right: 1.5rem;
 
-        &::after{
+        &::after {
           position: absolute;
           top: calc(50% + 0.1rem);
           right: -1rem;
@@ -85,19 +102,79 @@
           height: 0.5rem;
           content: "";
           background-color: currentcolor;
-          clip-path: polygon(0 1.5px, 1.5px 0, 50% calc(100% - 3px), calc(100% - 1.5px) 0, 100% 1.5px, 50% 100%);
+          clip-path: polygon(
+            0 1.5px,
+            1.5px 0,
+            50% calc(100% - 3px),
+            calc(100% - 1.5px) 0,
+            100% 1.5px,
+            50% 100%
+          );
           translate: 0 -50%;
 
+          @include md {
+            display: none;
+          }
         }
       }
     }
 
-    .nav-childMenu__wrapper{
+    .toggle-button {
+      display: none;
+
+      @include md {
+        display: block;
+      }
+
+      .toggle-mark {
+        &::before,
+        &::after {
+          position: absolute;
+          content: "";
+          background-color: var(--main-color);
+          transition:
+            opacity 0.15s ease-in-out,
+            transform 0.3s ease-in-out;
+        }
+
+        &::before {
+          top: 50%;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          opacity: 1;
+          transform: translateY(-50%);
+        }
+
+        &::after {
+          top: 0;
+          left: 50%;
+          width: 2px;
+          height: 100%;
+          transform: translateX(-50%);
+        }
+      }
+
+      &[aria-expanded="true"] {
+        .toggle-mark {
+          &::before {
+            opacity: 0;
+            transform: rotate(-90deg);
+          }
+
+          &::after {
+            transform: rotate(-90deg);
+          }
+        }
+      }
+    }
+
+    .nav-childMenu__wrapper {
       position: absolute;
       top: calc(90%);
       left: 50%;
       padding: 1.6875rem 2rem;
-      color:#fff;
+      color: #fff;
       white-space: nowrap;
       pointer-events: none;
       background-color: var(--main-color);
@@ -106,34 +183,67 @@
       opacity: 0;
       backdrop-filter: blur(0.25rem);
       transform: translateX(-50%);
-      transition: opacity 0.2s ease-in-out;
+      transition:
+        opacity 0.2s ease-in-out,
+        max-height 0.4s ease-in-out;
 
-      // transition: var(--transit-default);
+      @include md {
+        position: static;
+        max-height: 0;
+        padding: 0 0 0 1rem;
+        overflow: hidden;
+        color: var(--main-color);
+        background-color: transparent;
+        box-shadow: none;
+        backdrop-filter: unset;
+        transform: translateX(0);
 
-
-      .nav-childMenu{
-        .nav-childMenu__link{
-          font-size: 0.875rem;
-          font-weight: 500;
+        &.open {
+          max-height: 150px;
+          pointer-events: auto;
+          opacity: 1;
         }
       }
 
+      .nav-childMenu {
+        @include md {
+          margin-top: 0.75rem;
+        }
 
+        .nav-childMenu__link {
+          position: relative;
+          font-size: 0.875rem;
+          font-weight: 500;
+
+          &::before {
+            @include md {
+              position: absolute;
+              top: 50%;
+              left: -1rem;
+              width: 0.75rem;
+              height: 2px;
+              content: "";
+              background-color: #d9d9d9;
+              transform: translateY(-50%);
+            }
+          }
+        }
+      }
     }
 
     &:hover,
-    &:focus-visible{
-       .nav-childMenu__wrapper{
+    &:focus-visible {
+      .nav-childMenu__wrapper {
         pointer-events: auto;
         opacity: 1;
       }
-
     }
-
-
   }
 
-
+  /* アニメーション (オプション) */
+  .transition-opacity {
+    transition: opacity 0.4s;
+  }
 }
 
 /* ハンバーガーボタン */
