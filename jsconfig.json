@@ -2,8 +2,10 @@
   "compilerOptions": {
     "paths": {
       "@/*": ["./src/*"],
-      "@libs/*": ["./src/js/libs/*"],
+      "@components/*": ["./src/components/*"],
+      "@data/*": ["./src/data/*"],
       "@hooks/*": ["./src/js/hooks/*"],
+      "@libs/*": ["./src/js/libs/*"],
       "@scss/*": ["./src/styles/*"]
     }
   }

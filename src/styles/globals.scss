@@ -11,6 +11,7 @@
 
   /* Color */
   --main-color: #232b65;
+  --aqua-blue-color: #2CB0E0;
   --gray-color: #f3f3f3;
   --notice-color: #ec5655;
 
@@ -33,7 +34,8 @@ body {
   font-family: var(--font-ja);
   line-height: 1.625;
   color: var(--main-color);
-  letter-spacing: 0.05rem;
+
+  // letter-spacing: 0.05rem;
 
   @include md {
     margin-top: 3.5rem;
