@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useEffect } from "react";
 import styles from "@/styles/components/sections/hero.module.scss";
 
 // オプションをインポートする
@@ -19,6 +20,14 @@ const images = [
 ];
 
 export default function Hero() {
+  useEffect(() => {
+    const swiper = document.querySelector(".swiper");
+
+    if (swiper) {
+      swiper.style.height = "100%";
+    }
+  }, []);
+
   // コールバック関数の定義
   const callback = (element, isInView, options, progress) => {
     if (isInView) {
@@ -38,39 +47,48 @@ export default function Hero() {
 
   return (
     <div className={styles.hero}>
-      <Swiper
-        modules={[Navigation, Pagination, Autoplay, EffectFade]}
-        effect={"fade"}
-        fadeEffect={{ crossFade: true }}
-        breakpoints={1} // slidesPerViewを指定
-        slidesPerView={"auto"} // ハイドレーションエラー対策
-        centeredSlides={true} // スライドを中央に配置
-        loop={true} // スライドをループさせる
-        speed={1500} // スライドが切り替わる時の速度
-        autoplay={{
-          delay: 4000,
-          disableOnInteraction: false,
-        }} // スライド表示時間
-        navigation // ナビゲーション（左右の矢印）
-        pagination={{
-          clickable: true,
-        }} // ページネーション, クリックで対象のスライドに切り替わる
-        className={styles.slideWrapper}
-      >
-        {images.map((src, index) => (
-          <SwiperSlide key={index}>
-            <Image
-              src={src}
-              width={5000}
-              height={3334}
-              alt="Slider Image"
-              sizes="(max-width: 768px) 110vw, (max-width: 1024px) 110vw, 1600px"
-              className={"slideImage"}
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-      <div className={styles.section}>
+      <div className={styles.mySwiperWrapper}>
+        <Swiper
+          modules={[Navigation, Pagination, Autoplay, EffectFade]}
+          effect={"fade"}
+          fadeEffect={{ crossFade: true }}
+          breakpoints={1} // slidesPerViewを指定
+          slidesPerView={"auto"} // ハイドレーションエラー対策
+          centeredSlides={true} // スライドを中央に配置
+          loop={true} // スライドをループさせる
+          speed={1500} // スライドが切り替わる時の速度
+          autoplay={{
+            delay: 4000,
+            disableOnInteraction: false,
+          }} // スライド表示時間
+          navigation // ナビゲーション（左右の矢印）
+          pagination={{
+            clickable: true,
+          }} // ページネーション, クリックで対象のスライドに切り替わる
+          className={styles.slideWrapper}
+          observer={true} //リサイズ時の画像のガク付き対策
+          observeParents={true} //リサイズ時の画像のガク付き対策
+          observeSlideChildren={true} //リサイズ時の画像のガク付き対策
+          watchSlidesProgress={true} //リサイズ時の画像のガク付き対策
+        >
+          {images.map((src, index) => (
+            <SwiperSlide key={index} className={styles.customSlide}>
+              <Image
+                src={src}
+                width={5000}
+                height={3334}
+                alt="Slider Image"
+                sizes="(max-width: 768px) 110vw, (max-width: 1024px) 110vw, 1600px"
+                className={styles.slideImage}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+      <p className="" lang="en">
+        enriching everyone's life with the finest products from japan
+      </p>
+      {/* <div className={styles.section}>
         <span
           data-rola-trigger1
           data-rola-effect="text-clip"
@@ -80,8 +98,8 @@ export default function Hero() {
         >
           Rola
         </span>
-      </div>
-      <div className={styles.section}>
+      </div> */}
+      {/* <div className={styles.section}>
         <span data-rola-trigger2 data-rola-effect="text-clip">
           First
         </span>
@@ -90,8 +108,7 @@ export default function Hero() {
         <span data-rola-trigger2 data-rola-effect="text-clip">
           Second
         </span>
-      </div>
-
+      </div> */}
     </div>
   );
 }
