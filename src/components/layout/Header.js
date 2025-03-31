@@ -131,7 +131,7 @@ export default function Header() {
         const delay = (titleEnElements.length + 2) * 0.04;
         gsap.fromTo(
           contactButton,
-          { y: 30, opacity: 0 },
+          { y: 15, opacity: 0 },
           {
             y: 0,
             opacity: 1,
@@ -180,24 +180,24 @@ export default function Header() {
     };
   }, [isOpen]);
 
-  // `.js-childMenu__wrapper` の `open` クラスを削除する関数
-  const removeOpenClass = (key) => {
-    const parentMenu = document.querySelector(`[data-key="${key}"]`);
+  // // `.js-childMenu__wrapper` の `open` クラスを削除する関数
+  // const removeOpenClass = (key) => {
+  //   const parentMenu = document.querySelector(`[data-key="${key}"]`);
 
-    if (parentMenu) {
-      const childWrapper = parentMenu.querySelector(".js-childMenu__wrapper");
-      if (childWrapper && childWrapper.classList.contains("open")) {
-        childWrapper.classList.remove("open");
-      }
-    }
-  };
-
-  // メニューにフォーカスが当たった時、またはマウスホバー時の処理
-  // const activateMenu = (key) => {
-  //   if (isLg) {
-  //     // setActiveMenus((prev) => [...new Set([...prev, key])]);
+  //   if (parentMenu) {
+  //     const childWrapper = parentMenu.querySelector(".js-childMenu__wrapper");
+  //     if (childWrapper && childWrapper.classList.contains("open")) {
+  //       childWrapper.classList.remove("open");
+  //     }
   //   }
   // };
+
+  // メニューにフォーカスが当たった時、またはマウスホバー時の処理
+  const activateMenu = (key) => {
+    if (isLg) {
+      // setActiveMenus((prev) => [...new Set([...prev, key])]);
+    }
+  };
 
   // メニューからフォーカスが外れた時、またはマウスホバーが外れた時の処理
   // const deactivateMenu = (key) => {
@@ -259,7 +259,9 @@ export default function Header() {
   };
 
   const closeDrawerMenu = () => {
-    const navMenus = document.querySelectorAll(".js-nav-menu");
+    const navMenus = document.querySelectorAll(
+      ".js-nav-menu,.js-contact-button",
+    );
 
     setIsOpen(false);
 
@@ -267,29 +269,33 @@ export default function Header() {
       gsap.to(navMenus, {
         y: 10,
         duration: 0.5,
-        // onComplete: () => setIsOpen(false),
+      });
+      gsap.to(navMenus, {
+        y: 0,
+        duration: 0,
+        delay: 1.5,
       });
     }
   };
 
   return (
-    <header className="fixed left-0 top-0 z-50 w-full bg-white shadow-md">
+    <header className="fixed left-0 top-0 z-50 w-full bg-white">
       <div className="p-header mx-auto flex items-center justify-between">
-        <h1 className="z-10 text-xl font-bold">
+        <h1 className="z-50 text-xl font-bold">
           <Link href="/">
             <Image
               src="/assets/img/common/logo.png"
               alt="株式会社Glood roi"
               height={113}
               width={554}
-              className="h-fluid-[22,28,365,767] w-fluid-[107,136,365,767] md:h-fluid-[28,32,768,1024] md:w-fluid-[136,161,768,1024]"
+              className="h-fluid-[24,28,365,767] w-fluid-[117,136,365,767] md:h-fluid-[28,32,768,1024] md:w-fluid-[136,161,768,1024]"
             />
           </Link>
         </h1>
 
         <nav
           id="main-navigation"
-          className={`nav-menus js-nav-menus overflow-y-scroll pt-fluid-[56,72,350,1024] lg:h-full lg:overflow-y-visible lg:pt-0 ${isOpen ? "open" : ""}`}
+          className={`nav-menus js-nav-menus z-30 overflow-y-scroll pt-fluid-[56,72,350,1024] lg:h-full lg:overflow-y-visible lg:pt-0 ${isOpen ? "open" : ""}`}
           role="navigation"
           aria-label="メインナビゲーション"
         >
@@ -386,7 +392,7 @@ export default function Header() {
         </nav>
 
         <button
-          className={`hamburger z-10 h-fluid-[48,56,365,767] w-fluid-[48,56,365,767] md:h-fluid-[56,72,768,1024] md:w-fluid-[56,72,768,1024] ${isOpen ? "open" : ""}`}
+          className={`hamburger z-40 ${isOpen ? "open" : ""}`}
           onClick={() => {
             if (isOpen) {
               closeDrawerMenu(); // ドロワーメニューを閉じるアニメーション実行

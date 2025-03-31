@@ -1,0 +1,47 @@
+@charset "UTF-8";
+@use "@/styles/base/mixins" as *;
+
+.marquee {
+  overflow: hidden;
+}
+
+.loop_wrap {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+}
+
+.loop_wrap p {
+  flex: 0 0 auto;
+  overflow: hidden;
+  letter-spacing: 0.025em;
+  white-space: nowrap;
+}
+
+.loop_wrap p:nth-child(odd) {
+  animation: loop 150s -75s linear infinite;
+}
+
+.loop_wrap p:nth-child(even) {
+  animation: loop2 150s linear infinite;
+}
+
+@keyframes loop {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes loop2 {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-200%);
+  }
+}

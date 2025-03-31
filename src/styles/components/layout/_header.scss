@@ -125,6 +125,7 @@
       .title span,
       .title-en span {
         display: inline-block;
+        will-change: transform;
       }
     }
 
@@ -257,10 +258,23 @@
 
 /* ハンバーガーボタン */
 .hamburger {
-  @apply relative flex items-center justify-center p-3 focus:outline-none lg:hidden;
+  @apply relative flex items-center justify-center p-2 focus:outline-none md:p-3 lg:hidden;
+
+  --range: 4.5rem;
+
+  width: var(--range);
+  height: var(--range);
+
+  @include md {
+    --range: 4rem;
+  }
+
+  @include sp {
+    --range: 3.5rem;
+  }
 
   .humbergerButton__line {
-    @apply relative block h-0.5 w-8 bg-black transition-all duration-300;
+    @apply relative block h-0.5 w-8 bg-black transition-all duration-300 md:w-full;
 
     transition: background 0.2s ease-in-out;
 
@@ -275,11 +289,11 @@
     }
 
     &::before {
-      @apply -top-2;
+      @apply -top-2 md:-top-2.5;
     }
 
     &::after {
-      @apply top-2;
+      @apply top-2 md:top-2.5;
     }
   }
 }

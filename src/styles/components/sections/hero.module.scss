@@ -6,35 +6,119 @@
   display: flex;
   flex-direction: column;
   height: calc(100vh - 4.5rem);
-  background-color: rgb(237 237 237);
+  height: calc(100dvh - 4.5rem);
+
+  &::before,
+  &::after {
+    position: absolute;
+    bottom: 0;
+    content: "";
+    background-color: var(--base-gray-color);
+  }
+
+  &::before {
+    top: 20%;
+    right: 50%;
+    left: 0;
+
+    @include sp {
+      top: 15%;
+    }
+  }
+
+  &::after {
+    top: calc(50% - 7rem);
+    right: 0;
+    left: 50%;
+    z-index: -1;
+  }
 
   @include md {
-    height: calc(100vh - 3.5rem);
+    height: calc(100vh - 4rem);
+    height: calc(100dvh - 4rem);
   }
 
   @include sp {
-    height: calc(100vh - 3rem);
+    height: calc(100vh - 3.5rem);
+    height: calc(100dvh - 3.5rem);
   }
 
-  .mySwiperWrapper {
+  .heroBody {
     flex: 1;
     overflow: hidden;
 
-    .customSlide {
-      position: relative;
-      width: 100% !important;
-      height: 100% !important;
-      aspect-ratio: 5000 / 3334;
+    .heroBodyInner {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      width: 85%;
+      height: 100%;
+      margin: 0 auto;
 
-      img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: left top;
+      @include sp {
+        width: 92%;
+      }
+
+      .heroCopy {
+        grid-row: 1;
+        grid-column: 1 / span 12;
+        place-self: center start;
+
+        .copyText {
+          letter-spacing: 0.05em;
+          box-shadow: 0 4px 30px 0 rgb(35 43 101 / 15%);
+          opacity: 0.95;
+
+          span {
+            letter-spacing: -0.6em;
+          }
+        }
+      }
+
+      .mySwiperWrapper {
+        grid-row: 1;
+        grid-column: 2 / span 11;
+        overflow: hidden;
+        border-radius: 1rem;
+
+        @include md {
+          grid-column: 3 / span 10;
+          width: 100vw;
+          margin-right: calc(50% - 50vw);
+        }
+
+        @include sp {
+          grid-column: 3 / span 10;
+          border-radius: 0.75rem;
+        }
+
+        .customSlide {
+          position: relative;
+          width: 100% !important;
+          height: 100% !important;
+          aspect-ratio: 5000 / 3334;
+
+          .slideImage {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 30% top;
+            animation: zoomUp 7s linear 0s normal both;
+          }
+        }
       }
     }
+  }
+}
+
+@keyframes zoomUp {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(1.025);
   }
 }

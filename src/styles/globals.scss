@@ -39,11 +39,11 @@ body {
   // letter-spacing: 0.05rem;
 
   @include md {
-    margin-top: 3.5rem;
+    margin-top: 4rem;
   }
 
   @include sp {
-    margin-top: 3rem;
+    margin-top: 3.5rem;
   }
 }
 
@@ -63,6 +63,11 @@ body {
 
 .l-container__pr {
   margin-right: calc((100% - min(92%, var(--content-width))) / 2);
+}
+
+.l-grid__12 {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
 }
 
 .u-clip__full {
