@@ -30,8 +30,8 @@
   @apply fixed inset-0 flex lg:visible lg:relative lg:bg-transparent lg:opacity-100;
 
   transition:
-    opacity 0.3s ease-in-out,
-    visibility 0.3s ease-in-out;
+    opacity 0.8s cubic-bezier(0, 1.2, 0.58, 1),
+    visibility 0.8s cubic-bezier(0, 1.2, 0.58, 1);
 
   @include md {
     padding-right: 4%;
@@ -42,6 +42,10 @@
   /* ドロワーメニュー（SP） */
   &:not(.open) {
     @apply invisible opacity-0 lg:visible lg:opacity-100;
+
+    transition:
+      opacity 0.8s 0.2s cubic-bezier(0.11, 0.75, 0.34, 0.95),
+      visibility 0.8s 0.2s cubic-bezier(0.11, 0.75, 0.34, 0.95);
   }
 
   .nav-menu {
@@ -72,10 +76,10 @@
         transition: transform 0.2s;
       }
 
-      .c-txt.line:hover::before {
-        transform: scale(1, 1);
-        transform-origin: left top;
-      }
+      // .c-txt.line:hover::before {
+      //   transform: scale(1, 1);
+      //   transform-origin: left top;
+      // }
 
       &:hover,
       &:focus-visible {
@@ -116,6 +120,11 @@
             display: none;
           }
         }
+      }
+
+      .title span,
+      .title-en span {
+        display: inline-block;
       }
     }
 
@@ -183,9 +192,7 @@
       opacity: 0;
       backdrop-filter: blur(0.25rem);
       transform: translateX(-50%);
-      transition:
-        opacity 0.2s ease-in-out,
-        max-height 0.4s ease-in-out;
+      transition: opacity 0.2s ease-in-out;
 
       @include md {
         position: static;
@@ -197,11 +204,13 @@
         box-shadow: none;
         backdrop-filter: unset;
         transform: translateX(0);
+        transition: max-height 0.4s ease-in-out;
 
         &.open {
           max-height: 150px;
           pointer-events: auto;
-          opacity: 1;
+
+          // opacity: 1;
         }
       }
 
@@ -297,6 +306,6 @@
   }
 }
 
-.is-resize .nav-menu {
+.is-resize .nav-menus {
   transition: none;
 }

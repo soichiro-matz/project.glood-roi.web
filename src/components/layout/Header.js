@@ -4,25 +4,144 @@ import navLinks from "@/data/navLinks";
 import Button from "@/components/ui/Button";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import SplitType from "split-type";
+import gsap from "gsap";
+import Lettering from "@/js/libs/Lettering";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLg, setIsLg] = useState(false);
   const [activeMenus, setActiveMenus] = useState([]); // 複数のトグルを保存する配列
+  const [focusedMenu, setFocusedMenu] = useState(null);
   const router = useRouter();
 
   useEffect(() => {
     const handleResize = () => {
-      setIsLg(window.innerWidth >= 1024);
+      const isLargeScreen = window.innerWidth >= 1024;
+      setIsLg(isLargeScreen);
+
+      const childElements = document.querySelectorAll(".js-childMenu__wrapper");
+      if (childElements.length > 0) {
+        const opacity = isLargeScreen ? 0 : 1;
+
+        childElements.forEach((child) => {
+          child.style.transition = "none"; // トランジション効果を一時的に無効化
+          child.style.opacity = opacity;
+          // トランジションを再度有効化 (一瞬後に設定)
+          if (isLargeScreen) {
+            setFocusedMenu(null);
+            child.style.opacity = "";
+          }
+          requestAnimationFrame(() => {
+            child.style.transition = "";
+          });
+        });
+      }
     };
+
     handleResize();
     window.addEventListener("resize", handleResize);
+
+    const lettering = new Lettering(".js-title-en,.js-title");
+    lettering.letters();
+
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  useEffect(() => {
+    const childElements = document.querySelectorAll(".js-childMenu__wrapper");
+
+    if (childElements.length > 0) {
+      childElements.forEach((child) => {
+        if (!focusedMenu) {
+          // 👈 フォーカスが無いときだけopacityを変更
+          // child.style.opacity = 0;
+        }
+
+        if (focusedMenu === child.key && isLg) {
+          child.style.opacity = 1;
+        }
+      });
+    }
+  }, [focusedMenu]); // 👈 focusedMenu の変化を監視
 
   // ドロワーメニューの状態が変わった時に `body` のスクロールを制御する
   useEffect(() => {
     if (isOpen) {
+      // 1. `.title_en` を1文字ずつ分解
+      const titleEnElements = document.querySelectorAll(
+        ".js-title-en,.js-title",
+      );
+
+      titleEnElements.forEach((title, index) => {
+        // const splitText = new SplitType(title, { types: "chars" });
+        // const chars = splitText.chars;
+        const chars = title.querySelectorAll("span");
+
+        gsap.set(chars, { clearProps: "transform" });
+        // 2. GSAPで各文字をビューポート下から順にスライドイン
+        gsap.fromTo(
+          chars,
+          { y: 20, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            stagger: 0.04,
+            delay: index * 0.04,
+            duration: 0.3,
+            ease: "power4.out",
+          },
+        );
+
+        // 3. `child` が存在する場合、そのフェードインを少し遅れて実行
+        const parent = title.closest(".js-nav-menu");
+        const toggleButton = parent.querySelector(".js-toggle-button");
+        const child = parent.querySelector(".js-childMenu__wrapper");
+
+        if (toggleButton) {
+          gsap.fromTo(
+            toggleButton,
+            { opacity: 0 },
+            {
+              opacity: 1,
+              duration: 1,
+              delay: index * 0.04 + 0.6,
+              ease: "power4.out",
+            },
+          );
+        }
+
+        if (child) {
+          gsap.fromTo(
+            child,
+            { opacity: 0 },
+            {
+              opacity: 1,
+              duration: 1,
+              delay: index * 0.04 + 0.3,
+              ease: "power4.out",
+            },
+          );
+        }
+      });
+
+      const contactButton = document.querySelector(".js-contact-button");
+
+      if (contactButton) {
+        const delay = (titleEnElements.length + 2) * 0.04;
+        gsap.fromTo(
+          contactButton,
+          { y: 30, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            delay: delay,
+            duration: 1,
+            ease: "power4.out",
+          },
+        );
+      }
+
       const scrollbarWidth =
         window.innerWidth - document.documentElement.clientWidth;
 
@@ -39,6 +158,19 @@ export default function Header() {
     } else {
       document.body.classList.remove("no-scroll");
       document.body.classList.remove("no-scroll-fix");
+
+      const child = document.querySelectorAll(".js-childMenu__wrapper");
+
+      // ドロワーメニュー展開時にちらついてしまうのでopacityをリセット;
+      const isLargeScreen = window.innerWidth >= 1024;
+      if (child.length > 0 && !isLargeScreen) {
+        gsap.to(child, {
+          opacity: 0,
+          duration: 0.5,
+          delay: 0,
+          ease: "ease-in-out",
+        });
+      }
     }
 
     // クリーンアップ処理 (Next.js の SSR 対応)
@@ -48,34 +180,95 @@ export default function Header() {
     };
   }, [isOpen]);
 
-  const handleMouseEnter = (key) => {
-    if (isLg) setActiveMenus((prev) => [...new Set([...prev, key])]);
-  };
+  // `.js-childMenu__wrapper` の `open` クラスを削除する関数
+  const removeOpenClass = (key) => {
+    const parentMenu = document.querySelector(`[data-key="${key}"]`);
 
-  const handleMouseLeave = (key) => {
-    if (isLg) setActiveMenus((prev) => prev.filter((menu) => menu !== key));
-  };
-
-  const handleFocus = (key) => {
-    if (isLg) setActiveMenus((prev) => [...new Set([...prev, key])]);
-  };
-
-  const handleBlur = (e, key) => {
-    if (isLg) {
-      const relatedTarget = e.relatedTarget;
-      if (!relatedTarget || !relatedTarget.closest(".nav-childMenu__wrapper")) {
-        setActiveMenus((prev) => prev.filter((menu) => menu !== key));
+    if (parentMenu) {
+      const childWrapper = parentMenu.querySelector(".js-childMenu__wrapper");
+      if (childWrapper && childWrapper.classList.contains("open")) {
+        childWrapper.classList.remove("open");
       }
     }
   };
 
+  // メニューにフォーカスが当たった時、またはマウスホバー時の処理
+  // const activateMenu = (key) => {
+  //   if (isLg) {
+  //     // setActiveMenus((prev) => [...new Set([...prev, key])]);
+  //   }
+  // };
+
+  // メニューからフォーカスが外れた時、またはマウスホバーが外れた時の処理
+  // const deactivateMenu = (key) => {
+  //   // if (isLg) {
+  //   //   setActiveMenus((prev) => prev.filter((menu) => menu !== key));
+  //   //   // removeOpenClass(key); // `open` クラスを削除する処理を共通化
+  //   // }
+  // };
+
+  // マウスホバーがメニューに入った時の処理
+  // const handleMouseEnter = (key) => {
+  //   activateMenu(key);
+  // };
+
+  // マウスホバーがメニューから外れた時の処理
+  // const handleMouseLeave = (key) => {
+  //   deactivateMenu(key);
+  // };
+
+  // メニューにフォーカスが当たった時の処理
+  const handleFocus = (key) => {
+    activateMenu(key);
+    // フォーカスを設定
+    setFocusedMenu(key);
+  };
+
+  // メニューからフォーカスが外れた時の処理
+  const handleBlur = (e, key) => {
+    if (isLg) {
+      const relatedTarget = e.relatedTarget;
+
+      if (!relatedTarget || !relatedTarget.closest(".js-childMenu__wrapper")) {
+        // deactivateMenu(key);
+        // フォーカスが外れた時にリセット
+        setFocusedMenu(null);
+      }
+    }
+  };
+
+  // const toggleAccordion = (key) => {
+  //   if (!isLg) {
+  //     setActiveMenus((prev) =>
+  //       prev.includes(key)
+  //         ? prev.filter((menu) => menu !== key)
+  //         : [...prev, key],
+  //     );
+  //   }
+  // };
+
   const toggleAccordion = (key) => {
     if (!isLg) {
+      // `isLg` の場合はメニュー状態を更新しない
       setActiveMenus((prev) =>
         prev.includes(key)
           ? prev.filter((menu) => menu !== key)
           : [...prev, key],
       );
+    }
+  };
+
+  const closeDrawerMenu = () => {
+    const navMenus = document.querySelectorAll(".js-nav-menu");
+
+    setIsOpen(false);
+
+    if (navMenus) {
+      gsap.to(navMenus, {
+        y: 10,
+        duration: 0.5,
+        // onComplete: () => setIsOpen(false),
+      });
     }
   };
 
@@ -96,7 +289,7 @@ export default function Header() {
 
         <nav
           id="main-navigation"
-          className={`nav-menus overflow-y-scroll pt-fluid-[56,72,350,1024] lg:h-full lg:overflow-y-hidden lg:pt-0 ${isOpen ? "open" : ""}`}
+          className={`nav-menus js-nav-menus overflow-y-scroll pt-fluid-[56,72,350,1024] lg:h-full lg:overflow-y-visible lg:pt-0 ${isOpen ? "open" : ""}`}
           role="navigation"
           aria-label="メインナビゲーション"
         >
@@ -109,18 +302,21 @@ export default function Header() {
               const isHiddenMenus = ["privacyPolicy"]; //ヘッダーメニューで非表示（複数指定可）
               const isHidden = isHiddenMenus.includes(key);
               const isContact = key === "contact";
+              const isFocused = focusedMenu === key && isLg;
 
               return isHidden ? (
                 ""
               ) : (
                 <li
                   key={link.href}
-                  className={`nav-menu relative flex-col justify-center ${isPcHidden ? "lg:hidden" : ""} ${isContact ? "hidden lg:flex" : "flex"}`}
+                  className={`nav-menu js-nav-menu relative flex-col justify-center ${isPcHidden ? "lg:hidden" : ""} ${isContact ? "hidden lg:flex" : "flex"}`}
                   tabIndex={isLg && hasChildren ? 0 : -1}
-                  onMouseEnter={() => handleMouseEnter(key)}
-                  onMouseLeave={handleMouseLeave}
+                  // onMouseEnter={() => handleMouseEnter(key)}
+                  // onMouseLeave={() => handleMouseLeave(key)}
                   onFocus={() => handleFocus(key)}
-                  onBlur={handleBlur}
+                  onBlur={(e) => handleBlur(e, key)}
+                  data-key={`${key}`}
+
                   // onClick={() => handleItemClick(link.href)}  // ここでページ遷移を実行
                 >
                   <div className="flex w-full items-center justify-between">
@@ -130,11 +326,11 @@ export default function Header() {
                       onClick={() => setIsOpen(false)}
                     >
                       <p
-                        className={`title-en font-bold pb-fluid-[6,6,350,768] text-fluid-[24,26,350,768] lg:hidden`}
+                        className={`title-en js-title-en u-clip__full font-bold leading-none pb-fluid-[6,6,350,768] text-fluid-[24,26,350,768] lg:hidden`}
                       >
                         {link.text_en}
                       </p>
-                      <p className="text-fluid-[10,12,350,768] lg:text-base">
+                      <p className="title js-title u-clip__full leading-none text-fluid-[10,12,350,768] lg:text-base">
                         {link.text}
                       </p>
                     </Link>
@@ -142,7 +338,7 @@ export default function Header() {
                       <button
                         type="button"
                         onClick={() => toggleAccordion(key)}
-                        className="toggle-button ml-2 h-[40px] w-[40px] self-start mr-fluid-[-13,-6,350,768] mt-fluid-[-13,-6,350,768] p-fluid-[13,6,350,768] focus:outline-none"
+                        className="toggle-button js-toggle-button ml-2 h-[40px] w-[40px] self-start mr-fluid-[-13,-6,350,768] mt-fluid-[-13,-6,350,768] p-fluid-[13,6,350,768] focus:outline-none"
                         aria-expanded={isActive}
                         aria-label="Toggle submenu"
                       >
@@ -153,12 +349,13 @@ export default function Header() {
 
                   {hasChildren && (
                     <div
-                      className={`nav-childMenu__wrapper ${isActive ? "open" : ""}`}
+                      className={`nav-childMenu__wrapper js-childMenu__wrapper ${activeMenus.includes(key) ? "open" : ""}`}
+                      style={{ opacity: isFocused ? 1 : undefined }}
                       onClick={() => toggleAccordion(key)}
                     >
                       <ul className="nav-childMenu flex flex-col gap-y-3">
                         {link.children.map((child, index) => (
-                          <li key={child.href} tabIndex={isActive ? 0 : -1}>
+                          <li key={child.href} tabIndex={-1}>
                             <Link
                               href={child.href}
                               className="nav-childMenu__link block text-left"
@@ -175,7 +372,7 @@ export default function Header() {
               );
             })}
             <li className="lg:hidden">
-              <div key="contact" className="pt-5 lg:hidden">
+              <div key="contact" className="js-contact-button pt-5 lg:hidden">
                 <Button
                   tag="a"
                   linkProps={{ href: "/conact" }}
@@ -190,7 +387,13 @@ export default function Header() {
 
         <button
           className={`hamburger z-10 h-fluid-[48,56,365,767] w-fluid-[48,56,365,767] md:h-fluid-[56,72,768,1024] md:w-fluid-[56,72,768,1024] ${isOpen ? "open" : ""}`}
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => {
+            if (isOpen) {
+              closeDrawerMenu(); // ドロワーメニューを閉じるアニメーション実行
+            } else {
+              setIsOpen(true); // ドロワーメニューを開く
+            }
+          }}
           aria-expanded={isOpen}
           aria-label="メニューを開く"
           aria-controls="main-navigation"

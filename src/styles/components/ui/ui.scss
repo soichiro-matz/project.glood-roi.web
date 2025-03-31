@@ -28,6 +28,10 @@
     background-color 0.3s ease-in-out,
     color 0.3s ease-in-out;
 
+  @include tn {
+    width: 95%;
+  }
+
   &.-primary {
     background: var(--main-color);
     border-color: var(--main-color);

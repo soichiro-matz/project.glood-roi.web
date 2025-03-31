@@ -11,8 +11,8 @@
 
   /* Color */
   --main-color: #232b65;
-  --aqua-blue-color: #2CB0E0;
-  --base-gray-color: #F5F5F5;
+  --aqua-blue-color: #2cb0e0;
+  --base-gray-color: #f5f5f5;
   --gray-color: #f3f3f3;
   --notice-color: #ec5655;
 
@@ -63,4 +63,8 @@ body {
 
 .l-container__pr {
   margin-right: calc((100% - min(92%, var(--content-width))) / 2);
+}
+
+.u-clip__full {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
 }

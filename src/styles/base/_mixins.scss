@@ -1,5 +1,11 @@
 @use "variables" as *;
 
+@mixin tn {
+  @media (max-width: #{$breakpoint-tn}) {
+    @content;
+  }
+}
+
 @mixin sp {
   @media (max-width: #{$breakpoint-sp}) {
     @content;
