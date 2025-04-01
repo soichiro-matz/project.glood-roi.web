@@ -1,38 +1,13 @@
 @charset "UTF-8";
 @use "@/styles/base/mixins" as *;
 
-.marquee {
-  overflow: hidden;
-}
-
-.loop_wrap {
+.marqueeWrapper {
   display: flex;
-  width: 100%;
-  overflow: hidden;
-}
-
-.loop_wrap p {
-  flex: 0 0 auto;
-  overflow: hidden;
-  letter-spacing: 0.025em;
   white-space: nowrap;
-  animation: marqueeAnim 120s linear infinite;
 }
 
-.loop_wrap p:nth-child(1) {
-  animation-delay: 0s;
-}
-
-.loop_wrap p:nth-child(2) {
-  animation-delay: 120s;
-}
-
-@keyframes marqueeAnim {
-  0% {
-    transform: translateX(0);
-  }
-
-  100% {
-    transform: translateX(-100%);
-  }
+.marqueeText {
+  line-height: 1;
+  color: #fff;
+  white-space: nowrap;
 }
