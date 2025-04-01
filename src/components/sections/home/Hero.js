@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useEffect } from "react";
 import styles from "@/styles/components/sections/hero.module.scss";
 
-// オプションをインポートする
+// swiper
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -14,11 +14,11 @@ import useRola from "@hooks/useRola";
 
 import Marquee from "@components/parts/marquee";
 
-// publicフォルダの画像
+// swiper画像
 const images = [
-  "/assets/img/home/img-hero-01.jpeg",
-  "/assets/img/home/img-hero-02.jpeg",
-  "/assets/img/home/img-hero-03.jpeg",
+  "/assets/img/home/img-hero-01",
+  "/assets/img/home/img-hero-02",
+  "/assets/img/home/img-hero-03",
 ];
 
 export default function Hero() {
@@ -53,7 +53,7 @@ export default function Hero() {
         <div className={styles.heroBody}>
           <div className={styles.heroBodyInner}>
             <p
-              className={`z-10 flex flex-col gap-fluid-[8,12,350,768] md:gap-fluid-[10,12,1024,1480] ${styles.heroCopy}`}
+              className={`z-10 flex flex-col gap-fluid-[8,12,350,768] pt-fluid-[130,160,350,768] md:gap-fluid-[10,12,1024,1480] ${styles.heroCopy}`}
             >
               <span
                 className={`${styles.copyText} rounded-lg bg-white font-bold leading-none pb-fluid-[14,18,350,768] pt-fluid-[10,18,350,768] px-fluid-[16,24,350,768] text-fluid-[28,48,350,768] md:pb-fluid-[20,24,768,1480] md:pt-fluid-[12,16,768,1480] md:px-fluid-[24,32,768,1480] md:text-fluid-[48,64,1024,1480]`}
@@ -77,11 +77,12 @@ export default function Hero() {
                 loop={true} // スライドをループさせる
                 speed={1500} // スライドが切り替わる時の速度
                 autoplay={{
-                  delay: 4000,
+                  delay: 5000,
                   disableOnInteraction: false,
                 }} // スライド表示時間
-                navigation // ナビゲーション（左右の矢印）
+                // navigation // ナビゲーション（左右の矢印）
                 pagination={{
+                  el: `.${styles.customPagination}`,
                   clickable: true,
                 }} // ページネーション, クリックで対象のスライドに切り替わる
                 className={styles.slideWrapper}
@@ -92,50 +93,35 @@ export default function Hero() {
               >
                 {images.map((src, index) => (
                   <SwiperSlide key={index} className={styles.customSlide}>
-                    <Image
-                      src={src}
-                      width={5000}
-                      height={3334}
-                      alt="Slider Image"
-                      sizes="(max-width: 768px) 110vw, (max-width: 1024px) 110vw, 1600px"
-                      className={styles.slideImage}
-                    />
+                    <picture>
+                      <source
+                        srcSet={`${src}_sp.jpg 1x, ${src}_sp@2x.jpeg 2x"`}
+                        media="(max-width: 768px)"
+                      />
+                      <source
+                        srcSet={`${src}_tab.jpg 1x, ${src}_tab@2x.jpeg 2x"`}
+                        media="(max-width: 1024px)"
+                      />
+                      <source
+                        srcSet={`${src}_lg.jpg 1x, ${src}_lg@2x.jpeg 2x"`}
+                        media="(max-width: 1400px)"
+                      />
+                      <Image
+                        src={`${src}_pc.jpg`}
+                        width={5000}
+                        height={3334}
+                        alt="Slider Image"
+                        className={styles.slideImage}
+                      />
+                    </picture>
                   </SwiperSlide>
                 ))}
               </Swiper>
             </div>
+            <div className={styles.customPagination}></div>
           </div>
         </div>
         <Marquee />
-        {/* <div class={styles.marquee}>
-        <p
-          className={`{styles.marquee} {styles.marquee} font-bold text-fluid-[88,88,768,1024] ${styles.marqueeText}`}
-          lang="en"
-        >
-          enriching everyone's life with the finest products from japan
-        </p>
-      </div> */}
-        {/* <div className={styles.section}>
-        <span
-          data-rola-trigger1
-          data-rola-effect="text-clip"
-          // data-rola-target="#target"
-          data-rola-scrub-start="bottom"
-          data-rola-scrub-end="top center"
-        >
-          Rola
-        </span>
-      </div> */}
-        {/* <div className={styles.section}>
-        <span data-rola-trigger2 data-rola-effect="text-clip">
-          First
-        </span>
-      </div>
-      <div className={styles.section}>
-        <span data-rola-trigger2 data-rola-effect="text-clip">
-          Second
-        </span>
-      </div> */}
       </div>
       <div className="h-screen"></div>
     </>

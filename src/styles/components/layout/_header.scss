@@ -70,21 +70,12 @@
         background: var(--main-color);
         border-radius: 2px;
         transform: scale(0, 1);
-
-        // transform: translateX(-50%);
         transform-origin: center top;
         transition: transform 0.2s;
       }
 
-      // .c-txt.line:hover::before {
-      //   transform: scale(1, 1);
-      //   transform-origin: left top;
-      // }
-
       &:hover,
       &:focus-visible {
-        // color: var(--aqua-blue-color);
-
         &::before {
           transform: scale(1, 1);
           transform-origin: center top;
@@ -210,8 +201,6 @@
         &.open {
           max-height: 150px;
           pointer-events: auto;
-
-          // opacity: 1;
         }
       }
 

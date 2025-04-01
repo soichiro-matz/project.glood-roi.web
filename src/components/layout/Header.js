@@ -295,7 +295,7 @@ export default function Header() {
 
         <nav
           id="main-navigation"
-          className={`nav-menus js-nav-menus z-30 overflow-y-scroll pt-fluid-[56,72,350,1024] lg:h-full lg:overflow-y-visible lg:pt-0 ${isOpen ? "open" : ""}`}
+          className={`nav-menus js-nav-menus z-30 overflow-y-scroll pt-fluid-[64,72,350,1024] lg:h-full lg:overflow-y-visible lg:pt-0 ${isOpen ? "open" : ""}`}
           role="navigation"
           aria-label="メインナビゲーション"
         >

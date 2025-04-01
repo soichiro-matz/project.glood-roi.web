@@ -26,6 +26,10 @@
   --ease-in-out: cubic-bezier(0.11, 0.7, 0.43, 0.98);
 }
 
+nextjs-portal {
+  display: none;
+}
+
 html {
   scroll-behavior: auto; /* Lenis が管理するので自動スクロールは無効にする */
 }

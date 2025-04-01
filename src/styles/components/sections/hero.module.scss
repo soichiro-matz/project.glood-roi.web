@@ -22,7 +22,7 @@
     left: 0;
 
     @include sp {
-      top: 15%;
+      top: 25%;
     }
   }
 
@@ -66,7 +66,7 @@
         .copyText {
           letter-spacing: 0.05em;
           box-shadow: 0 4px 30px 0 rgb(35 43 101 / 15%);
-          opacity: 0.95;
+          opacity: 0.9;
 
           span {
             letter-spacing: -0.6em;
@@ -104,10 +104,49 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: 30% top;
+            object-position: right top;
             animation: zoomUp 7s linear 0s normal both;
           }
         }
+      }
+
+      .customPagination {
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        grid-row: 1/1;
+        grid-column: 1/1;
+        gap: 0.875rem;
+        place-self: flex-end center;
+        align-items: end;
+        padding: 0 1.25rem 0.125rem;
+        margin-top: 1rem;
+
+        @include md {
+          grid-column: 2 / span 1;
+        }
+
+        @include sp {
+          padding-right: 0.75rem;
+        }
+      }
+
+      .customPagination :global(.swiper-pagination-bullet) {
+        --range: 1rem;
+
+        width: var(--range);
+        height: var(--range);
+        background-color: rgb(255 255 255);
+        border-radius: 9999px;
+        opacity: 1;
+
+        @include sp {
+          --range: 0.85rem;
+        }
+      }
+
+      .customPagination :global(.swiper-pagination-bullet-active) {
+        background-color: var(--main-color);
       }
     }
   }
@@ -115,10 +154,10 @@
 
 @keyframes zoomUp {
   0% {
-    transform: scale(1);
+    transform: scale(1.1);
   }
 
   100% {
-    transform: scale(1.025);
+    transform: scale(1);
   }
 }
