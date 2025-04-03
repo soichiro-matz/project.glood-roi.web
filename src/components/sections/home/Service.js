@@ -1,71 +1,77 @@
+import { useEffect, useRef } from "react";
 import Image from "next/image";
+import gsap from "gsap";
 import { nanoid } from "nanoid";
 import styles from "@/styles/components/sections/home/services.module.scss";
 
 export default function Service({ service, index }) {
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    // const serviceSection = document.querySelector(".js-service");
+    // const isDesktop = true;
+
+    // const scrollPsarams = {
+    //   sp: {
+    //     start: ["", "top bottom", "top bottom"],
+    //   },
+    //   md: {
+    //     start: ["", "top bottom", "top bottom"],
+    //   },
+    //   lg: {
+    //     start: ["", "top bottom", "top bottom"],
+    //   },
+    // };
+
+    // let scrollPsaram = scrollPsarams.lg;
+
+    const load = async () => {
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+      gsap.registerPlugin(ScrollTrigger);
+
+      const anim = gsap.fromTo(
+        sectionRef.current,
+        {
+          y: 0,
+        },
+        {
+          y: -300,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top bottom",
+            end: "top 30%",
+            scrub: true,
+            markers: true,
+          },
+        },
+      );
+
+      // const anim = gsap.fromTo(
+      //   sectionRef.current,
+      //   { y: 0 },
+      //   {
+      //     y: -300,
+      //     scrollTrigger: {
+      //       trigger: sectionRef.current,
+      //       start: "top bottom",
+      //       end: "top 30%",
+      //       scrub: true,
+      //       markers: true,
+      //     },
+      //   },
+      // );
+
+      return () => {
+        anim.scrollTrigger?.kill();
+      };
+    };
+
+    load();
+  }, []);
+
   const bg = styles[`bg-${index % 2 === 0 ? "gray" : "white"}`];
   const bgReverce = styles[`bg-${index % 2 !== 0 ? "gray" : "white"}`];
-
-  let num = index + 1;
-  let images = null;
-  const imagePath = "/assets/img/home/icon-service-0";
-  switch (num) {
-    case 1:
-      images = (
-        <>
-          <div
-            className={`${styles.imageWrapper} ${styles._01__01} lg:h-fluid-[216,216,350,1024] lg:w-fluid-[172,172,350,1024]`}
-          >
-            <Image
-              src={imagePath + "1-01.svg"}
-              width={172}
-              height={216}
-              alt=""
-              className={`${styles.image01_01} hidden lg:block`}
-            />
-          </div>
-          <div
-            className={`${styles.imageWrapper} _01__02 lg:h-fluid-[100,104,350,1024] lg:w-fluid-[118,123,350,1024]`}
-          >
-            <Image
-              src={imagePath + "1-02.svg"}
-              width={104}
-              height={123}
-              alt=""
-              className={`${styles.image01_02} `}
-            />
-          </div>
-          <div
-            className={`${styles.imageWrapper} _01__03 h-fluid-[53,59,350,1024] w-fluid-[48,53,350,1024]`}
-          >
-            <Image
-              src={imagePath + "1-03.svg"}
-              width={53}
-              height={59}
-              alt=""
-              className={`${styles.image01_03} `}
-            />
-          </div>
-          <div
-            className={`${styles.imageWrapper} _01__04 h-fluid-[89,111] w-fluid-[90,114]`}
-          >
-            <Image
-              src={imagePath + "1-04.svg"}
-              width={114}
-              height={111}
-              alt=""
-              className={`${styles.image01_04} `}
-            />
-          </div>
-        </>
-      );
-      break;
-    case 2:
-      break;
-    case 3:
-      break;
-    default:
-  }
 
   function getIcon(
     index = 0,
@@ -75,10 +81,10 @@ export default function Service({ service, index }) {
     addClass = "",
     imageClass = "",
   ) {
+    const imagePath = "/assets/img/home/icon-service-0";
     const num = index + 1;
 
     const indexClass = styles[`_0${num}__0${count}`];
-    console.log(`_0${num}__0${count}`);
     return (
       <div
         className={`${styles.imageWrapper} ${indexClass} ${addClass} absolute`}
@@ -95,7 +101,10 @@ export default function Service({ service, index }) {
   }
 
   return (
-    <section className={`${bgReverce} ${styles.service} relative`}>
+    <section
+      {...(index !== 0 ? { ref: sectionRef } : {})}
+      className={`${bgReverce} ${styles.service} relative`}
+    >
       <div
         className={`${styles.serviceContainer} l-container l-grid__12 pt-fluid-[56,104,350,1024] lg:gap-x-8 lg:pt-fluid-[270,320,1024,1480]`}
       >
@@ -127,6 +136,14 @@ export default function Service({ service, index }) {
               103,
               132,
               "left-[6%] lg:left-[2.5%] bottom-0 w-fluid-[60,80,350,1024] h-fluid-[77,104,350,1024] lg:hidden",
+            )}
+          {index === 2 &&
+            getIcon(
+              index,
+              2,
+              124,
+              176,
+              "left-1/2  bottom-0 w-fluid-[96,124,350,1024] h-fluid-[136,176,350,1024] lg:hidden",
             )}
         </div>
         <p

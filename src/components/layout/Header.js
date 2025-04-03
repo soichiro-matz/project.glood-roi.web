@@ -4,7 +4,6 @@ import navLinks from "@/data/navLinks";
 import Button from "@/components/ui/Button";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import SplitType from "split-type";
 import gsap from "gsap";
 import Lettering from "@/js/libs/Lettering";
 
@@ -13,7 +12,7 @@ export default function Header() {
   const [isLg, setIsLg] = useState(false);
   const [activeMenus, setActiveMenus] = useState([]); // 複数のトグルを保存する配列
   const [focusedMenu, setFocusedMenu] = useState(null);
-  const router = useRouter();
+  // const router = useRouter();
 
   useEffect(() => {
     const handleResize = () => {

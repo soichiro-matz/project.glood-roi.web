@@ -3,21 +3,8 @@
 
 .services {
   .service {
-    border-top: 1px solid rgb(236 236 236);
-    border-top-left-radius: 4rem;
-    border-top-right-radius: 4rem;
-
-    @include md {
-      background-color: #fff;
-    }
-
-    @include sp {
-      border-top-left-radius: 3rem;
-      border-top-right-radius: 3rem;
-    }
-
     &:first-child {
-      border: none;
+      margin-top: 0;
 
       .serviceContainer {
         // padding-top: 3rem;
@@ -30,6 +17,33 @@
           padding-top: 1.5rem;
         }
       }
+    }
+
+    &:nth-child(2),
+    &:nth-child(3) {
+      // border-top: 1px solid rgb(236 236 236);
+      border-top-left-radius: 4rem;
+      border-top-right-radius: 4rem;
+
+      @include md {
+        background-color: #fff;
+        box-shadow: 0 0 1.5rem 0 rgb(78 65 247 / 10%);
+      }
+
+      @include sp {
+        border-top-left-radius: 3rem;
+        border-top-right-radius: 3rem;
+      }
+    }
+
+    &:nth-child(2) {
+      margin-top: -3rem;
+      box-shadow: 0 0 1.5rem #00004624;
+    }
+
+    &:nth-child(3) {
+      margin-top: -20rem;
+      box-shadow: 0 0 1.5rem 0 rgb(78 65 247 / 10%);
     }
 
     .serviceContainer {
@@ -171,7 +185,6 @@
       }
 
       &._02__01 {
-        // display: none;
         transform: translateY(-50%);
       }
 
@@ -180,12 +193,13 @@
       }
 
       &._03__01 {
-        // display: none;
         transform: translateY(-50%);
       }
 
-      &._03__01 {
-        transform: translateY(-50%);
+      &._03__02 {
+        @include md {
+          transform: translate(-50%, 65%);
+        }
       }
     }
   }
