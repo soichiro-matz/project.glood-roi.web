@@ -2,18 +2,4 @@
 @use "@/styles/base/mixins" as *;
 
 .home {
-  h2 {
-    display: flex;
-    width: 2rem;
-    padding-left: 2rem;
-    color: red;
-
-    @include md {
-      color: greenyellow;
-    }
-
-    @include sp {
-      color: blue;
-    }
-  }
 }

@@ -1,0 +1,8 @@
+@charset "UTF-8";
+@use "@/styles/base/mixins" as *;
+
+.subTitle {
+  font-weight: 700;
+  line-height: 1;
+  color: var(--main-color);
+}

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useEffect } from "react";
-import styles from "@/styles/components/sections/hero.module.scss";
+import styles from "@/styles/components/sections/home/hero.module.scss";
 
 // swiper
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
@@ -123,7 +123,6 @@ export default function Hero() {
         </div>
         <Marquee />
       </div>
-      <div className="h-screen"></div>
     </>
   );
 }
