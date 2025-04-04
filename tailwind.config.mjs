@@ -43,6 +43,9 @@ export default {
         "light-gray": "#E6E6E6",
         line: "#B6C1D3",
       },
+      screens: {
+        "3xl": "1920px",
+      },
     },
   },
   plugins: [

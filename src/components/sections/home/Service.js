@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { nanoid } from "nanoid";
@@ -6,64 +6,68 @@ import styles from "@/styles/components/sections/home/services.module.scss";
 
 export default function Service({ service, index }) {
   const sectionRef = useRef(null);
+  // const iconRefSlow = useRef(null);
+  // const iconRefMoreSlow = useRef(null);
 
-  useEffect(() => {
-    // const serviceSection = document.querySelector(".js-service");
-    // const isDesktop = true;
-
-    // const scrollPsarams = {
-    //   sp: {
-    //     start: ["", "top bottom", "top bottom"],
-    //   },
-    //   md: {
-    //     start: ["", "top bottom", "top bottom"],
-    //   },
-    //   lg: {
-    //     start: ["", "top bottom", "top bottom"],
-    //   },
-    // };
-
-    // let scrollPsaram = scrollPsarams.lg;
-
+  useLayoutEffect(() => {
     const load = async () => {
       const { ScrollTrigger } = await import("gsap/ScrollTrigger");
       gsap.registerPlugin(ScrollTrigger);
 
-      const anim = gsap.fromTo(
-        sectionRef.current,
-        {
-          y: 0,
-        },
-        {
-          y: -300,
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top bottom",
-            end: "top 30%",
-            scrub: true,
-            markers: true,
+      if (index !== 0) {
+        const sectionAnim = gsap.fromTo(
+          sectionRef.current,
+          {
+            y: 0,
           },
-        },
-      );
+          {
+            y: -300,
+            ease: "none",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top bottom",
+              end: "top 30%",
+              scrub: true,
+              // markers: true,
+            },
+          },
+        );
+      }
 
-      // const anim = gsap.fromTo(
-      //   sectionRef.current,
-      //   { y: 0 },
-      //   {
-      //     y: -300,
-      //     scrollTrigger: {
-      //       trigger: sectionRef.current,
-      //       start: "top bottom",
-      //       end: "top 30%",
-      //       scrub: true,
-      //       markers: true,
-      //     },
-      //   },
-      // );
+      const slows = sectionRef.current.querySelectorAll(".js-move-Slow");
+
+      gsap.to(slows, {
+        y: 300,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+          // markers: true,
+          id: `scroll-${index}`,
+        },
+      });
+
+      const moreSlows =
+        sectionRef.current.querySelectorAll(".js-move-moreSlow");
+
+      gsap.to(moreSlows, {
+        y: 100,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+          // markers: true,
+          id: `scroll-${index}-moreSlow`, // 👈 IDを固有に！
+        },
+      });
 
       return () => {
-        anim.scrollTrigger?.kill();
+        sectionAnim.scrollTrigger?.kill();
+        scrollTriggerInstance?.kill(); // ✅ 自分のだけ kill
       };
     };
 
@@ -80,13 +84,15 @@ export default function Service({ service, index }) {
     height = 0,
     addClass = "",
     imageClass = "",
+    // currentRef = undefined,
   ) {
     const imagePath = "/assets/img/home/icon-service-0";
     const num = index + 1;
-
     const indexClass = styles[`_0${num}__0${count}`];
+
     return (
       <div
+        // {...(currentRef ? { ref: currentRef } : {})}
         className={`${styles.imageWrapper} ${indexClass} ${addClass} absolute`}
       >
         <Image
@@ -102,7 +108,7 @@ export default function Service({ service, index }) {
 
   return (
     <section
-      {...(index !== 0 ? { ref: sectionRef } : {})}
+      ref={sectionRef}
       className={`${bgReverce} ${styles.service} relative`}
     >
       <div
@@ -127,7 +133,7 @@ export default function Service({ service, index }) {
               4,
               114,
               111,
-              "left-[10%] bottom-0 w-fluid-[80,114,350,1024] h-fluid-[78,111,350,1024]  lg:hidden",
+              "left-[10%] bottom-[2%] w-fluid-[80,114,350,1024] h-fluid-[78,111,350,1024]  lg:hidden js-move-moreSlow",
             )}
           {index === 1 &&
             getIcon(
@@ -135,7 +141,7 @@ export default function Service({ service, index }) {
               2,
               103,
               132,
-              "left-[6%] lg:left-[2.5%] bottom-0 w-fluid-[60,80,350,1024] h-fluid-[77,104,350,1024] lg:hidden",
+              "left-[6%] lg:left-[2.5%] bottom-0 w-fluid-[60,80,350,1024] h-fluid-[77,104,350,1024] lg:hidden js-move-moreSlow",
             )}
           {index === 2 &&
             getIcon(
@@ -143,7 +149,7 @@ export default function Service({ service, index }) {
               2,
               124,
               176,
-              "left-1/2  bottom-0 w-fluid-[96,124,350,1024] h-fluid-[136,176,350,1024] lg:hidden",
+              "left-1/2 bottom-[-7%]  md:bottom-[-15%] w-fluid-[88,124,350,1024] h-fluid-[125,176,350,1024] lg:hidden js-move-moreSlow",
             )}
         </div>
         <p
@@ -176,7 +182,7 @@ export default function Service({ service, index }) {
               2,
               156,
               132,
-              "left-0 bottom-[30%] w-fluid-[100,156,350,1024] h-fluid-[84,132,350,1024]  lg:hidden",
+              "left-0 bottom-[55%] w-fluid-[100,156,350,1024] h-fluid-[84,132,350,1024]  lg:hidden js-move-moreSlow",
             )}
           {index === 0 &&
             getIcon(
@@ -184,7 +190,7 @@ export default function Service({ service, index }) {
               3,
               59,
               53,
-              "right-0 bottom-[30%] w-fluid-[44,78,350,1024] h-fluid-[49,60,350,1024] lg:hidden",
+              "right-0 bottom-[70%] w-fluid-[44,78,350,1024] h-fluid-[49,60,350,1024] lg:hidden js-move-moreSlow",
             )}
           {index === 2 &&
             getIcon(
@@ -192,7 +198,7 @@ export default function Service({ service, index }) {
               2,
               143,
               203,
-              "-left-[20%] bottom-0 w-fluid-[124,143,1024,1480] h-fluid-[176,203,1024,1480] hidden lg:block",
+              "-left-[2%] bottom-[7%] w-fluid-[124,143,1024,1480] h-fluid-[176,203,1024,1480] hidden lg:block js-move-moreSlow",
             )}
         </div>
         <div className={`${bg} ${styles.backGround} relative lg:rounded-l-3xl`}>
@@ -202,7 +208,7 @@ export default function Service({ service, index }) {
               4,
               114,
               111,
-              "left-[10%] bottom-0 w-fluid-[114,114,1024,1280] h-fluid-[111,111,1024,1280] hidden lg:block",
+              "left-[10%] bottom-[2%] w-fluid-[114,114,1024,1280] h-fluid-[111,111,1024,1280] hidden lg:block  js-move-moreSlow",
             )}
           {index === 1 &&
             getIcon(
@@ -210,11 +216,12 @@ export default function Service({ service, index }) {
               2,
               103,
               132,
-              "left-[3%] bottom-0 w-fluid-[60,90,1024,1280] h-fluid-[77,115,1024,1280] hidden lg:block",
+              "left-[3%] bottom-[10%] w-fluid-[60,90,1024,1280] h-fluid-[77,115,1024,1280] hidden lg:block js-move-Slow",
             )}
         </div>
         <div
-          className={`${bgReverce} ${styles.bgBottom} h-fluid-[325,370,350.1024] lg:h-fluid-[320,370,1024.1480]`}
+          // className={`${bgReverce} ${styles.bgBottom} h-fluid-[325,370,350.1024] lg:h-fluid-[320,370,1024.1480]`}
+          className={`${bgReverce} ${styles.bgBottom} h-[800]`}
         ></div>
       </div>
       {index === 0 &&
@@ -223,7 +230,7 @@ export default function Service({ service, index }) {
           1,
           172,
           216,
-          "left-[53%] top-[3rem] w-fluid-[132,142,1280,1480] h-fluid-[165,177,1280,1480] hidden lg:block",
+          "left-[53%] top-0 w-fluid-[132,142,1280,1480] h-fluid-[165,177,1280,1480] hidden lg:block js-move-moreSlow",
         )}
 
       {index === 1 &&
@@ -232,7 +239,7 @@ export default function Service({ service, index }) {
           1,
           124,
           122,
-          "right-[17%] top-0 w-fluid-[80,124,350,1024] h-fluid-[104,122,350,1024]",
+          "right-[17%] 2xl:right-[20%] 3xl:right-[23%] top-0 w-fluid-[80,124,350,1024] h-fluid-[104,122,350,1024] ",
         )}
       {index === 2 &&
         getIcon(
@@ -240,7 +247,7 @@ export default function Service({ service, index }) {
           1,
           165,
           80,
-          "right-[17%] top-0 w-fluid-[105,165,350,1024] h-fluid-[51,80,350,1024]",
+          "right-[17%] 2xl:right-[20%] 3xl:right-[23%] top-[-2%] lg:top-[-4%] w-fluid-[105,165,350,1024] h-fluid-[51,80,350,1024]  js-move-moreSlow",
         )}
     </section>
   );

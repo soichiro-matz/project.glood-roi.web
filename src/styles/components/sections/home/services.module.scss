@@ -37,12 +37,14 @@
     }
 
     &:nth-child(2) {
-      margin-top: -3rem;
+      z-index: 1;
+      margin-top: calc(-3rem - 30rem);
       box-shadow: 0 0 1.5rem #00004624;
     }
 
     &:nth-child(3) {
-      margin-top: -20rem;
+      z-index: 2;
+      margin-top: calc(-20rem - 35rem);
       box-shadow: 0 0 1.5rem 0 rgb(78 65 247 / 10%);
     }
 
@@ -181,7 +183,7 @@
       }
 
       &._01__04 {
-        transform: translateY(50%);
+        // transform: translateY(50%);
       }
 
       &._02__01 {
@@ -189,16 +191,16 @@
       }
 
       &._02__02 {
-        transform: translateY(50%);
+        // transform: translateY(50%);
       }
 
       &._03__01 {
-        transform: translateY(-50%);
+        // transform: translateY(-50%);
       }
 
       &._03__02 {
         @include md {
-          transform: translate(-50%, 65%);
+          transform: translateX(-50%);
         }
       }
     }
