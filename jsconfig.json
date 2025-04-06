@@ -7,7 +7,8 @@
       "@hooks/*": ["./src/js/hooks/*"],
       "@libs/*": ["./src/js/libs/*"],
       "@scss/*": ["./src/styles/*"],
-      "@ui/*": ["./src/components/ui/*"]
+      "@ui/*": ["./src/components/ui/*"],
+      "@utils/*": ["./src/js/utils/*"]
     }
   }
 }

@@ -7,14 +7,10 @@ export default function SectionTitle({
 }) {
   const HeadingTag = tag === "h2" ? "h2" : "h3";
   return (
-    <HeadingTag className="-translate-y-1/2 transform text-center gap-fluid-[8,10]">
+    <HeadingTag className="relative text-center gap-fluid-[8,10]">
       <SubTitle
         lang="en"
-        addClass={[
-          "text-fluid-[36,48,350,768]",
-          "md:text-fluid-[48,80]",
-          "relative",
-        ]}
+        addClass={["text-fluid-[36,48,350,768]", "md:text-fluid-[48,80]"]}
       >
         {titleEn}
       </SubTitle>

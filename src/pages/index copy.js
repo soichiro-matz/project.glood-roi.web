@@ -61,6 +61,11 @@ export default function Home() {
       <p class="text">
         enriching everyone's life with the finest products from japan
       </p>
+      <div className="js-main-section">
+        <section className="card"></section>
+        <section className="card"></section>
+        <section className="card"></section>
+      </div>
     </div>
   );
 }

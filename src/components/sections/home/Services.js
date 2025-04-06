@@ -37,8 +37,10 @@ const Items = [
 
 export default function Services() {
   return (
-    <section className={`${styles.services}`}>
-      <SectionTitle tag="h2" titleEn="service" titleJp="サービス" />
+    <section className={`${styles.services} relative`}>
+      <div className="-translate-y-1/2 transform">
+        <SectionTitle tag="h2" titleEn="service" titleJp="サービス" />
+      </div>
       <ul>
         {Items.map((service, index) => (
           <Service key={nanoid()} service={service} index={index} />
