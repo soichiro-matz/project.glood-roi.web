@@ -221,7 +221,7 @@ export default function Service({ service, index }) {
           </div>
           <div
             // className={`${bgReverce} ${styles.bgBottom} h-fluid-[325,370,350.1024] lg:h-fluid-[320,370,1024.1480]`}
-            className={`${bgReverce} ${styles.bgBottom} h-[800px]`}
+            className={`${bgReverce} ${styles.bgBottom} h-[880px]`}
           ></div>
         </div>
         {index === 0 &&

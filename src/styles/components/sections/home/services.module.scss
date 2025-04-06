@@ -27,7 +27,9 @@
 
       @include md {
         background-color: #fff;
-        box-shadow: 0 0 1.5rem 0 rgb(78 65 247 / 10%);
+
+        // box-shadow: 0 0 1.5rem 0 rgb(78 65 247 / 10%);
+        box-shadow: 0 0 0.15rem #00004614;
       }
 
       @include sp {
@@ -38,19 +40,20 @@
 
     &:nth-child(2) {
       z-index: 1;
-      margin-top: calc(-3rem - 30rem);
-      box-shadow: 0 0 1.5rem #00004624;
+      margin-top: calc(-3rem - 35rem);
+      box-shadow: 0 0 0.15rem #00004614;
     }
 
     &:nth-child(3) {
       z-index: 2;
       margin-top: calc(-20rem - 35rem);
-      box-shadow: 0 0 1.5rem 0 rgb(78 65 247 / 10%);
-      clip-path: inset(0 0 0.25rem 0); //下辺のみboxshadow部をマスクして非表示
+      box-shadow: 0 0 0.15rem #00004614;
+
+      // clip-path: inset(0 0 0.25rem 0); //下辺のみboxshadow部をマスクして非表示
 
       .serviceContainer {
         .bgBottom {
-          height: 20rem;
+          height: 25rem;
         }
       }
     }
@@ -146,7 +149,8 @@
         grid-row: 1/3;
         grid-column: 2 / span 11;
         width: 100vw;
-        height: 50rem;
+
+        // height: 50rem;
         margin-right: calc(50% - 50vw);
 
         @include md {

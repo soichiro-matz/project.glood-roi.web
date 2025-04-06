@@ -39,30 +39,30 @@ export default function ProductLines() {
             stagger: 0.2, // ← 順番に表示
             scrollTrigger: {
               trigger: section,
-              start: "top 80%",
+              start: "top 90%",
               toggleActions: "play none none reverse",
-              // markers: true,
+              markers: true,
             },
           },
         );
       });
 
-      const triggerElement = document.querySelector(".js-main-section");
-      const cards = triggerElement.querySelectorAll(`.${styles._reverse}`);
+      // const triggerElement = document.querySelector(".js-main-section");
+      // const cards = triggerElement.querySelectorAll(`.${styles._reverse}`);
 
-      ScrollTrigger.create({
-        trigger: triggerElement,
-        start: "top-=320 50%",
-        markers: true,
-        onEnter: () => {
-          // カードを順番に処理し、_reverse クラスを削除
-          cards.forEach((card, index) => {
-            setTimeout(() => {
-              card.classList.remove(styles._reverse); // ← ここもCSS Moduleで
-            }, index * 100); // 200ms 間隔で順番に削除
-          });
-        },
-      });
+      // ScrollTrigger.create({
+      //   trigger: triggerElement,
+      //   start: "top-=320 50%",
+      //   markers: true,
+      //   onEnter: () => {
+      //     // カードを順番に処理し、_reverse クラスを削除
+      //     cards.forEach((card, index) => {
+      //       setTimeout(() => {
+      //         card.classList.remove(styles._reverse); // ← ここもCSS Moduleで
+      //       }, index * 100); // 200ms 間隔で順番に削除
+      //     });
+      //   },
+      // });
     };
 
     load();
@@ -86,49 +86,38 @@ export default function ProductLines() {
           titleJp="取扱商品カテゴリー"
         />
         <ul
-          className={`${styles.items} l-container flex flex-wrap pt-fluid-[56,104]`}
+          className={`${styles.items} l-container flex flex-wrap pt-fluid-[120,160]`}
         >
           {Items.map((item, index) => (
             <li
               key={nanoid()}
-              className={`${styles.item} w-1/2 h-fluid-[204,246,350,768] md:w-1/4 md:h-fluid-[196,240]`}
+              className={`${styles.item} w-1/2 md:w-1/4 md:h-fluid-[196,240]`}
             >
               <div
-                className={`${styles.cardWrapper} ${styles.rotate} ${styles._reverse} _re h-full w-full`}
+                className={`relative py-fluid-[32,40,350,768] md:py-fluid-[32,32]`}
               >
-                <div className={`${styles.card} h-full w-full`}>
-                  <div className={`${styles.front} h-full w-full`}>
-                    <div
-                      className={`relative py-fluid-[32,40,350,768] md:py-fluid-[32,32]`}
-                    >
-                      <section
-                        className={`flex flex-col items-center gap-fluid-[16,20]`}
+                <section
+                  className={`flex flex-col items-center gap-fluid-[16,20]`}
+                >
+                  <h3 className={`${styles.name} flex flex-col items-center`}>
+                    {item.categories.map((category) => (
+                      <span
+                        key={nanoid()}
+                        className={`${styles.category} leading-nonr font-medium text-fluid-[14,16]`}
                       >
-                        <h3
-                          className={`${styles.name} flex flex-col items-center`}
-                        >
-                          {item.categories.map((category) => (
-                            <span
-                              key={nanoid()}
-                              className={`${styles.category} leading-nonr font-medium text-fluid-[14,16]`}
-                            >
-                              {category}
-                            </span>
-                          ))}
-                        </h3>
-                        <div
-                          className={`${styles.icon} ${styles[`-i${zeroPad(index + 1, 2)}`]} order-first rounded-full leading-none wh-fluid-[80,104,350,768] md:wh-fluid-[72,104]`}
-                        ></div>
-                        <span
-                          className={`${styles.number} absolute left-0 top-0 font-bold pl-fluid-[5,8,350,768] pt-fluid-[0,4,350,768] text-fluid-[14,16] wh-fluid-[48,64,350,768] md:pl-fluid-[8,8] md:pt-fluid-[4,4] md:wh-fluid-[56,64]`}
-                        >
-                          {zeroPad(index + 1, 2)}
-                        </span>
-                      </section>
-                    </div>
-                  </div>
-                  <div className={`${styles.back} h-full w-full`}></div>
-                </div>
+                        {category}
+                      </span>
+                    ))}
+                  </h3>
+                  <div
+                    className={`${styles.icon} ${styles[`-i${zeroPad(index + 1, 2)}`]} order-first rounded-full leading-none wh-fluid-[80,104,350,768] md:wh-fluid-[72,104]`}
+                  ></div>
+                  <span
+                    className={`${styles.number} absolute left-0 top-0 font-bold pl-fluid-[5,8,350,768] pt-fluid-[0,4,350,768] text-fluid-[14,16] wh-fluid-[48,64,350,768] md:pl-fluid-[8,8] md:pt-fluid-[4,4] md:wh-fluid-[56,64]`}
+                  >
+                    {zeroPad(index + 1, 2)}
+                  </span>
+                </section>
               </div>
             </li>
           ))}
