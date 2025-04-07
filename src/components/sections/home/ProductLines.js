@@ -86,7 +86,7 @@ export default function ProductLines() {
           titleJp="取扱商品カテゴリー"
         />
         <ul
-          className={`${styles.items} l-container flex flex-wrap pt-fluid-[120,160]`}
+          className={`${styles.items} l-container flex flex-wrap pt-fluid-[88,120] md:pt-fluid-[120,160]`}
         >
           {Items.map((item, index) => (
             <li
