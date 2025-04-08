@@ -77,20 +77,44 @@
     }
   }
 
+  &.-secondary {
+    color: var(--main-color);
+    background: #fff;
+
+    .p-btnIcon {
+      background-color: var(--main-color);
+
+      &::before {
+        background-color: var(--main-color);
+        background-image: url("/assets/img/common/icon-arrow-white.svg");
+      }
+
+      &::after {
+        background-color: #fff;
+        background-image: url("/assets/img/common/icon-arrow.svg");
+      }
+    }
+  }
+
   &:hover,
   &:focus-visible {
     &.-primary {
       color: var(--main-color);
       background-color: #fff;
+    }
 
-      .p-btnIcon {
-        &::before {
-          opacity: 0; /* 非表示 */
-        }
+    &.-secondary {
+      color: #fff;
+      background-color: var(--main-color);
+    }
 
-        &::after {
-          opacity: 1; /* 表示 */
-        }
+    .p-btnIcon {
+      &::before {
+        opacity: 0; /* 非表示 */
+      }
+
+      &::after {
+        opacity: 1; /* 表示 */
       }
     }
   }

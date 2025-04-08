@@ -6,6 +6,7 @@ import AboutUs from "@components/sections/home/AboutUs";
 import Services from "@components/sections/home/Services";
 import ProductLines from "@components/sections/home/ProductLines";
 import News from "@components/sections/home/News";
+import Recruit from "@components/sections/home/Recruit";
 
 export async function getStaticProps() {
   //お知らせ記事取得件数
@@ -33,6 +34,7 @@ export default function Home({ posts }) {
         <Services />
         <ProductLines />
         <News posts={posts} />
+        <Recruit />
       </div>
     </Layout>
   );

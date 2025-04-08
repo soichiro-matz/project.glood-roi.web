@@ -6,7 +6,7 @@ import Button from "@/components/ui/Button";
 
 export default function News({ posts }) {
   return (
-    <section className={`${styles.news} py-fluid-[80,136]`}>
+    <section className={`${styles.news} pb-fluid-[120,216] pt-fluid-[80,136]`}>
       <div
         className={`l-container flex flex-col gap-y-fluid-[56,80,350,768] md:flex-row`}
       >

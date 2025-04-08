@@ -1,0 +1,62 @@
+import Image from "next/image";
+import SectionTitle from "@/components/parts/SectionTitle";
+import styles from "@/styles/components/sections/home/recruit.module.scss";
+import { zeroPad } from "@utils/utils";
+import Button from "@/components/ui/Button";
+
+const images = ["", "", "", ""];
+
+export default function Recruit() {
+  return (
+    <section className={`${styles.recruit} relative`}>
+      <div className="-translate-y-1/2 transform text-center">
+        <SectionTitle tag="h2" titleEn="recruit" titleJp="採用情報" />
+      </div>
+      <p
+        className={`${styles.messge} flex items-center justify-center leading-none py-fluid-[56,88] text-fluid-[20,36]`}
+      >
+        わたしたちと一緒に働きませんか？
+      </p>
+      <div
+        className={`l-container md:items-["normal"] flex flex-col items-center gap-x-fluid-[24,88] gap-y-fluid-[24,32,350,768] md:flex-row md:justify-center`}
+      >
+        <div className={`flex flex-col gap-fluid-[16,36] pb-fluid-[16,24]`}>
+          <Button
+            tag="a"
+            linkProps={{ href: "/news" }}
+            className="c-button p-button -secondary"
+          >
+            正社員(総合職)募集
+          </Button>
+          <Button
+            tag="a"
+            linkProps={{ href: "/news" }}
+            className="c-button p-button -secondary"
+          >
+            アルバイト募集
+          </Button>
+        </div>
+        <div
+          className={`z-10 flex items-end pb-2 gap-x-fluid-[0,16] lg:pb-2.5`}
+        >
+          {images.map((img, index) => {
+            return (
+              <img
+                src={
+                  "/assets/img/home/img-recruit-" +
+                  zeroPad(index + 1, 2) +
+                  ".svg"
+                }
+                // width={120}
+                height="auto"
+                alt=""
+                className={`${styles.iconImage} w-fluid-[72,96,350,768] md:w-fluid-[96,120]`}
+                key={index}
+              />
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
