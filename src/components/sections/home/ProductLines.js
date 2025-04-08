@@ -41,7 +41,7 @@ export default function ProductLines() {
               trigger: section,
               start: "top 90%",
               toggleActions: "play none none reverse",
-              markers: true,
+              // markers: true,
             },
           },
         );
@@ -78,7 +78,7 @@ export default function ProductLines() {
       ></div>
 
       <section
-        className={`js-transition-item js-main-section bg-white pt-fluid-[80,136,350,768] md:pb-fluid-[96,160] md:pt-fluid-[120,160]`}
+        className={`js-transition-item js-main-section bg-white text-center pb-fluid-[80,156,350,768] pt-fluid-[80,136,350,768] md:pb-fluid-[96,160] md:pt-fluid-[120,160]`}
       >
         <SectionTitle
           tag="h2"
@@ -113,7 +113,7 @@ export default function ProductLines() {
                     className={`${styles.icon} ${styles[`-i${zeroPad(index + 1, 2)}`]} order-first rounded-full leading-none wh-fluid-[80,104,350,768] md:wh-fluid-[72,104]`}
                   ></div>
                   <span
-                    className={`${styles.number} absolute left-0 top-0 font-bold pl-fluid-[5,8,350,768] pt-fluid-[0,4,350,768] text-fluid-[14,16] wh-fluid-[48,64,350,768] md:pl-fluid-[8,8] md:pt-fluid-[4,4] md:wh-fluid-[56,64]`}
+                    className={`${styles.number} absolute left-0 top-0 text-left font-bold pl-fluid-[5,8,350,768] pt-fluid-[0,4,350,768] text-fluid-[14,16] wh-fluid-[48,64,350,768] md:pl-fluid-[8,8] md:pt-fluid-[4,4] md:wh-fluid-[56,64]`}
                   >
                     {zeroPad(index + 1, 2)}
                   </span>

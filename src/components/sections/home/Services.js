@@ -38,7 +38,7 @@ const Items = [
 export default function Services() {
   return (
     <section className={`${styles.services} relative`}>
-      <div className="-translate-y-1/2 transform">
+      <div className="-translate-y-1/2 transform text-center">
         <SectionTitle tag="h2" titleEn="service" titleJp="サービス" />
       </div>
       <ul>

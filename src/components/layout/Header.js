@@ -278,9 +278,9 @@ export default function Header() {
   };
 
   return (
-    <header className="fixed left-0 top-0 z-50 w-full bg-white">
+    <header className="fixed left-0 top-0 z-[100] w-full bg-white">
       <div className="p-header mx-auto flex items-center justify-between">
-        <h1 className="z-50 text-xl font-bold">
+        <h1 className="z-[100] text-xl font-bold">
           <Link href="/">
             <Image
               src="/assets/img/common/logo.png"

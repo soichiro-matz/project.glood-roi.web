@@ -4,8 +4,7 @@
 export const SITE = {
   name: "株式会社Glood roi",
   nameEn: "Glood roi Inc.",
-  description:
-    "description",
+  description: "description",
   url: "https://gloodroi.com/",
   base: "/",
   trackingId: "G-xxxxxxxx",
@@ -42,4 +41,8 @@ export const SNS = {
   twitter: "",
   instagram: "",
   facebook: "",
+};
+
+export const API_URL = {
+  news: "https://gloodroi.com/wp-json/wp/v2/posts?_embed",
 };
