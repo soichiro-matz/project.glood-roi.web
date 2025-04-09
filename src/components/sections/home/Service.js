@@ -79,7 +79,6 @@ export default function Service({ service, index }) {
           trigger: serviceTitle,
           start: "top 80%",
           end: "bottom top",
-          // scrub: true, // スクロール連動するなら
           // markers: true,
         },
       });
@@ -94,7 +93,6 @@ export default function Service({ service, index }) {
           {
             x: -30,
             opacity: 0,
-            // stagger: 0.05,
             duration: 0.8,
             ease: "power3.out",
           },
@@ -114,7 +112,7 @@ export default function Service({ service, index }) {
 
       return () => {
         sectionAnim.scrollTrigger?.kill();
-        scrollTriggerInstance?.kill(); // ✅ 自分のだけ kill
+        scrollTriggerInstance?.kill();
       };
     };
 

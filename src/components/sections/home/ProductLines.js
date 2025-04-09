@@ -36,7 +36,7 @@ export default function ProductLines() {
             opacity: 1,
             duration: 1,
             ease: "power3.out",
-            stagger: 0.2, // ← 順番に表示
+            stagger: 0.2,
             scrollTrigger: {
               trigger: section,
               start: "top 90%",
@@ -47,20 +47,40 @@ export default function ProductLines() {
         );
       });
 
-      // const triggerElement = document.querySelector(".js-main-section");
-      // const cards = triggerElement.querySelectorAll(`.${styles._reverse}`);
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".js-productCategory",
+          start: "top 130%",
+          // markers: true,
+        },
+      });
 
-      // ScrollTrigger.create({
-      //   trigger: triggerElement,
-      //   start: "top-=320 50%",
-      //   markers: true,
-      //   onEnter: () => {
-      //     // カードを順番に処理し、_reverse クラスを削除
-      //     cards.forEach((card, index) => {
-      //       setTimeout(() => {
-      //         card.classList.remove(styles._reverse); // ← ここもCSS Moduleで
-      //       }, index * 100); // 200ms 間隔で順番に削除
-      //     });
+      tl.from(".js-productCategory", {
+        y: 150,
+        stagger: 0.1,
+        duration: 1,
+        ease: "power3.out",
+      }).to(
+        ".js-productCategory",
+        {
+          opacity: 1,
+          stagger: 0.1,
+          duration: 1,
+          ease: "power3.out",
+        },
+        "<0.2",
+      );
+
+      // gsap.from(".js-productCategory", {
+      //   y: 100,
+      //   opacity: 0,
+      //   duration: 1,
+      //   ease: "power3.out",
+      //   stagger: 0.2,
+      //   scrollTrigger: {
+      //     trigger: ".js-productCategory",
+      //     start: "top 120%",
+      //     // markers: true,
       //   },
       // });
     };
@@ -92,7 +112,7 @@ export default function ProductLines() {
           {Items.map((item, index) => (
             <li
               key={nanoid()}
-              className={`${styles.item} w-1/2 md:w-1/4 md:h-fluid-[196,240]`}
+              className={`${styles.item} js-productCategory w-1/2 md:w-1/4 md:h-fluid-[196,240]`}
             >
               <div
                 className={`relative py-fluid-[32,40,350,768] md:py-fluid-[32,32]`}
