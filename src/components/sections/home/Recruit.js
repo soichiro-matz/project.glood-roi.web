@@ -13,7 +13,7 @@ export default function Recruit() {
         <SectionTitle tag="h2" titleEn="recruit" titleJp="採用情報" />
       </div>
       <p
-        className={`${styles.messge} flex items-center justify-center leading-none py-fluid-[56,88] text-fluid-[20,36]`}
+        className={`${styles.messge} flex items-center justify-center leading-none py-fluid-[40,56,350,768] text-fluid-[20,36] md:py-fluid-[56,88]`}
       >
         わたしたちと一緒に働きませんか？
       </p>
@@ -37,7 +37,7 @@ export default function Recruit() {
           </Button>
         </div>
         <div
-          className={`z-10 flex items-end pb-2 gap-x-fluid-[0,16] lg:pb-2.5`}
+          className={`z-10 flex items-end pb-1 gap-x-fluid-[0,16] md:pb-2 lg:pb-2.5`}
         >
           {images.map((img, index) => {
             return (
@@ -50,7 +50,7 @@ export default function Recruit() {
                 // width={120}
                 height="auto"
                 alt=""
-                className={`${styles.iconImage} w-fluid-[72,96,350,768] md:w-fluid-[96,120]`}
+                className={`${styles.iconImage} w-fluid-[56,88,350,768] md:w-fluid-[96,120]`}
                 key={index}
               />
             );

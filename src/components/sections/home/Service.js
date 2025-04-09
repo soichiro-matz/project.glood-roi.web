@@ -120,10 +120,12 @@ export default function Service({ service, index }) {
             </span>
           </h3>
           <div
-            className={`${styles.description} relative pb-fluid-[64,80,350.1024] pt-fluid-[24,40,350.1024] lg:pb-fluid-[80,120,1024.1480] lg:pt-fluid-[10,16,1024.1480]`}
+            className={`${styles.description} relative pb-fluid-[64,80,350.1024] pt-fluid-[24,40,350.1024] text-fluid-[15,17] lg:pb-fluid-[80,120,1024.1480] lg:pt-fluid-[10,16,1024.1480]`}
           >
             {service.description.map((text) => (
-              <p key={nanoid()}>{text}</p>
+              <p key={nanoid()} className="leading-loose">
+                {text}
+              </p>
             ))}
             {index === 0 &&
               getIcon(
