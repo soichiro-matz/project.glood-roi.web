@@ -23,8 +23,6 @@ export default function AboutUs() {
       <div className={`l-container`}>
         <div
           className={`${styles.card} l-grid__12 relative rounded-3xl pb-fluid-[64,120,350,768] pt-fluid-[104,120,350,768] px-fluid-[28,64,350,768] md:gap-x-8 md:px-fluid-[40,104] md:py-fluid-[96,144,768,1280]`}
-          data-rola-trigger01
-          data-rola-transition="slide"
         >
           <h2
             className={`${styles.subTitle} pb-fluid-[32,40,350,768] md:pb-fluid-[40,72]`}

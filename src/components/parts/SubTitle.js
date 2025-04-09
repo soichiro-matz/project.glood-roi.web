@@ -7,7 +7,7 @@ export default function SubTitle({
   title = "",
   lang = "ja",
   addClass = [],
-  start = "80%",
+  start = "90%",
   ariaHidden = false,
 }) {
   const subTitleRef = useRef(null);

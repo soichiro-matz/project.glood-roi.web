@@ -5,7 +5,7 @@ export default function SectionTitle({
   titleEn = "",
   titleJp = "",
   align = "",
-  start = "80%",
+  start = "90%",
 }) {
   const HeadingTag = tag === "h2" ? "h2" : "h3";
 
