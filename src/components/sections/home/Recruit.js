@@ -1,4 +1,5 @@
-import Image from "next/image";
+import { useLayoutEffect } from "react";
+import gsap from "gsap";
 import SectionTitle from "@/components/parts/SectionTitle";
 import styles from "@/styles/components/sections/home/recruit.module.scss";
 import { zeroPad } from "@utils/utils";
@@ -7,6 +8,28 @@ import Button from "@/components/ui/Button";
 const images = ["", "", "", ""];
 
 export default function Recruit() {
+  useLayoutEffect(() => {
+    const load = async () => {
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+      gsap.registerPlugin(ScrollTrigger);
+
+      gsap.from(".js-employee", {
+        opacity: 0,
+        x: -10,
+        ease: "power3.out",
+        stagger: 0.2,
+        duration: 1.5,
+        scrollTrigger: {
+          trigger: ".js-employee",
+          start: "top 85%",
+          // scrub: true,
+          // markers: true,
+        },
+      });
+    };
+
+    load();
+  }, []);
   return (
     <section className={`${styles.recruit} relative`}>
       <div className="-translate-y-1/2 transform text-center">
@@ -50,7 +73,7 @@ export default function Recruit() {
                 // width={120}
                 height="auto"
                 alt=""
-                className={`${styles.iconImage} w-fluid-[56,88,350,768] md:w-fluid-[96,120]`}
+                className={`${styles.iconImage} js-employee w-fluid-[56,88,350,768] md:w-fluid-[96,120]`}
                 key={index}
               />
             );

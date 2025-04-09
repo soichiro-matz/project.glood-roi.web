@@ -29,6 +29,19 @@ export default function News({ posts }) {
           // markers: true,
         },
       });
+
+      gsap.to(".js-paper-airplane", {
+        y: -100,
+        x: 50,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".js-newsSection",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+          markers: true,
+        },
+      });
     };
 
     load();
@@ -49,14 +62,14 @@ export default function News({ posts }) {
             align="left"
           />
           <div
-            className={`${styles.imageWrapper} absolute left-[55%] top-[-25%] w-fluid-[120,160,350,768] md:left-[10%] md:top-[35%] md:w-fluid-[160,235] lg:top-[40%]`}
+            className={`${styles.imageWrapper} absolute left-[40%] top-[70%] w-fluid-[120,160,350,768] md:left-0 md:top-[40%] md:w-fluid-[160,235] lg:top-[50%]`}
           >
             <Image
               src="/assets/img/home/icon-news-01.svg"
               width={235}
               height={130}
               alt=""
-              className={`${styles.iconImage} `}
+              className={`${styles.iconImage} js-paper-airplane`}
             />
           </div>
         </div>
