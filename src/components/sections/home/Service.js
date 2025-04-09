@@ -196,7 +196,7 @@ export default function Service({ service, index }) {
                 2,
                 143,
                 203,
-                "-left-[2%] bottom-[7%] w-fluid-[124,143,1024,1480] h-fluid-[176,203,1024,1480] hidden lg:block js-move-moreSlow",
+                "-left-[2%] lg:-left-[15%] bottom-[7%] w-fluid-[124,143,1024,1480] h-fluid-[176,203,1024,1480] hidden lg:block js-move-moreSlow",
               )}
           </div>
           <div
