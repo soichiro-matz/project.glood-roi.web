@@ -11,6 +11,22 @@
   padding-right: var(--scrollbar-width);
 }
 
+.l-header__wrapper {
+  position: relative;
+
+  &::before {
+    position: absolute;
+    inset: 0;
+    content: "";
+    background-color: rgb(255 255 255 / 80%);
+    border: 0;
+
+    // background-color: red;
+
+    backdrop-filter: blur(5px);
+  }
+}
+
 .p-header {
   height: 4.5rem;
   padding: 0 3rem;
