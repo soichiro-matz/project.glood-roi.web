@@ -75,7 +75,7 @@ export default function Footer() {
         lang="en"
       >
         <small className="capitalize">
-          Copyright © <time datetime={getYear()}>{getYear()} </time>
+          Copyright © <time dateTime={getYear()}>{getYear()} </time>
           <Link href="/contact">{SITE.nameEn}</Link>
         </small>
       </p>

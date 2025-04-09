@@ -240,7 +240,7 @@ export default function Header() {
             role="navigation"
             aria-label="メインナビゲーション"
           >
-            <ul className="flex h-fit w-full flex-col space-y-6 rounded-2xl bg-white px-7 py-10 text-center lg:h-full lg:flex-row lg:gap-x-8 lg:space-y-0 lg:bg-transparent lg:p-0">
+            <ul className="flex h-fit w-full flex-col space-y-6 rounded-2xl bg-white px-7 py-10 text-center lg:h-full lg:flex-row lg:space-y-0 lg:bg-transparent lg:p-0 lg:gap-x-fluid-[24,32,1024,1280]">
               {Object.entries(navLinks).map(([key, link]) => {
                 const pcHiddenMenus = ["home"]; //PC版で非表示（複数指定可）
                 const isPcHidden = pcHiddenMenus.includes(key);
@@ -272,7 +272,7 @@ export default function Header() {
                         >
                           {link.text_en}
                         </p>
-                        <p className="title js-title u-clip__full leading-none text-fluid-[10,12,350,768] lg:text-base">
+                        <p className="title js-title u-clip__full leading-none text-fluid-[10,12,350,768] lg:text-base lg:text-fluid-[15,16,1024,1280]">
                           {link.text}
                         </p>
                       </Link>
