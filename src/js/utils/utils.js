@@ -32,3 +32,7 @@ export const zeroPad = (num, digits) => {
   }
   return (zero + num).slice(-1 * digits);
 };
+
+export const getYear = () => {
+  return new Date().getFullYear();
+};

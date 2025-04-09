@@ -14,7 +14,7 @@ export const navLinks = {
       { href: "/about#greeting", text: "ご挨拶" },
       { href: "/about#data", text: "データでみるGlood roi" },
       { href: "/about#outline", text: "会社概要／沿革" },
-    ]
+    ],
   },
   service: {
     href: "/service",
@@ -24,11 +24,11 @@ export const navLinks = {
       { href: "/service#domestic", text: "国内EC事業" },
       { href: "/service#cross-border", text: "越境EC事業" },
       { href: "/service#wholesale", text: "卸売事業" },
-    ]
+    ],
   },
   productLines: {
     href: "/#product-lines",
-    text: "取扱商品",
+    text: "取扱商品カテゴリー",
     text_en: "product lines",
   },
   news: {
@@ -44,7 +44,7 @@ export const navLinks = {
       { href: "/recruite#full-time", text: "正社員(総合職)" },
       { href: "/recruite#part-time", text: "アルバイト" },
       { href: "/entry", text: "エントリー" },
-    ]
+    ],
   },
   contact: {
     href: "/contact",
@@ -55,7 +55,7 @@ export const navLinks = {
     href: "/privacy-policy",
     text: "プライバシーポリシー",
     text_en: "privacy policy",
-  }
+  },
 };
 
 /**
@@ -63,8 +63,8 @@ export const navLinks = {
  * @param {string} key - 'about', 'service', 'recruite' など
  * @returns {Array|undefined} - children が存在する場合は配列、存在しない場合は undefined
  * React コンポーネント関数で呼び出す
-   * ex) import { getChildren } from "@/data/navLinks";
-   * ex)  const aboutChildren = getChildren("about");
+ * ex) import { getChildren } from "@/data/navLinks";
+ * ex)  const aboutChildren = getChildren("about");
  */
 export function getChildren(key) {
   if (navLinks[key] && navLinks[key].children) {
@@ -73,4 +73,4 @@ export function getChildren(key) {
   return undefined;
 }
 
-export default navLinks;  // ← デフォルトエクスポートを追加！
+export default navLinks; // ← デフォルトエクスポートを追加！
