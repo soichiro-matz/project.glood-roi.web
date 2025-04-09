@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useEffect } from "react";
 import styles from "@/styles/components/sections/home/hero.module.scss";
+import useSetRealHeight from "@hooks/useSetRealHeight";
 
 // swiper
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
@@ -21,6 +22,8 @@ const images = [
 ];
 
 export default function Hero() {
+  useSetRealHeight(".js-hero");
+
   useEffect(() => {
     const swiper = document.querySelector(".swiper");
 
@@ -31,7 +34,7 @@ export default function Hero() {
 
   return (
     <>
-      <div className={styles.hero}>
+      <div className={`${styles.hero} js-hero`}>
         <div className={styles.heroBody}>
           <div className={styles.heroBodyInner}>
             <p
