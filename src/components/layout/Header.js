@@ -3,7 +3,6 @@ import Link from "next/link";
 import navLinks from "@/data/navLinks";
 import Button from "@/components/ui/Button";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import gsap from "gsap";
 import Lettering from "@/js/libs/Lettering";
 
@@ -12,7 +11,6 @@ export default function Header() {
   const [isLg, setIsLg] = useState(false);
   const [activeMenus, setActiveMenus] = useState([]); // 複数のトグルを保存する配列
   const [focusedMenu, setFocusedMenu] = useState(null);
-  // const router = useRouter();
 
   useEffect(() => {
     const handleResize = () => {
@@ -52,11 +50,6 @@ export default function Header() {
 
     if (childElements.length > 0) {
       childElements.forEach((child) => {
-        if (!focusedMenu) {
-          // 👈 フォーカスが無いときだけopacityを変更
-          // child.style.opacity = 0;
-        }
-
         if (focusedMenu === child.key && isLg) {
           child.style.opacity = 1;
         }
@@ -73,8 +66,6 @@ export default function Header() {
       );
 
       titleEnElements.forEach((title, index) => {
-        // const splitText = new SplitType(title, { types: "chars" });
-        // const chars = splitText.chars;
         const chars = title.querySelectorAll("span");
 
         gsap.set(chars, { clearProps: "transform" });
@@ -179,46 +170,8 @@ export default function Header() {
     };
   }, [isOpen]);
 
-  // // `.js-childMenu__wrapper` の `open` クラスを削除する関数
-  // const removeOpenClass = (key) => {
-  //   const parentMenu = document.querySelector(`[data-key="${key}"]`);
-
-  //   if (parentMenu) {
-  //     const childWrapper = parentMenu.querySelector(".js-childMenu__wrapper");
-  //     if (childWrapper && childWrapper.classList.contains("open")) {
-  //       childWrapper.classList.remove("open");
-  //     }
-  //   }
-  // };
-
-  // メニューにフォーカスが当たった時、またはマウスホバー時の処理
-  const activateMenu = (key) => {
-    if (isLg) {
-      // setActiveMenus((prev) => [...new Set([...prev, key])]);
-    }
-  };
-
-  // メニューからフォーカスが外れた時、またはマウスホバーが外れた時の処理
-  // const deactivateMenu = (key) => {
-  //   // if (isLg) {
-  //   //   setActiveMenus((prev) => prev.filter((menu) => menu !== key));
-  //   //   // removeOpenClass(key); // `open` クラスを削除する処理を共通化
-  //   // }
-  // };
-
-  // マウスホバーがメニューに入った時の処理
-  // const handleMouseEnter = (key) => {
-  //   activateMenu(key);
-  // };
-
-  // マウスホバーがメニューから外れた時の処理
-  // const handleMouseLeave = (key) => {
-  //   deactivateMenu(key);
-  // };
-
   // メニューにフォーカスが当たった時の処理
   const handleFocus = (key) => {
-    activateMenu(key);
     // フォーカスを設定
     setFocusedMenu(key);
   };
@@ -229,22 +182,11 @@ export default function Header() {
       const relatedTarget = e.relatedTarget;
 
       if (!relatedTarget || !relatedTarget.closest(".js-childMenu__wrapper")) {
-        // deactivateMenu(key);
         // フォーカスが外れた時にリセット
         setFocusedMenu(null);
       }
     }
   };
-
-  // const toggleAccordion = (key) => {
-  //   if (!isLg) {
-  //     setActiveMenus((prev) =>
-  //       prev.includes(key)
-  //         ? prev.filter((menu) => menu !== key)
-  //         : [...prev, key],
-  //     );
-  //   }
-  // };
 
   const toggleAccordion = (key) => {
     if (!isLg) {
@@ -315,12 +257,9 @@ export default function Header() {
                     key={link.href}
                     className={`nav-menu js-nav-menu relative flex-col justify-center ${isPcHidden ? "lg:hidden" : ""} ${isContact ? "hidden lg:flex" : "flex"}`}
                     tabIndex={isLg && hasChildren ? 0 : -1}
-                    // onMouseEnter={() => handleMouseEnter(key)}
-                    // onMouseLeave={() => handleMouseLeave(key)}
                     onFocus={() => handleFocus(key)}
                     onBlur={(e) => handleBlur(e, key)}
                     data-key={`${key}`}
-                    // onClick={() => handleItemClick(link.href)}  // ここでページ遷移を実行
                   >
                     <div className="flex w-full items-center justify-between">
                       <Link
