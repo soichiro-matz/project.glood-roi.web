@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { useEffect } from "react";
+import gsap from "gsap";
+import Lettering from "@/js/libs/Lettering";
 import styles from "@/styles/components/sections/home/hero.module.scss";
 import useSetRealHeight from "@hooks/useSetRealHeight";
 
@@ -25,11 +27,101 @@ export default function Hero() {
   useSetRealHeight(".js-hero");
 
   useEffect(() => {
+    const lettering = new Lettering(".js-copy");
+    lettering.letters();
+
     const swiper = document.querySelector(".swiper");
 
     if (swiper) {
       swiper.style.height = "100%";
     }
+
+    const load = async () => {
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+      gsap.registerPlugin(ScrollTrigger);
+
+      const jsCopy = document.querySelectorAll(".js-copy");
+
+      jsCopy.forEach((copy, index) => {
+        const chars = copy.querySelectorAll("span");
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: copy,
+            start: "top 80%",
+            end: "bottom top",
+            toggleActions: "play none none none",
+            // markers: true,
+          },
+        });
+
+        const beforeDulation = 1;
+        const charsDulation = 1.5;
+        const baseDelay = 0.5;
+        const delayOffset = index * 0.3;
+
+        tl.to(copy, {
+          "--before-opacity": 1,
+          "--before-scale": 1,
+          duration: beforeDulation,
+          delay: baseDelay + delayOffset,
+          ease: "power3.out",
+        })
+          .set(copy, {
+            backgroundColor: "rgb(255 255 255 / 90%)",
+            color: "var(--main-color)",
+            "--before-transform-origin": "right",
+            "--before-origin": "right",
+          })
+          .to(copy, {
+            "--before-scale": 0,
+            duration: beforeDulation,
+            ease: "power3.out",
+          })
+          .fromTo(
+            chars,
+            { y: 100, opacity: 0 },
+            {
+              y: 0,
+              stagger: 0.04,
+              duration: 1,
+              ease: "power4.out",
+            },
+            "<-=0.1",
+          )
+          .fromTo(
+            chars,
+            { opacity: 0 },
+            {
+              opacity: 1,
+              stagger: 0.04,
+              duration: charsDulation,
+              ease: "power4.out",
+            },
+            "<0.2",
+          )
+          .to(
+            copy,
+            {
+              borderRadius: "0.5rem",
+              duration: beforeDulation,
+              ease: "power3.out",
+            },
+            "<",
+          )
+          .to(
+            copy,
+            {
+              boxShadow: "0 4px 30px 0 rgb(35 43 101 / 15%)",
+              duration: 0.2,
+              ease: "power3.out",
+            },
+            "<",
+          );
+      });
+    };
+
+    load();
   }, []);
 
   return (
@@ -41,14 +133,14 @@ export default function Hero() {
               className={`z-10 flex flex-col gap-fluid-[8,12,350,768] pt-fluid-[130,160,350,768] md:gap-fluid-[10,12,1024,1480] ${styles.heroCopy}`}
             >
               <span
-                className={`${styles.copyText} rounded-lg bg-white font-bold leading-none pb-fluid-[14,18,350,768] pt-fluid-[10,18,350,768] px-fluid-[16,24,350,768] text-fluid-[28,48,350,768] md:pb-fluid-[20,24,768,1480] md:pt-fluid-[12,16,768,1480] md:px-fluid-[24,32,768,1480] md:text-fluid-[48,64,1024,1480]`}
+                className={`${styles.copyText} js-copy relative font-bold leading-none pb-fluid-[14,18,350,768] pt-fluid-[10,18,350,768] px-fluid-[16,24,350,768] text-fluid-[28,48,350,768] md:pb-fluid-[20,24,768,1480] md:pt-fluid-[14,18,768,1480] md:px-fluid-[24,32,768,1480] md:text-fluid-[48,64,1024,1480]`}
               >
-                良いモノを<span>、</span>
+                良いモノを、
               </span>
               <span
-                className={`${styles.copyText} rounded-lg bg-white font-bold leading-none pb-fluid-[14,18,350,768] pt-fluid-[10,18,350,768] px-fluid-[16,24,350,768] text-fluid-[28,48,350,768] md:pb-fluid-[20,24,768,1480] md:pt-fluid-[12,16,768,1480] md:px-fluid-[24,32,768,1480] md:text-fluid-[48,64,1024,1480]`}
+                className={`${styles.copyText} js-copy relative font-bold leading-none pb-fluid-[14,18,350,768] pt-fluid-[10,18,350,768] px-fluid-[16,24,350,768] text-fluid-[28,48,350,768] md:pb-fluid-[20,24,768,1480] md:pt-fluid-[14,18,768,1480] md:px-fluid-[24,32,768,1480] md:text-fluid-[48,64,1024,1480]`}
               >
-                必要な人へ<span>。</span>
+                必要な人へ。
               </span>
             </p>
             <div className={`${styles.mySwiperWrapper}`}>

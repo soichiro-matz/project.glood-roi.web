@@ -53,13 +53,7 @@
       grid-template-columns: repeat(12, 1fr);
       width: 85%;
       height: 100%;
-
-      // margin-left: 7%;
       margin: 0 auto;
-
-      // @include sp {
-      //   width: 85%;
-      // }
 
       .heroCopy {
         grid-row: 1;
@@ -67,12 +61,32 @@
         place-self: center start;
 
         .copyText {
+          color: transparent;
           letter-spacing: 0.05em;
-          box-shadow: 0 4px 30px 0 rgb(35 43 101 / 15%);
-          opacity: 0.95;
+          background-color: transparent;
+          clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
 
           span {
-            letter-spacing: -0.6em;
+            display: inline-block;
+            will-change: transform;
+
+            &:last-child {
+              letter-spacing: -0.6em;
+            }
+          }
+
+          &::before {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+
+            // width: var(--before-width, 0%);
+            height: 100%;
+            content: "";
+            background: var(--main-color);
+            opacity: var(--before-opacity, 0);
+            transform: scaleX(var(--before-scale, 0));
+            transform-origin: var(--before-transform-origin, left);
           }
         }
       }
