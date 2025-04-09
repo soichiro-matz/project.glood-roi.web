@@ -1,12 +1,43 @@
+import { useLayoutEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import gsap from "gsap";
 import styles from "@/styles/components/sections/home/news.module.scss";
 import SectionTitle from "@/components/parts/SectionTitle";
 import Button from "@/components/ui/Button";
+import useRola from "@hooks/useRola";
 
 export default function News({ posts }) {
+  useRola("[data-rola-trigger01]", {
+    once: true,
+    rootMargin: "0px 0px -30%",
+  });
+
+  useLayoutEffect(() => {
+    const load = async () => {
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+      gsap.registerPlugin(ScrollTrigger);
+
+      gsap.to(".js-newsSection", {
+        clipPath: "inset(0% round 0rem)",
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".js-newsSection",
+          start: "top bottom",
+          end: "top 10%",
+          scrub: true,
+          // markers: true,
+        },
+      });
+    };
+
+    load();
+  }, []);
+
   return (
-    <section className={`${styles.news} pb-fluid-[120,216] pt-fluid-[80,136]`}>
+    <section
+      className={`${styles.news} js-newsSection pb-fluid-[120,216] pt-fluid-[80,136]`}
+    >
       <div
         className={`l-container flex flex-col gap-y-fluid-[56,80,350,768] md:flex-row`}
       >
@@ -37,6 +68,8 @@ export default function News({ posts }) {
                   <Link
                     href={`/news/detail/${post.id}`}
                     className={`${styles.link}`}
+                    data-rola-trigger01
+                    data-rola-transition="slide"
                   >
                     <article
                       className={`${styles.articleWrapper} relative flex items-center pb-fluid-[32,40] pt-fluid-[28,36] px-fluid-[10,16]`}

@@ -3,6 +3,8 @@
 
 .news {
   background-color: var(--base-gray-color);
+  clip-path: inset(10% round 4rem);
+  will-change: clip-path;
 
   .heading {
   }
