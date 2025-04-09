@@ -85,7 +85,16 @@
 
         .title {
           letter-spacing: 0.1em;
-          background: var(--main-color);
+
+          &::before {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            width: var(--before-width, 0%);
+            height: 100%;
+            content: "";
+            background: var(--main-color);
+          }
         }
       }
 
