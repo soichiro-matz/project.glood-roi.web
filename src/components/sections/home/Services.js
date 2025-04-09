@@ -37,7 +37,10 @@ const Items = [
 
 export default function Services() {
   return (
-    <section className={`${styles.services} relative`}>
+    <section
+      className={`${styles.services} relative scroll-mt-[10rem]`}
+      id="service"
+    >
       <div className="-translate-y-1/2 transform text-center">
         <SectionTitle tag="h2" titleEn="service" titleJp="サービス" />
       </div>

@@ -17,7 +17,7 @@ export const navLinks = {
     ],
   },
   service: {
-    href: "/service",
+    href: "/#service",
     text: "サービス",
     text_en: "service",
     children: [
