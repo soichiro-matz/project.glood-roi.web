@@ -84,6 +84,7 @@ export default function ProductLines() {
           tag="h2"
           titleEn="product lines"
           titleJp="取扱商品カテゴリー"
+          start="110%"
         />
         <ul
           className={`${styles.items} l-container flex flex-wrap pt-fluid-[88,120] md:pt-fluid-[120,160]`}

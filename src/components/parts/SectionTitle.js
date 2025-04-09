@@ -5,6 +5,7 @@ export default function SectionTitle({
   titleEn = "",
   titleJp = "",
   align = "",
+  start = "80%",
 }) {
   const HeadingTag = tag === "h2" ? "h2" : "h3";
 
@@ -29,10 +30,12 @@ export default function SectionTitle({
       <SubTitle
         lang="en"
         addClass={["text-fluid-[36,48,350,768]", "md:text-fluid-[48,80]"]}
+        start={start}
+        ariaHidden={true}
       >
         {titleEn}
       </SubTitle>
-      <SubTitle lang="jp" addClass={addClass}>
+      <SubTitle lang="jp" addClass={addClass} start={start}>
         {titleJp}
       </SubTitle>
     </HeadingTag>

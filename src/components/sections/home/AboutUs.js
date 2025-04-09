@@ -7,6 +7,15 @@ import Button from "@/components/ui/Button";
 const image01 = "/assets/img/home/img-aoutUs.svg";
 
 export default function AboutUs() {
+  useRola("[data-rola-trigger01]", {
+    once: true,
+    rootMargin: "0px 0px -30%",
+  });
+  useRola("[data-rola-trigger02]", {
+    once: true,
+    rootMargin: "0px 0px -50%",
+  });
+
   return (
     <section
       className={`${styles.aboutUs} pb-fluid-[120,272,768,1280] pt-fluid-[80,120,350,768] md:pt-fluid-[64,184,768,1280]`}
@@ -14,6 +23,8 @@ export default function AboutUs() {
       <div className={`l-container`}>
         <div
           className={`${styles.card} l-grid__12 relative rounded-3xl pb-fluid-[64,120,350,768] pt-fluid-[104,120,350,768] px-fluid-[28,64,350,768] md:gap-x-8 md:px-fluid-[40,104] md:py-fluid-[96,144,768,1280]`}
+          data-rola-trigger01
+          data-rola-transition="slide"
         >
           <h2
             className={`${styles.subTitle} pb-fluid-[32,40,350,768] md:pb-fluid-[40,72]`}
@@ -21,11 +32,17 @@ export default function AboutUs() {
             <SubTitle
               lang="en"
               addClass={["text-fluid-[32,48,350,768]", "md:text-fluid-[48,64]"]}
+              ariaHidden="true"
             >
               about us
             </SubTitle>
+            <span className="sr-only">私達について</span>
           </h2>
-          <div className={`${styles.cardBody} flex flex-col`}>
+          <div
+            className={`${styles.cardBody} flex flex-col`}
+            data-rola-trigger01
+            data-rola-transition="slide"
+          >
             <p
               className={`${styles.lead} font-bold pb-fluid-[24,32] text-fluid-[22,24] md:text-fluid-[24,26]`}
             >
