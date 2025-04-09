@@ -40,7 +40,7 @@ export default function Marquee() {
     return () => resizeObserver.disconnect();
   }, []);
 
-  const duration = textWidth ? `${textWidth / 30}s` : "0s";
+  const duration = textWidth ? `${textWidth / 35}s` : "0s";
 
   return (
     <div className="overflow-hidden whitespace-nowrap">
@@ -55,13 +55,13 @@ export default function Marquee() {
       >
         <p
           ref={baseRef}
-          className={`pr-8 font-bold text-fluid-[72,136,350,768] md:text-fluid-[136,144,768,1800] ${styles.marqueeText} flex-none`}
+          className={`pr-8 font-bold text-fluid-[80,136,350,768] md:text-fluid-[136,152,768,1800] ${styles.marqueeText} flex-none`}
           lang="en"
         >
           enriching everyone's life with the finest products from japan
         </p>
         <p
-          className={`pr-8 font-bold text-fluid-[72,120,350,768] md:text-fluid-[120,144,768,1800] ${styles.marqueeText} flex-none`}
+          className={`pr-8 font-bold text-fluid-[80,136,350,768] md:text-fluid-[136,152,768,1800] ${styles.marqueeText} flex-none`}
           lang="en"
         >
           enriching everyone's life with the finest products from japan

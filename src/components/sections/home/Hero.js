@@ -10,7 +10,6 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { EffectFade } from "swiper/modules";
 import "swiper/css/effect-fade";
-import useRola from "@hooks/useRola";
 
 import Marquee from "@components/parts/marquee";
 
@@ -29,23 +28,6 @@ export default function Hero() {
       swiper.style.height = "100%";
     }
   }, []);
-
-  // コールバック関数の定義
-  const callback = (element, isInView, options, progress) => {
-    if (isInView) {
-      console.log(
-        `ヒーロースクラブ中: ${element.tagName}, ヒーロー: ${progress}`,
-      );
-    } else {
-      console.log(`ヒーロースクラブ終了: ${element.tagName}`);
-    }
-  };
-
-  useRola(
-    "[data-rola-trigger3]",
-    { once: true, scrub: true, rootMargin: "0px 0px 0px" },
-    callback,
-  );
 
   return (
     <>
@@ -70,7 +52,6 @@ export default function Hero() {
               <Swiper
                 modules={[Navigation, Pagination, Autoplay, EffectFade]}
                 effect={"fade"}
-                // fadeEffect={{ crossFade: true }}
                 breakpoints={1} // slidesPerViewを指定
                 slidesPerView={"auto"} // ハイドレーションエラー対策
                 centeredSlides={true} // スライドを中央に配置
@@ -80,7 +61,6 @@ export default function Hero() {
                   delay: 5000,
                   disableOnInteraction: false,
                 }} // スライド表示時間
-                // navigation // ナビゲーション（左右の矢印）
                 pagination={{
                   el: `.${styles.customPagination}`,
                   clickable: true,

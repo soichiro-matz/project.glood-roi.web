@@ -77,6 +77,8 @@
       .mySwiperWrapper {
         grid-row: 1;
         grid-column: 2 / span 11;
+        width: 100vw;
+        margin-right: calc(50% - 50vw);
         overflow: hidden;
         border-radius: 1rem;
 
