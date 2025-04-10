@@ -11,6 +11,7 @@
   .items {
     .item {
       opacity: 0;
+      transform: translateY(10rem);
 
       &:nth-child(1),
       &:nth-child(3),

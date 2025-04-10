@@ -55,8 +55,8 @@ export default function ProductLines() {
         },
       });
 
-      tl.from(".js-productCategory", {
-        y: 150,
+      tl.to(".js-productCategory", {
+        y: 0,
         stagger: 0.1,
         duration: 1,
         ease: "power3.out",
@@ -70,26 +70,16 @@ export default function ProductLines() {
         },
         "<0.2",
       );
-
-      // gsap.from(".js-productCategory", {
-      //   y: 100,
-      //   opacity: 0,
-      //   duration: 1,
-      //   ease: "power3.out",
-      //   stagger: 0.2,
-      //   scrollTrigger: {
-      //     trigger: ".js-productCategory",
-      //     start: "top 120%",
-      //     // markers: true,
-      //   },
-      // });
     };
 
     load();
   }, []);
 
   return (
-    <div className={`${styles.productLines} js-transition relative z-50`}>
+    <div
+      id="product-lines"
+      className={`${styles.productLines} js-transition relative z-50`}
+    >
       <div
         className={`${styles.transition01} js-transition-item absolute h-[500px] w-full`}
       ></div>

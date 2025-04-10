@@ -20,11 +20,11 @@ export const navLinks = {
     href: "/#service",
     text: "サービス",
     text_en: "service",
-    children: [
-      { href: "/#domestic", text: "国内EC事業", anchor: "domestic" },
-      { href: "/#cross-border", text: "越境EC事業", anchor: "cross-border" },
-      { href: "/#wholesale", text: "卸売事業", anchor: "wholesale" },
-    ],
+    // children: [
+    //   { href: "/#domestic", text: "国内EC事業", anchor: "domestic" },
+    //   { href: "/#cross-border", text: "越境EC事業", anchor: "cross-border" },
+    //   { href: "/#wholesale", text: "卸売事業", anchor: "wholesale" },
+    // ],
   },
   productLines: {
     href: "/#product-lines",

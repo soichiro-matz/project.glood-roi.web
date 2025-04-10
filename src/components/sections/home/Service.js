@@ -4,9 +4,6 @@ import gsap from "gsap";
 import { nanoid } from "nanoid";
 import useRola from "@hooks/useRola";
 import styles from "@/styles/components/sections/home/services.module.scss";
-import { getChildren } from "@data/navLinks";
-
-const serviceChildren = getChildren("service");
 
 export default function Service({ service, index }) {
   const sectionRef = useRef(null);
@@ -18,8 +15,6 @@ export default function Service({ service, index }) {
   });
 
   useEffect(() => {
-    console.log(serviceChildren);
-
     const load = async () => {
       const { ScrollTrigger } = await import("gsap/ScrollTrigger");
       gsap.registerPlugin(ScrollTrigger);
@@ -173,14 +168,7 @@ export default function Service({ service, index }) {
   }
 
   return (
-    <li
-      ref={sectionRef}
-      className={`${bgReverce} ${styles.service} relative`}
-      {...(index == 0 ? { id: serviceChildren[index].anchor } : {})}
-      data-offset-sp="-30"
-      data-offset-md="0"
-      data-offset-lg="150"
-    >
+    <li ref={sectionRef} className={`${bgReverce} ${styles.service} relative`}>
       <section>
         <div
           className={`${styles.serviceContainer} l-container l-grid__12 pt-fluid-[56,104,350,1024] lg:gap-x-8 lg:pt-fluid-[270,320,1024,1480]`}
