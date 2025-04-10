@@ -47,29 +47,33 @@ export default function ProductLines() {
         );
       });
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: ".js-productCategory",
-          start: "top 130%",
-          // markers: true,
-        },
-      });
+      setTimeout(() => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: ".js-productCategory",
+            start: "top 130%",
+            // markers: true,
+          },
+        });
 
-      tl.to(".js-productCategory", {
-        y: 0,
-        stagger: 0.1,
-        duration: 1,
-        ease: "power3.out",
-      }).to(
-        ".js-productCategory",
-        {
-          opacity: 1,
+        tl.to(".js-productCategory", {
+          y: 0,
           stagger: 0.1,
           duration: 1,
           ease: "power3.out",
-        },
-        "<0.2",
-      );
+        }).to(
+          ".js-productCategory",
+          {
+            opacity: 1,
+            stagger: 0.1,
+            duration: 1,
+            ease: "power3.out",
+          },
+          "<0.2",
+        );
+
+        ScrollTrigger.refresh();
+      }, 500);
     };
 
     load();
