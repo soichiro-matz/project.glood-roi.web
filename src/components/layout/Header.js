@@ -266,6 +266,7 @@ export default function Header() {
                         href={link.href}
                         className={`nav-link block items-center text-left lg:flex ${hasChildren ? "has-children" : ""} ${key === "contact" ? "isContact" : ""}`}
                         onClick={() => setIsOpen(false)}
+                        scroll={false}
                       >
                         <p
                           className={`title-en js-title-en u-clip__full font-bold leading-none pb-fluid-[6,6,350,768] text-fluid-[24,26,350,768] lg:hidden`}

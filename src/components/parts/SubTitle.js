@@ -22,8 +22,6 @@ export default function SubTitle({
 
       const subTitle = subTitleRef.current;
 
-      console.log(subTitle);
-
       if (subTitle) {
         const chars = subTitle.querySelectorAll("span");
 

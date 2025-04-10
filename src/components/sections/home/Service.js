@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { nanoid } from "nanoid";
@@ -14,7 +14,7 @@ export default function Service({ service, index }) {
     rootMargin: "0px 0px -30%",
   });
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const load = async () => {
       const { ScrollTrigger } = await import("gsap/ScrollTrigger");
       gsap.registerPlugin(ScrollTrigger);
@@ -70,15 +70,17 @@ export default function Service({ service, index }) {
         },
       });
 
-      const serviceTitle = sectionRef.current.querySelector(".js-serviceTitle");
-      const text = sectionRef.current.querySelector("span");
-      const image = sectionRef.current.querySelector(".js-ServiseImage");
+      const serviceTitle = sectionRef.current.querySelector(
+        ".js-serviceTitleWrapper",
+      );
+      const text = sectionRef.current.querySelector(".js-serviceTitle");
+      const image = sectionRef.current.querySelector(".js-serviseImage");
+      const description = sectionRef.current.querySelector(".js-description");
 
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: serviceTitle,
+          trigger: sectionRef.current,
           start: "top 80%",
-          end: "bottom top",
           // markers: true,
         },
       });
@@ -88,27 +90,41 @@ export default function Service({ service, index }) {
         duration: 0.8,
         ease: "power3.out",
       })
-        .from(
+        .to(
           text,
           {
-            x: -30,
-            opacity: 0,
+            x: 0,
+            opacity: 1,
             duration: 0.8,
             ease: "power3.out",
           },
           "<0.1",
         )
-        .from(
+        .to(
           image,
           {
-            y: 50,
-            opacity: 0,
+            y: "-3rem",
+            opacity: 1,
             // stagger: 0.05,
             duration: 1.5,
             ease: "power3.out",
           },
           "<",
         );
+
+      gsap.to(description, {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: description,
+          start: `top ${index == 0 ? "80%" : "bottom"}`,
+          // markers: true,
+        },
+      });
+
+      console.log("ScrollTriggers:", ScrollTrigger.getAll());
 
       return () => {
         sectionAnim.scrollTrigger?.kill();
@@ -160,15 +176,15 @@ export default function Service({ service, index }) {
           <h3 className={`${styles.heading}`}>
             <span
               ref={titleRef}
-              className={`${styles.title} lg:pb2 js-serviceTitle relative inline-block pb-1.5 pt-1 font-medium text-white px-fluid-[10,16] text-fluid-[18,24,350,1024] lg:pt-1 lg:text-fluid-[24,24]`}
+              className={`${styles.title} lg:pb2 js-serviceTitleWrapper relative inline-block pb-1.5 pt-1 font-medium text-white px-fluid-[10,16] text-fluid-[18,24,350,1024] lg:pt-1 lg:text-fluid-[24,24]`}
             >
-              <span className="inline-block">{service.name}</span>
+              <span className="js-serviceTitle inline-block">
+                {service.name}
+              </span>
             </span>
           </h3>
           <div
-            className={`${styles.description} relative pb-fluid-[64,80,350.1024] pt-fluid-[24,40,350.1024] text-fluid-[15,17] lg:pb-fluid-[80,120,1024.1480] lg:pt-fluid-[10,16,1024.1480]`}
-            data-rola-trigger01
-            data-rola-transition="slide"
+            className={`${styles.description} js-description relative pb-fluid-[64,80,350.1024] pt-fluid-[24,40,350.1024] text-fluid-[15,17] lg:pb-fluid-[80,120,1024.1480] lg:pt-fluid-[10,16,1024.1480]`}
           >
             {service.description.map((text) => (
               <p key={nanoid()} className="leading-loose">
@@ -214,7 +230,7 @@ export default function Service({ service, index }) {
             </span>
           </p>
           <div
-            className={`${styles.imageContainer} js-ServiseImage relative pb-fluid-[32,48,350.1024] lg:pb-fluid-[80,120,1024.1480]`}
+            className={`${styles.imageContainer} js-serviseImage relative pb-fluid-[32,48,350.1024] lg:pb-fluid-[80,120,1024.1480]`}
           >
             <Image
               src={service.image}

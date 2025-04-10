@@ -31,4 +31,9 @@
       height: 1rem;
     }
   }
+
+  .iconImage {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
 }

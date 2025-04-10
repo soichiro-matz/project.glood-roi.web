@@ -13,18 +13,26 @@ export default function Recruit() {
       const { ScrollTrigger } = await import("gsap/ScrollTrigger");
       gsap.registerPlugin(ScrollTrigger);
 
-      gsap.from(".js-employee", {
-        opacity: 0,
-        x: -10,
-        ease: "power3.out",
-        stagger: 0.2,
-        duration: 1.5,
-        scrollTrigger: {
-          trigger: ".js-employee",
-          start: "top 85%",
-          // scrub: true,
-          // markers: true,
-        },
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          const elems = document.querySelectorAll(".js-employee");
+
+          if (!elems.length) return;
+
+          gsap.to(".js-employee", {
+            opacity: 1,
+            x: 0,
+            ease: "power3.out",
+            stagger: 0.2,
+            duration: 1.5,
+            scrollTrigger: {
+              trigger: ".js-employee",
+              start: "top 85%",
+              // scrub: true,
+              markers: true,
+            },
+          });
+        }, 5000);
       });
     };
 
