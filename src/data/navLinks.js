@@ -21,9 +21,9 @@ export const navLinks = {
     text: "サービス",
     text_en: "service",
     children: [
-      { href: "/service#domestic", text: "国内EC事業" },
-      { href: "/service#cross-border", text: "越境EC事業" },
-      { href: "/service#wholesale", text: "卸売事業" },
+      { href: "/#domestic", text: "国内EC事業", anchor: "domestic" },
+      { href: "/#cross-border", text: "越境EC事業", anchor: "cross-border" },
+      { href: "/#wholesale", text: "卸売事業", anchor: "wholesale" },
     ],
   },
   productLines: {

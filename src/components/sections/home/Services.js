@@ -37,21 +37,29 @@ const Items = [
 
 export default function Services() {
   return (
-    <section
-      className={`${styles.services} relative`}
-      id="service"
+    <div
+      id="cross-border"
       data-offset-sp="-100"
-      data-offset-md="-120"
-      data-offset-lg="-160"
+      data-offset-md="1100"
+      data-offset-lg="1200"
     >
-      <div className="-translate-y-1/2 transform text-center">
-        <SectionTitle tag="h2" titleEn="service" titleJp="サービス" />
+      <div
+        id="wholesale"
+        data-offset-sp="-100"
+        data-offset-md="2250"
+        data-offset-lg="2200"
+      >
+        <section className={`${styles.services} relative`} id="service">
+          <div className="-translate-y-1/2 transform text-center">
+            <SectionTitle tag="h2" titleEn="service" titleJp="サービス" />
+          </div>
+          <ul>
+            {Items.map((service, index) => (
+              <Service key={nanoid()} service={service} index={index} />
+            ))}
+          </ul>
+        </section>
       </div>
-      <ul>
-        {Items.map((service, index) => (
-          <Service key={nanoid()} service={service} index={index} />
-        ))}
-      </ul>
-    </section>
+    </div>
   );
 }
