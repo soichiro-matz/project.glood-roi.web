@@ -58,13 +58,13 @@ export default function Marquee() {
           className={`pr-8 font-bold text-fluid-[80,136,350,768] md:text-fluid-[136,152,768,1800] ${styles.marqueeText} flex-none`}
           lang="en"
         >
-          enriching everyone's life with the finest products from japan
+          enriching everyone&#39;s life with the finest products from japan
         </p>
         <p
           className={`pr-8 font-bold text-fluid-[80,136,350,768] md:text-fluid-[136,152,768,1800] ${styles.marqueeText} flex-none`}
           lang="en"
         >
-          enriching everyone's life with the finest products from japan
+          enriching everyone&#39;s life with the finest products from japan
         </p>
       </div>
     </div>

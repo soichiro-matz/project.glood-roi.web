@@ -59,7 +59,7 @@ export default function Home() {
         <img src="test.jpg" alt="" />
       </div>
       <p class="text">
-        enriching everyone's life with the finest products from japan
+        enriching everyone&#39;s life with the finest products from japan
       </p>
       <div className="js-main-section">
         <section className="card"></section>

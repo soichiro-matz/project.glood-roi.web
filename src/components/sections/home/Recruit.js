@@ -29,7 +29,7 @@ export default function Recruit() {
               trigger: ".js-employee",
               start: "top 85%",
               // scrub: true,
-              markers: true,
+              // markers: true,
             },
           });
         }, 5000);
