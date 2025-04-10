@@ -9,11 +9,8 @@ import "@scss/libs/Rola.scss";
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
-  useEffect(() => {
-    if ("scrollRestoration" in window.history) {
-      window.history.scrollRestoration = "manual";
-    }
 
+  const bindAnchorEvents = async () => {
     let lenis;
 
     (async () => {
@@ -24,7 +21,7 @@ export default function App({ Component, pageProps }) {
       //lenis +anchorlink対応
       anchors.forEach((anchor) => {
         anchor.addEventListener("click", (e) => {
-          alert("なし");
+          // alert("なし");
 
           const href = anchor.getAttribute("href");
           if (!href || href === "#" || href.startsWith("http")) return;
@@ -58,15 +55,33 @@ export default function App({ Component, pageProps }) {
     return () => {
       if (lenis) lenis.destroy();
     };
+    // }, []);
+  };
+
+  useEffect(() => {
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+
+    // 初回ページ描画時
+    bindAnchorEvents();
+
+    // ページ遷移のたびにアンカーイベント再設定
+    router.events.on("routeChangeComplete", bindAnchorEvents);
+
+    // クリーンアップ
+    return () => {
+      router.events.off("routeChangeComplete", bindAnchorEvents);
+    };
   }, []);
 
-  // ✅ 別ページ → アンカー付きページへの遷移時にスクロール実行
+  // 別ページ → アンカー付きページへの遷移時にスクロール実行
   useEffect(() => {
-    alert("あり");
+    // alert("あり");
 
     const hash = window.location.hash;
     if (!hash) return;
-    // ✅ ハッシュのジャンプ挙動を防止
+    // ハッシュのジャンプ挙動を防止
     setTimeout(() => {
       window.scrollTo(0, 0);
     }, 0);
@@ -78,13 +93,13 @@ export default function App({ Component, pageProps }) {
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           const offset = getOffsetByScreen(target);
-          // ✅ スクロールが完了するのを待ってから ScrollTrigger.refresh()
+          // スクロールが完了するのを待ってから ScrollTrigger.refresh()
           lenis.scrollTo(target, {
             offset,
             duration: 1.2,
             easing: (t) => 1 - Math.pow(1 - t, 3),
             onComplete: () => {
-              // ✅ scrollTo完了後にrefreshすることで、invalidateOnRefreshも機能
+              // scrollTo完了後にrefreshすることで、invalidateOnRefreshも機能
               const { ScrollTrigger } = require("gsap/ScrollTrigger");
               ScrollTrigger.refresh(true);
             },
@@ -99,7 +114,7 @@ export default function App({ Component, pageProps }) {
   return <Component {...pageProps} />;
 }
 
-// ✅ offsetを取得（セクション側に data-offset-* をつけておく）
+// offsetを取得（セクション側に data-offset-* をつけておく）
 function getOffsetByScreen(target) {
   const width = window.innerWidth;
   let offsetAttr = "0";

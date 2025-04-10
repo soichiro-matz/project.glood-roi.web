@@ -124,8 +124,6 @@ export default function Service({ service, index }) {
         },
       });
 
-      console.log("ScrollTriggers:", ScrollTrigger.getAll());
-
       return () => {
         sectionAnim.scrollTrigger?.kill();
         scrollTriggerInstance?.kill();

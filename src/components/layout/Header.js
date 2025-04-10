@@ -265,7 +265,10 @@ export default function Header() {
                       <Link
                         href={link.href}
                         className={`nav-link block items-center text-left lg:flex ${hasChildren ? "has-children" : ""} ${key === "contact" ? "isContact" : ""}`}
-                        onClick={() => setIsOpen(false)}
+                        onClick={() => {
+                          setIsOpen(false);
+                          setFocusedMenu(null);
+                        }}
                         scroll={false}
                       >
                         <p
@@ -301,7 +304,10 @@ export default function Header() {
                               <Link
                                 href={child.href}
                                 className="nav-childMenu__link block text-left"
-                                onClick={() => setIsOpen(false)}
+                                onClick={() => {
+                                  setIsOpen(false);
+                                  setFocusedMenu(null);
+                                }}
                               >
                                 {child.text}
                               </Link>
