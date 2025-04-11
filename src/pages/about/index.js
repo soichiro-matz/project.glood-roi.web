@@ -2,6 +2,8 @@ import styles from "@/styles/pages/about/index.module.scss";
 import { SITE } from "@/config/config";
 import Layout from "@/components/layout/Layout";
 import Heading from "@/components/sections/Heading";
+import Mvv from "@/components/sections/about/Mvv";
+import Message from "@/components/sections/about/Message";
 
 export default function About() {
   const title = "私たちについて";
@@ -19,17 +21,11 @@ export default function About() {
     },
   ];
 
-  console.log(breadcrumbs);
-
   return (
     <Layout title={title} description={description}>
       <Heading titleEn={title_en} titleJp={title} breadcrumbs={breadcrumbs} />
-      <div className={styles.about}>
-        <section>
-          <h2>About Our Company</h2>
-          <p>We are a company that values...</p>
-        </section>
-      </div>
+      <Mvv />
+      <Message />
     </Layout>
   );
 }

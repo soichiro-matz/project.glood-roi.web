@@ -10,4 +10,8 @@
   line-height: 1;
   color: #fff;
   white-space: nowrap;
+
+  &.fontGray {
+    color: var(--base-gray-color);
+  }
 }

@@ -11,7 +11,7 @@ export const navLinks = {
     text_en: "about us",
     children: [
       { href: "/about#mvb", text: "ミッション／ビジョン／バリュー" },
-      { href: "/about#greeting", text: "ご挨拶" },
+      { href: "/about#message", text: "代表挨拶" },
       { href: "/about#data", text: "データでみるGlood roi" },
       { href: "/about#outline", text: "会社概要／沿革" },
     ],

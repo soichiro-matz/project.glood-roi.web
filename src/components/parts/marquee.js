@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "@scss/components/parts/marquee.module.scss";
 
-export default function Marquee() {
+export default function Marquee({ color = "", backgroundolor = "" }) {
   const baseRef = useRef(null);
   const [textWidth, setTextWidth] = useState(0);
   const [animationName, setAnimationName] = useState("");
+
+  const fontColor = styles[`font${color == "gray" ? "Gray" : "Transparent"}`];
 
   useEffect(() => {
     if (!baseRef.current) return;
@@ -55,13 +57,13 @@ export default function Marquee() {
       >
         <p
           ref={baseRef}
-          className={`pr-8 font-bold text-fluid-[80,136,350,768] md:text-fluid-[136,152,768,1800] ${styles.marqueeText} flex-none`}
+          className={`${fontColor} pr-8 font-bold text-fluid-[80,136,350,768] md:text-fluid-[136,152,768,1800] ${styles.marqueeText} flex-none`}
           lang="en"
         >
           enriching everyone&#39;s life with the finest products from japan
         </p>
         <p
-          className={`pr-8 font-bold text-fluid-[80,136,350,768] md:text-fluid-[136,152,768,1800] ${styles.marqueeText} flex-none`}
+          className={`${fontColor} pr-8 font-bold text-fluid-[80,136,350,768] md:text-fluid-[136,152,768,1800] ${styles.marqueeText} flex-none`}
           lang="en"
         >
           enriching everyone&#39;s life with the finest products from japan

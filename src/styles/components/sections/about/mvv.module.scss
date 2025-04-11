@@ -1,0 +1,95 @@
+@charset "UTF-8";
+@use "@/styles/base/mixins" as *;
+
+.mvv {
+  &::before,
+  &::after {
+    position: absolute;
+    right: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    content: "";
+  }
+
+  &::before {
+    top: 0;
+    bottom: 90%;
+    background-color: var(--base-gray-color);
+  }
+
+  &::after {
+    top: 10%;
+    bottom: 0;
+    background-color: var(--sub-base-gray-color);
+  }
+
+  .card {
+    .cardBody {
+      @apply relative gap-[10] lg:gap-4;
+
+      .heading {
+        @apply flex items-center pb-0 gap-y-fluid-[6,10] pt-fluid-[56,112] md:flex-col md:items-start md:pb-fluid-[56,88];
+
+        grid-column: 2 / span 3;
+
+        @include sp {
+          grid-column: 2 / span 10;
+        }
+
+        .titleEn {
+          @apply font-bold leading-none text-fluid-[28,36,350,780] md:text-fluid-[40,56];
+        }
+
+        .title {
+          @apply relative ml-3 pl-[14] font-medium leading-none text-fluid-[12,14,350,780] md:ml-0 md:pl-0 md:text-fluid-[14,18];
+
+          &::before {
+            content: "・";
+
+            @include sp {
+              position: absolute;
+              top: 50%;
+              left: 0;
+              width: 0.675rem;
+              height: 1px;
+              content: "";
+              background-color: var(--main-color);
+              transform: translateY(-50%);
+            }
+          }
+        }
+      }
+
+      .description {
+        @apply font-medium leading-loose pb-fluid-[40,48,350,768] pt-fluid-[20,28,350,768] text-fluid-[16,20] md:pb-fluid-[56,88] md:pt-fluid-[56,112];
+
+        grid-column: 6 / span 6;
+
+        @include sp {
+          grid-column: 2 / span 10;
+        }
+
+        .descriptionList {
+          margin-left: 1rem;
+          list-style: disc;
+
+          li {
+            @apply leading-loose mb-fluid-[20,32];
+
+            &::marker {
+              @apply text-fluid-[10,12];
+            }
+          }
+        }
+      }
+
+      .border {
+        grid-column: 2 / span 10;
+        width: 100%;
+        height: 1px;
+        background-color: var(--border-color);
+      }
+    }
+  }
+}

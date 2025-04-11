@@ -1,0 +1,42 @@
+@charset "UTF-8";
+@use "@/styles/base/mixins" as *;
+
+.messageContainer {
+  background-color: var(--sub-base-gray-color);
+
+  .message {
+    @apply bg-white pt-fluid-[80,104,350,768] md:pt-fluid-[104,160];
+
+    opacity: 0;
+
+    .messageInner {
+      grid-column: 3 / span 8;
+
+      @include md {
+        grid-column: 2 / span 10;
+      }
+
+      @include sp {
+        grid-column: 1 / span 12;
+        padding: 0 1rem;
+      }
+
+      .greeting {
+        opacity: 0;
+        transform: translateY(4rem);
+
+        @include md {
+          transform: translateY(3rem);
+        }
+
+        @include sp {
+          transform: translateY(2rem);
+        }
+      }
+
+      .sign {
+        font-family: "Klee One", cursive;
+      }
+    }
+  }
+}
