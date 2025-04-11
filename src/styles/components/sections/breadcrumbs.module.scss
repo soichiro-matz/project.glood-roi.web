@@ -1,0 +1,28 @@
+@charset "UTF-8";
+@use "@/styles/base/mixins" as *;
+
+.breadcrumbItem {
+  @apply relative font-medium leading-none text-fluid-[12,16];
+
+  &:not(:last-of-type)::after {
+    position: absolute;
+    top: 0;
+    right: -0.875rem;
+    bottom: 0;
+    width: 8px;
+    height: 8px;
+    margin: auto 0;
+    content: "";
+    border-top: 1.5px solid var(--main-color);
+    border-right: 1.5px solid var(--main-color);
+    transform: rotate(45deg);
+
+    @include md {
+      // right: -0.75rem;
+    }
+  }
+
+  img {
+    @apply w-fluid-[14,16,350,768] lg:w-fluid-[16,19];
+  }
+}

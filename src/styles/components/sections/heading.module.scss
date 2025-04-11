@@ -1,0 +1,9 @@
+@charset "UTF-8";
+@use "@/styles/base/mixins" as *;
+
+.heading {
+  background-color: var(--base-gray-color);
+
+  .headingInner {
+  }
+}
