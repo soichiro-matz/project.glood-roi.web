@@ -33,22 +33,6 @@ export default function Data() {
         },
       });
 
-      // const tl = gsap.timeline({
-      //   scrollTrigger: {
-      //     trigger: ".js-data",
-      //     start: "top 80%",
-      //     // markers: true,
-      //   },
-      // });
-
-      // tl.to(".js-data", {
-      //   y: 0,
-      //   opacity: 1,
-      //   stagger: 0.1,
-      //   duration: 1,
-      //   ease: "power3.out",
-      // });
-
       gsap.to(".js-datas", {
         y: 0,
         opacity: 1,

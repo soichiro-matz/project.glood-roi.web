@@ -1,0 +1,66 @@
+@charset "UTF-8";
+@use "@/styles/base/mixins" as *;
+
+.outlineContainer {
+  background-color: var(--footer-bg-color);
+
+  .outline {
+    background-color: #fff;
+    opacity: 0;
+
+    .outlineItems {
+      grid-column: 3 / span 8;
+
+      @include md {
+        grid-column: 2 / span 10;
+      }
+
+      @include sp {
+        grid-column: 1 / span 12;
+
+        // width: 95%;
+      }
+
+      .dlDt {
+        @apply text-fluid-[16,16];
+      }
+
+      .dlDd {
+        @apply text-fluid-[15,16];
+
+        .googleMap {
+          @apply w-full lg:w-fluid-[350,480,1024,1280];
+
+          aspect-ratio: 3/2;
+
+          iframe {
+            width: 100%;
+            height: 100%;
+          }
+        }
+
+        .office {
+          dt {
+            &::before {
+              content: "【";
+            }
+
+            &::after {
+              content: "】";
+            }
+          }
+        }
+      }
+
+      .parentheses {
+        &::before {
+          content: "（";
+        }
+
+        &::after {
+          content: "）";
+        }
+      }
+    }
+  }
+}
