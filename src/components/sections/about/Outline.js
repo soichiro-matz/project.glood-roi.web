@@ -29,7 +29,7 @@ export default function Outline() {
   return (
     <div className={`${styles.outlineContainer}`}>
       <section
-        className={`${styles.outline} js-outline__bg pb-fluid-[120,216] pt-fluid-[80,136]`}
+        className={`${styles.outline} js-outline__bg pb-fluid-[24,56,350,768] pt-fluid-[80,136] md:pb-fluid-[64,72]`}
         id="outline"
       >
         <div className="text-center">
@@ -62,9 +62,9 @@ export default function Outline() {
                       width="600"
                       height="450"
                       style={{ border: 0 }}
-                      allowfullscreen=""
+                      allowFullScreen=""
                       loading="lazy"
-                      referrerpolicy="no-referrer-when-downgrade"
+                      referrerPolicy="no-referrer-when-downgrade"
                     ></iframe>
                   </div>
                 </dd>
@@ -141,7 +141,7 @@ export default function Outline() {
               <div className={`c-dl__items`}>
                 <dt className={`c-dl__dt ${styles.dlDt}`}>設立</dt>
                 <dd className={`c-dl__dd ${styles.dlDd}`}>
-                  <time datetime="2020-10-15">{COMPANY.foundingDate}</time>
+                  <time dateTime="2020-10-15">{COMPANY.foundingDate}</time>
                 </dd>
               </div>
               <div className={`c-dl__items`}>
@@ -153,7 +153,7 @@ export default function Outline() {
                 <dd className={`c-dl__dd ${styles.dlDd}`}>
                   14億9000万円
                   <time
-                    datetime="2020-10-15"
+                    dateTime="2020-10-15"
                     className={`${styles.parentheses}`}
                   >
                     2024年9月
@@ -165,7 +165,7 @@ export default function Outline() {
                 <dd className={`c-dl__dd ${styles.dlDd}`}>
                   38名
                   <time
-                    datetime="2020-10-15"
+                    dateTime="2020-10-15"
                     className={`${styles.parentheses}`}
                   >
                     2024年9月
