@@ -4,6 +4,7 @@ import Layout from "@/components/layout/Layout";
 import Heading from "@/components/sections/Heading";
 import Mvv from "@/components/sections/about/Mvv";
 import Message from "@/components/sections/about/Message";
+import Data from "@/components/sections/about/Data";
 
 export default function About() {
   const title = "私たちについて";
@@ -26,6 +27,7 @@ export default function About() {
       <Heading titleEn={title_en} titleJp={title} breadcrumbs={breadcrumbs} />
       <Mvv />
       <Message />
+      <Data />
     </Layout>
   );
 }

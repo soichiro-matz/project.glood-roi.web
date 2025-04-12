@@ -41,34 +41,38 @@ export default function Service({ service, index }) {
 
       const slows = sectionRef.current.querySelectorAll(".js-move-Slow");
 
-      gsap.to(slows, {
-        y: 300,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
-          // markers: true,
-          id: `scroll-${index}`,
-        },
-      });
+      if (slows.count > 0) {
+        gsap.to(slows, {
+          y: 300,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+            // markers: true,
+            id: `scroll-${index}`,
+          },
+        });
+      }
 
       const moreSlows =
         sectionRef.current.querySelectorAll(".js-move-moreSlow");
 
-      gsap.to(moreSlows, {
-        y: 100,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
-          // markers: true,
-          id: `scroll-${index}-moreSlow`, // 👈 IDを固有に！
-        },
-      });
+      if (moreSlows.count > 0) {
+        gsap.to(moreSlows, {
+          y: 100,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+            // markers: true,
+            id: `scroll-${index}-moreSlow`, // 👈 IDを固有に！
+          },
+        });
+      }
 
       const serviceTitle = sectionRef.current.querySelector(
         ".js-serviceTitleWrapper",

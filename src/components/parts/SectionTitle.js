@@ -26,7 +26,7 @@ export default function SectionTitle({
   }
 
   return (
-    <HeadingTag className="relative inline-block gap-fluid-[8,10]">
+    <HeadingTag className="relative gap-fluid-[8,10]">
       <SubTitle
         lang="en"
         addClass={["text-fluid-[36,48,350,768]", "md:text-fluid-[48,80]"]}
