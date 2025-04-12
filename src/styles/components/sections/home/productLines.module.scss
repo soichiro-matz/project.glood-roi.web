@@ -2,16 +2,16 @@
 @use "@/styles/base/mixins" as *;
 
 .productLines {
-  margin-top: -40em;
+  margin-top: -40rem;
 
   @include md {
-    margin-top: -35em;
+    margin-top: -35rem;
   }
 
   .items {
     .item {
-      opacity: 0;
-      transform: translateY(10rem);
+      // opacity: 0;
+      // transform: translateY(10rem);
 
       &:nth-child(1),
       &:nth-child(3),

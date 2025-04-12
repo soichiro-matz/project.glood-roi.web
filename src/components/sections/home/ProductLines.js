@@ -18,65 +18,64 @@ const Items = [
 
 export default function ProductLines() {
   useLayoutEffect(() => {
-    const load = async () => {
-      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-      gsap.registerPlugin(ScrollTrigger);
+    const ctx = gsap.context(() => {
+      const load = async () => {
+        const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+        gsap.registerPlugin(ScrollTrigger);
 
-      gsap.utils.toArray(".js-transition").forEach((section) => {
-        const items = section.querySelectorAll(".js-transition-item");
+        // 背景アニメーション
+        gsap.utils.toArray(".js-transition").forEach((section) => {
+          const items = section.querySelectorAll(".js-transition-item");
 
-        gsap.fromTo(
-          items,
-          {
-            y: 500,
-            opacity: 0,
-          },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            ease: "power3.out",
-            stagger: 0.2,
-            scrollTrigger: {
-              trigger: section,
-              start: "top 90%",
-              toggleActions: "play none none reverse",
-              // markers: true,
+          gsap.fromTo(
+            items,
+            { y: 500, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 1,
+              ease: "power3.out",
+              stagger: 0.2,
+              scrollTrigger: {
+                trigger: section,
+                start: "top 90%",
+              },
             },
-          },
-        );
-      });
-
-      setTimeout(() => {
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: ".js-productCategory",
-            start: "top 130%",
-            // markers: true,
-          },
+          );
         });
 
-        tl.to(".js-productCategory", {
-          y: 0,
-          stagger: 0.1,
-          duration: 1,
-          ease: "power3.out",
-        }).to(
-          ".js-productCategory",
-          {
-            opacity: 1,
-            stagger: 0.1,
-            duration: 1,
-            ease: "power3.out",
-          },
-          "<0.2",
-        );
+        setTimeout(() => {
+          // 各カテゴリアニメーション（li → div を対象）
+          gsap.utils.toArray(".js-productCategory").forEach((el, i) => {
+            if (!el) return;
 
-        ScrollTrigger.refresh();
-      }, 500);
-    };
+            gsap.fromTo(
+              el,
+              { y: 300, opacity: 0 },
+              {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                delay: i * 0.1,
+                ease: "power3.out",
+                scrollTrigger: {
+                  trigger: "js-productCategoies",
+                  start: "top 80%",
+                  markers: true,
+                },
+              },
+            );
+          });
 
-    load();
+          // ✅ DOM描画完了後にrefresh
+          requestAnimationFrame(() => ScrollTrigger.refresh());
+        }, 200);
+      };
+
+      load();
+    });
+
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -101,7 +100,7 @@ export default function ProductLines() {
           start="110%"
         />
         <ul
-          className={`${styles.items} l-container flex flex-wrap pt-fluid-[88,120] md:pt-fluid-[120,160]`}
+          className={`${styles.items} js-productCategories l-container flex flex-wrap pt-fluid-[88,120] md:pt-fluid-[120,160]`}
         >
           {Items.map((item, index) => (
             <li
