@@ -12,6 +12,7 @@ export default function Marquee({ color = "", backgroundolor = "" }) {
     if (!baseRef.current) return;
 
     const updateWidth = () => {
+      if (!baseRef.current) return;
       const width = baseRef.current.offsetWidth;
       setTextWidth(width);
 

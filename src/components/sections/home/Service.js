@@ -39,9 +39,9 @@ export default function Service({ service, index }) {
         );
       }
 
-      const slows = sectionRef.current.querySelectorAll(".js-move-Slow");
+      const slows = sectionRef.current?.querySelectorAll(".js-move-Slow") ?? [];
 
-      if (slows.count > 0) {
+      if (slows.length > 0) {
         gsap.to(slows, {
           y: 300,
           ease: "none",
@@ -57,9 +57,9 @@ export default function Service({ service, index }) {
       }
 
       const moreSlows =
-        sectionRef.current.querySelectorAll(".js-move-moreSlow");
+        sectionRef.current.querySelectorAll(".js-move-moreSlow") ?? [];
 
-      if (moreSlows.count > 0) {
+      if (moreSlows.length > 0) {
         gsap.to(moreSlows, {
           y: 100,
           ease: "none",
