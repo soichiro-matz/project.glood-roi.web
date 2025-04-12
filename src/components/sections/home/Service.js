@@ -19,6 +19,8 @@ export default function Service({ service, index }) {
       const { ScrollTrigger } = await import("gsap/ScrollTrigger");
       gsap.registerPlugin(ScrollTrigger);
 
+      if (!sectionRef.current) return;
+
       if (index !== 0) {
         const sectionAnim = gsap.fromTo(
           sectionRef.current,

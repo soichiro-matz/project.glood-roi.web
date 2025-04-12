@@ -10,10 +10,11 @@ export const navLinks = {
     text: "私たちについて",
     text_en: "about us",
     children: [
-      { href: "/about#mvb", text: "ミッション／ビジョン／バリュー" },
+      { href: "/about#mvv", text: "ミッション／ビジョン／バリュー" },
       { href: "/about#message", text: "代表挨拶" },
       { href: "/about#data", text: "データでみるGlood roi" },
-      { href: "/about#outline", text: "会社概要／沿革" },
+      { href: "/about#outline", text: "会社概要" },
+      { href: "/about#history", text: "沿革" },
     ],
   },
   service: {

@@ -27,9 +27,9 @@ export default function Outline() {
     load();
   }, []);
   return (
-    <div className={`${styles.outlineContainer}`}>
+    <div className={`${styles.outlineContainer} `}>
       <section
-        className={`${styles.outline} js-outline__bg pb-fluid-[24,56,350,768] pt-fluid-[80,136] md:pb-fluid-[64,72]`}
+        className={`${styles.outline} js-outline__bg z-10 pb-fluid-[24,56,350,768] pt-fluid-[80,136] md:pb-fluid-[64,72]`}
         id="outline"
       >
         <div className="text-center">

@@ -40,6 +40,7 @@ export default function Data() {
         scrollTrigger: {
           trigger: ".js-datas",
           start: "top 60%",
+          once: true,
           onEnter: () => {
             const countElms = document.querySelectorAll(".js-num");
 
@@ -128,7 +129,7 @@ export default function Data() {
         })}
       </dl>
       <div
-        className={`${styles.imageWrapper} absolute bottom-[-5] left-[50%] w-fluid-[160,230,350,768] w-fluid-[38,53,350,768] md:w-fluid-[230,240]`}
+        className={`${styles.imageWrapper} absolute bottom-[-5] left-[50%] w-fluid-[160,230,350,768] md:w-fluid-[230,240]`}
       >
         <img
           src="/assets/img/about/img-data-01.svg"

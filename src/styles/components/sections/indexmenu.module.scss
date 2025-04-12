@@ -1,0 +1,113 @@
+@charset "UTF-8";
+@use "@/styles/base/mixins" as *;
+
+.indexMenu {
+  filter: drop-shadow(0 4px 30px rgb(16 20 65 / 10%));
+  transition: transform 0.3s ease-in-out;
+
+  .indexMenuLeft {
+    color: #fff;
+    background-color: var(--main-color);
+
+    .title {
+      width: 0.5em;
+      letter-spacing: -0.2em;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      white-space: normal;
+    }
+
+    .indexToggleButton {
+      // background-color: red;
+
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: 90%;
+      transition:
+        transform 0.3s ease-in-out,
+        background-image 0.3s ease-in-out;
+      will-change: background-image;
+
+      @include sp {
+        background-size: 85%;
+        transition:
+          transform 0.3s ease-in-out,
+          background-image 0s;
+      }
+    }
+
+    // &:hover,
+    // &:focus-visible {
+    //   .indexToggleButton {
+    //     background-image: url("/assets/img/common/icon-close-hover.svg");
+    //   }
+    // }
+
+    &.open {
+      .indexToggleButton {
+        background-image: url("/assets/img/common/icon-close.svg");
+      }
+
+      @media screen and (width >=1024) {
+        &:hover,
+        &:focus-visible {
+          .indexToggleButton {
+            background-image: url("/assets/img/common/icon-close-hover.svg");
+          }
+        }
+      }
+    }
+
+    &:not(.open) {
+      .indexToggleButton {
+        background-image: url("/assets/img/common/icon-open.svg");
+      }
+
+      @media screen and (width >=1024px) {
+        &:hover,
+        &:focus-visible {
+          .indexToggleButton {
+            background-size: 100%;
+
+            // background-image: url("/assets/img/common/icon-close-hover.svg");
+          }
+        }
+      }
+    }
+  }
+
+  .indexMenuRight {
+    .textLink {
+      position: relative;
+
+      &::before {
+        position: absolute;
+        bottom: 0.125rem;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        content: "";
+        background: var(--main-color);
+        transform: scale(0, 1);
+        transform-origin: right top;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .icon {
+        transition: transform 0.3s ease-in-out;
+      }
+
+      &:hover,
+      &:focus-visible {
+        &::before {
+          transform: scale(1, 1);
+          transform-origin: left top;
+        }
+
+        .icon {
+          transform: translateX(0.5rem);
+        }
+      }
+    }
+  }
+}

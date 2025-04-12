@@ -87,7 +87,7 @@ export default function Outline() {
   }, []);
 
   return (
-    <section className={`pb-fluid-[120,216] pt-fluid-[80,136]`} id="outline">
+    <section className={`pb-fluid-[120,216] pt-fluid-[80,136]`} id="history">
       <div className="text-center">
         <SectionTitle tag="h2" titleEn="history" titleJp="沿革" start="75%" />
       </div>

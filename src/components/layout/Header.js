@@ -298,7 +298,7 @@ export default function Header() {
                         style={{ opacity: isFocused ? 1 : undefined }}
                         onClick={() => toggleAccordion(key)}
                       >
-                        <ul className="nav-childMenu flex flex-col gap-y-3">
+                        <ul className="nav-childMenu flex flex-col gap-y-4">
                           {link.children.map((child, index) => (
                             <li key={child.href} tabIndex={-1}>
                               <Link
