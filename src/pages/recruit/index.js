@@ -2,7 +2,7 @@ import { SITE } from "@/config/config";
 import Layout from "@/components/layout/Layout";
 import Heading from "@/components/parts/Heading";
 import IndexMenu from "@/components/parts/IndexMenu";
-import Requirements from "@/pages/recruit/Requirements";
+import Requirements from "@/components/section/recruit/Requirements";
 import styles from "@/styles/pages/recruit/index.module.scss";
 import { getChildren } from "@/data/navLinks";
 

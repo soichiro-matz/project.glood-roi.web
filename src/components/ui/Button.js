@@ -55,6 +55,12 @@ const Button = forwardRef(function Button(props, ref) {
   }
 
   const { tag, children, ...otherProps } = props;
+
+  // input 要素は children を取れないため条件分岐
+  if (tag === "input") {
+    return createElement(tag, { ref, ...otherProps });
+  }
+
   return createElement(
     tag,
     { ref, type: "button", ...otherProps },

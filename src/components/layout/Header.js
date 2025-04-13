@@ -323,7 +323,7 @@ export default function Header() {
                 <div key="contact" className="js-contact-button pt-5 lg:hidden">
                   <Button
                     tag="a"
-                    linkProps={{ href: "/conact" }}
+                    linkProps={{ href: "/contact" }}
                     className="c-button p-button -primary"
                   >
                     お問い合わせ

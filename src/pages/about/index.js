@@ -1,11 +1,11 @@
 import { SITE } from "@/config/config";
 import Layout from "@/components/layout/Layout";
 import Heading from "@/components/parts/Heading";
-import Mvv from "@/pages/about/Mvv";
-import Message from "@/pages/about/Message";
-import Data from "@/pages/about/Data";
-import Outline from "@/pages/about/Outline";
-import History from "@/pages/about/History";
+import Mvv from "@/components/section/about/Mvv";
+import Message from "@/components/section/about/Message";
+import Data from "@/components/section/about/Data";
+import Outline from "@/components/section/about/Outline";
+import History from "@/components/section/about/History";
 import IndexMenu from "@/components/parts/IndexMenu";
 import { getChildren } from "@/data/navLinks";
 

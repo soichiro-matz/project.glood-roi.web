@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import styles from "@/styles/pages/home/services.module.scss";
 import SectionTitle from "@/components/parts/SectionTitle";
-import Service from "@/pages/home/Service";
+import Service from "@/components/section/home/Service";
 const Items = [
   {
     name: "国内EC事業",

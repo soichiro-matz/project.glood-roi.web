@@ -1,0 +1,14 @@
+@charset "UTF-8";
+@use "@/styles/base/mixins" as *;
+
+.formContainer {
+  grid-column: 3 / span 8;
+
+  @include md {
+    grid-column: 2 / span 10;
+  }
+
+  @include sp {
+    grid-column: 1 / span 12;
+  }
+}
