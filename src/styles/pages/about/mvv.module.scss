@@ -75,7 +75,7 @@
           list-style: disc;
 
           li {
-            @apply leading-loose mb-fluid-[20,32];
+            @apply leading-[1.8] mb-fluid-[28,48];
 
             &::marker {
               @apply text-fluid-[10,12];
