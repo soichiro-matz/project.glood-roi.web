@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import styles from "@/styles/components/sections/indexmenu.module.scss";
+import styles from "@/styles/components/parts/indexmenu.module.scss";
 export default function IndexMenu({ menu }) {
   const router = useRouter();
   const [isIndexOpen, setIsIndexOpen] = useState(false);
@@ -69,7 +69,7 @@ export default function IndexMenu({ menu }) {
     >
       <h2 className="sr-only">目次</h2>
       <button
-        className={`${isIndexOpen ? styles["open"] : ""} ${styles.indexMenuLeft} flex flex-col items-center justify-center gap-5 rounded-l-xl px-1.5 py-5 md:rounded-l-2xl md:px-3 md:py-10`}
+        className={`${isIndexOpen ? styles["open"] : ""} ${styles.indexMenuLeft} flex flex-col items-center justify-center gap-5 rounded-l-xl px-1.5 py-5 md:rounded-l-2xl md:px-3 md:py-5`}
         aria-expanded={isIndexOpen}
         aria-label={`目次を${isIndexOpen ? "閉じる" : "開く"}`}
         aria-controls="index-menu"
@@ -82,7 +82,7 @@ export default function IndexMenu({ menu }) {
         }}
       >
         <span
-          className={`${styles.title} inline-block text-center font-medium leading-[1.2] md:leading-[1.3] lg:leading-[1.5]`}
+          className={`${styles.title} inline-block text-center font-medium leading-[1.2] md:leading-[1.3] lg:leading-[1.3]`}
           lang="en"
           aria-hidden="true"
         >
@@ -92,7 +92,7 @@ export default function IndexMenu({ menu }) {
       </button>
       <nav
         id="index-menu"
-        className={`${styles.indexMenuRight} js-indexMenuRight bg-white px-6 py-4 md:px-8 md:py-7 lg:px-9`}
+        className={`${styles.indexMenuRight} js-indexMenuRight bg-white px-6 py-5 md:px-6 md:py-4 lg:px-8`}
       >
         <ul className="flex flex-col">
           {menu.map((item) => {

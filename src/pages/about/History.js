@@ -1,7 +1,7 @@
 import { useEffect, Fragment } from "react";
 import gsap from "gsap";
 import { nanoid } from "nanoid";
-import styles from "@/styles/components/sections/about/history.module.scss";
+import styles from "@/styles/pages/about/history.module.scss";
 import SectionTitle from "@/components/parts/SectionTitle";
 
 const histories = [

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import gsap from "gsap";
-import styles from "@/styles/components/sections/about/message.module.scss";
+import styles from "@/styles/pages/about/message.module.scss";
 import SectionTitle from "@/components/parts/SectionTitle";
 import Marquee from "@components/parts/marquee";
 export default function Message() {

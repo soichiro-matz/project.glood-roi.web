@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import gsap from "gsap";
-import styles from "@/styles/components/sections/about/mvv.module.scss";
+import styles from "@/styles/pages/about/mvv.module.scss";
 export default function Mvv() {
   useEffect(() => {
     const load = async () => {

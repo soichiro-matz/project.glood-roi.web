@@ -1,7 +1,7 @@
 import { useLayoutEffect } from "react";
 import gsap from "gsap";
 import SectionTitle from "@/components/parts/SectionTitle";
-import styles from "@/styles/components/sections/home/recruit.module.scss";
+import styles from "@/styles/pages/home/recruit.module.scss";
 import { zeroPad } from "@utils/utils";
 import Button from "@/components/ui/Button";
 

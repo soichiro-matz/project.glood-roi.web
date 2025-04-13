@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { API_URL } from "@/config/config";
 import styles from "@/styles/pages/index.module.scss";
 import Layout from "@/components/layout/Layout";
-import Hero from "@/components/sections/home/Hero";
-import AboutUs from "@components/sections/home/AboutUs";
-import Services from "@components/sections/home/Services";
-import ProductLines from "@components/sections/home/ProductLines";
-import News from "@components/sections/home/News";
-import Recruit from "@components/sections/home/Recruit";
+import Hero from "@/pages/home/Hero";
+import AboutUs from "@/pages/home/AboutUs";
+import Services from "@/pages/home/Services";
+import ProductLines from "@/pages/home/ProductLines";
+import News from "@/pages/home/News";
+import Recruit from "@/pages/home/Recruit";
 
 // export async function getStaticProps() {
 //お知らせ記事取得件数

@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import { useEffect } from "react";
 import gsap from "gsap";
-import styles from "@/styles/components/sections/home/productLines.module.scss";
+import styles from "@/styles/pages/home/productLines.module.scss";
 import SectionTitle from "@/components/parts/SectionTitle";
 import { zeroPad } from "@utils/utils";
 

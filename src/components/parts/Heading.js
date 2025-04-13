@@ -1,5 +1,5 @@
-import styles from "@/styles/components/sections/heading.module.scss";
-import Breadcrumbs from "@/components/sections/Breadcrumbs";
+import styles from "@/styles/components/parts/heading.module.scss";
+import Breadcrumbs from "@/components/parts/Breadcrumbs";
 
 export default function Heading({
   titleEn = "",

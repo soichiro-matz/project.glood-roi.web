@@ -1,6 +1,6 @@
 import Image from "next/image";
 import useRola from "@hooks/useRola";
-import styles from "@/styles/components/sections/home/aboutUs.module.scss";
+import styles from "@/styles/pages/home/aboutUs.module.scss";
 import SubTitle from "@components/parts/SubTitle";
 import Button from "@/components/ui/Button";
 const image01 = "/assets/img/home/img-aoutUs.svg";

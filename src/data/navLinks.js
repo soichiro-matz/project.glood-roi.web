@@ -37,13 +37,13 @@ export const navLinks = {
     text: "お知らせ",
     text_en: "news",
   },
-  recruite: {
-    href: "/recruite",
+  recruit: {
+    href: "/recruit",
     text: "採用情報",
-    text_en: "recruite",
+    text_en: "recruit",
     children: [
-      { href: "/recruite#full-time", text: "正社員(総合職)" },
-      { href: "/recruite#part-time", text: "アルバイト" },
+      { href: "/recruit#full-time", text: "正社員(総合職)" },
+      { href: "/recruit#part-time", text: "アルバイト" },
       { href: "/entry", text: "エントリー" },
     ],
   },

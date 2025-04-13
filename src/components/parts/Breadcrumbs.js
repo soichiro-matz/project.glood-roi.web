@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { nanoid } from "nanoid";
-import styles from "@/styles/components/sections/breadcrumbs.module.scss";
+import styles from "@/styles/components/parts/breadcrumbs.module.scss";
 export default function Breadcrumbs({ breadcrumbs = [] }) {
   return breadcrumbs.length == 0 ? (
     ""

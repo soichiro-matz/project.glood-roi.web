@@ -2,15 +2,4 @@
 @use "@/styles/base/mixins" as *;
 
 .about {
-  h2 {
-    color: pink;
-
-    @include md {
-      color: yellow;
-    }
-
-    @include sp {
-      color: cyan;
-    }
-  }
 }

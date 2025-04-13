@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import gsap from "gsap";
 import Link from "next/link";
 import { nanoid } from "nanoid";
-import styles from "@/styles/components/sections/about/outline.module.scss";
+import styles from "@/styles/pages/about/outline.module.scss";
 import SectionTitle from "@/components/parts/SectionTitle";
 import { SITE, COMPANY } from "@/config/config";
 

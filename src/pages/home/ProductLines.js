@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import { useLayoutEffect } from "react";
 import gsap from "gsap";
-import styles from "@/styles/components/sections/home/productLines.module.scss";
+import styles from "@/styles/pages/home/productLines.module.scss";
 import SectionTitle from "@/components/parts/SectionTitle";
 import { zeroPad } from "@utils/utils";
 
@@ -61,7 +61,7 @@ export default function ProductLines() {
                 scrollTrigger: {
                   trigger: "js-productCategoies",
                   start: "top 80%",
-                  markers: true,
+                  // markers: true,
                 },
               },
             );

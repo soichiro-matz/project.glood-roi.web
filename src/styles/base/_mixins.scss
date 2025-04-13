@@ -19,7 +19,13 @@
 }
 
 @mixin lg {
-  @media (min-width: #{$breakpoint-lg}) {
+  @media (max-width: #{$breakpoint-lg}) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (max-width: #{$breakpoint-xl}) {
     @content;
   }
 }

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import gsap from "gsap";
 import { nanoid } from "nanoid";
 
-import styles from "@/styles/components/sections/about/data.module.scss";
+import styles from "@/styles/pages/about/data.module.scss";
 import SectionTitle from "@/components/parts/SectionTitle";
 
 const datas = [

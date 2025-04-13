@@ -2,7 +2,7 @@ import { useLayoutEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import gsap from "gsap";
-import styles from "@/styles/components/sections/home/news.module.scss";
+import styles from "@/styles/pages/home/news.module.scss";
 import SectionTitle from "@/components/parts/SectionTitle";
 import Button from "@/components/ui/Button";
 import useRola from "@hooks/useRola";

@@ -1,0 +1,91 @@
+@charset "UTF-8";
+@use "@/styles/base/mixins" as *;
+
+.lead {
+  background-color: var(--base-gray-color);
+}
+
+.titleWrapper {
+  background-image: url("/assets/img/recruit/img-header-bg__lg.jpg");
+  background-position: 62% bottom;
+  background-size: cover;
+
+  @include md {
+    background-position: 65% bottom;
+  }
+
+  @include sp {
+    background-position: 68% bottom;
+  }
+}
+
+.requirements {
+  background-color: var(--base-gray-color);
+
+  .card {
+    grid-column: 2 / span 10;
+    opacity: 0;
+    transform: translateY(6rem);
+
+    @include lg {
+      grid-column: 3 / span 8;
+    }
+
+    @include md {
+      grid-column: 2 / span 10;
+    }
+
+    @include sp {
+      grid-column: 1 / span 12;
+    }
+
+    .heading {
+      .title {
+        display: inline-block;
+
+        &::before {
+          position: absolute;
+          top: 60%;
+          bottom: 0;
+          left: -0.675em;
+          width: 0.5rem;
+          height: 105%;
+          content: "";
+          background-color: var(--aqua-blue-color);
+          transform: translateY(-50%);
+
+          @include md {
+            top: 50%;
+            left: -0.75em;
+          }
+
+          @include sp {
+            top: 55%;
+            width: 0.4rem;
+          }
+        }
+      }
+    }
+
+    .information {
+      .office {
+        dt {
+          &::before {
+            content: "【";
+          }
+
+          &::after {
+            content: "】";
+          }
+        }
+      }
+    }
+
+    .iconTel {
+      background-image: url("/assets/img/common/icon-tel.svg");
+
+      // background-position: center center;
+      background-size: cover;
+    }
+  }
+}

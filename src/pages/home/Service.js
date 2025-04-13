@@ -3,7 +3,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import { nanoid } from "nanoid";
 import useRola from "@hooks/useRola";
-import styles from "@/styles/components/sections/home/services.module.scss";
+import styles from "@/styles/pages/home/services.module.scss";
 
 export default function Service({ service, index }) {
   const sectionRef = useRef(null);

@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useEffect } from "react";
 import gsap from "gsap";
 import Lettering from "@/js/libs/Lettering";
-import styles from "@/styles/components/sections/home/hero.module.scss";
+import styles from "@/styles/pages/home/hero.module.scss";
 import useSetRealHeight from "@hooks/useSetRealHeight";
 
 // swiper
