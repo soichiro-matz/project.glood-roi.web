@@ -45,13 +45,29 @@ export default function ProductLines() {
         });
 
         setTimeout(() => {
+          // gsap.utils.toArray(".js-productCategory").forEach((el, i) => {
+          //   if (!el) return;
+
+          //   gsap.to(el, {
+          //     y: 0,
+          //     opacity: 1,
+          //     duration: 1,
+          //     ease: "power3.out",
+          //     scrollTrigger: {
+          //       trigger: el,
+          //       start: "top 80%",
+          //       markers: true,
+          //     },
+          //   });
+          // });
+
           // 各カテゴリアニメーション（li → div を対象）
           gsap.utils.toArray(".js-productCategory").forEach((el, i) => {
             if (!el) return;
 
             gsap.fromTo(
               el,
-              { y: 300, opacity: 0 },
+              { y: 100, opacity: 0 },
               {
                 y: 0,
                 opacity: 1,
@@ -59,7 +75,7 @@ export default function ProductLines() {
                 delay: i * 0.1,
                 ease: "power3.out",
                 scrollTrigger: {
-                  trigger: "js-productCategoies",
+                  trigger: ".js-productCategories",
                   start: "top 80%",
                   // markers: true,
                 },
