@@ -60,7 +60,7 @@ export default function ContactForm() {
       <Heading titleEn={title_en} titleJp={title} breadcrumbs={breadcrumbs} />
       <div className="l-container l-grid__12">
         <div
-          className={`${styles.formContainer} pb-fluid-[32,32,350,768] pt-fluid-[24,40,350,768] md:pb-fluid-[32,40] md:pt-fluid-[40,56]`}
+          className={`${styles.formContainer} pb-fluid-[32,32,350,768] pt-fluid-[40,48,350,768] md:pb-fluid-[32,40] md:pt-fluid-[40,56]`}
         >
           <p className="lg-pr-0 pr-4 leading-[1.8] pb-fluid-[40,48,350,768] text-fluid-[15,16] md:pb-fluid-[48,80]">
             お問合せありがとうございます。
@@ -254,7 +254,7 @@ export default function ContactForm() {
             <div className={`${formStyles.privacyPolicy}`}>
               <p>
                 お問合せフォームのご入力内容を送信いただく前に
-                <Link href="" target="_blank">
+                <Link href="/privacy-policy" target="_blank">
                   「個人情報の取り扱い」
                 </Link>
                 をお読みいただき、内容にご同意いただく必要があります。

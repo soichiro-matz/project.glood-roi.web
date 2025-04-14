@@ -19,9 +19,7 @@ export default function Heading({
             >
               {titleEn}
             </span>
-            <span className="sr-only" aria-hidden="true">
-              {titleJp}
-            </span>
+            <span className="sr-only">{titleJp}</span>
           </h2>
           <Breadcrumbs breadcrumbs={breadcrumbs} />
         </div>

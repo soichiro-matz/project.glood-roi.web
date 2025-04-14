@@ -96,6 +96,13 @@
     }
   }
 
+  &.-reverse {
+    .p-btnIcon {
+      order: -1;
+      transform: rotate(180deg);
+    }
+  }
+
   &:hover,
   &:focus-visible {
     &.-primary {

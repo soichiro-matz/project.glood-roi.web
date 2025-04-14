@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import { SITE } from "@/config/config";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
@@ -82,19 +83,22 @@ ${privacy ? "✔ 同意あり" : "✘ 未同意"}
     await transporter.sendMail({
       from: `"お問い合わせフォーム" <${process.env.SMTP_USER}>`,
       to: process.env.ADMIN_EMAIL,
-      subject: "【Webお問い合わせ】新しいお問い合わせがありました",
-      text: bodyText,
+      subject: "【HPお問い合わせ】新しいお問い合わせがありました",
+      text: `以下の内容で問い合わせを受信しました。
+
+──────────────
+${bodyText}`,
     });
 
     // ユーザー自動返信メール
     await transporter.sendMail({
-      from: `"RENS 株式会社" <${process.env.SMTP_USER}>`,
+      from: `"${SITE.name}" <${process.env.SMTP_USER}>`,
       to: email,
-      subject: "【お問い合わせありがとうございます】RENS 株式会社",
+      subject: `【お問い合わせありがとうございます】${SITE.name}`,
       text: `${name} 様
 
 この度はお問い合わせいただき、誠にありがとうございます。
-以下の内容で受け付けました。
+以下の内容にて承りました。
 
 ──────────────
 ${bodyText}
@@ -104,8 +108,8 @@ ${bodyText}
 今しばらくお待ちくださいませ。
 
 ──────────────────
-RENS 株式会社
-https://rens-f.co.jp/
+${SITE.name}
+${SITE.url}
 `,
     });
 

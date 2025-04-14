@@ -12,3 +12,19 @@
     grid-column: 1 / span 12;
   }
 }
+
+.confirmContainer {
+  .inputData {
+    .item {
+      @apply md:py-fluid-[12,16];
+
+      &::after {
+        background-color: var(--border-color);
+      }
+
+      .dlDt {
+        @apply w-full md:w-[40%];
+      }
+    }
+  }
+}
