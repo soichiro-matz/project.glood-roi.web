@@ -1,10 +1,8 @@
-import Link from "next/link";
 import Script from "next/script";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { SITE } from "@/config/config";
 import styles from "@/styles/pages/contact/index.module.scss";
-import formStyles from "@/styles/components/ui/form.module.scss";
 import Layout from "@/components/layout/Layout";
 import Heading from "@/components/parts/Heading";
 import Button from "@/components/ui/Button";
