@@ -7,10 +7,14 @@ export default function Heading({
   breadcrumbs = [],
 }) {
   return (
-    <header className={`${styles.heading} mt-[-56] md:mt-[-64] lg:mt-[-72]`}>
-      <div className={`${styles.headingInner} pt-[56] md:pt-[64] lg:pt-[72]`}>
+    <header
+      className={`${styles.heading} mt-[-3.5rem] md:mt-[-4rem] lg:mt-[-4.5rem]`}
+    >
+      <div
+        className={`${styles.headingInner} pt-[3.5rem] md:pt-[4rem] lg:pt-[4.5rem]`}
+      >
         <div
-          className={`l-container flex flex-col gap-2 py-[56] md:py-[88] lg:py-[160]`}
+          className={`l-container flex flex-col gap-2 py-[3.5rem] md:py-[5.5rem] lg:py-[10rem]`}
         >
           <h2>
             <span

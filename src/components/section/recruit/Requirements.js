@@ -89,7 +89,7 @@ export default function Requirements() {
 
   return (
     <ul
-      className={`${styles.requirements} flex flex-col gap-[56] py-fluid-[56,80,350,768] md:gap-[96] md:py-fluid-[80,120] lg:gap-[120]`}
+      className={`${styles.requirements} flex flex-col gap-[3.5rem] py-fluid-[56,80,350,768] md:gap-[6rem] md:py-fluid-[80,120] lg:gap-[7.5rem]`}
     >
       {requirements.map((info) => {
         return (
