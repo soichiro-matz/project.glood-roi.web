@@ -54,14 +54,14 @@ export default function Recruit() {
         <div className={`flex flex-col gap-fluid-[16,36] pb-fluid-[16,24]`}>
           <Button
             tag="a"
-            linkProps={{ href: "/news" }}
+            linkProps={{ href: "/recruit#full-time" }}
             className="c-button p-button -secondary"
           >
             正社員(総合職)募集
           </Button>
           <Button
             tag="a"
-            linkProps={{ href: "/news" }}
+            linkProps={{ href: "/recruit#part-time" }}
             className="c-button p-button -secondary"
           >
             アルバイト募集
