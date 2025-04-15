@@ -1,32 +1,60 @@
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import Button from "@/components/ui/Button";
 import { SITE, API_URL } from "@/config/config";
 import Layout from "@/components/layout/Layout";
 import Heading from "@/components/parts/Heading";
 import styles from "@/styles/pages/news/index.module.scss";
 
-export async function getStaticPaths() {
-  const res = await fetch(`${API_URL.news}?_embed&orderby=date&order=desc`);
-  const posts = await res.json();
+// export async function getStaticPaths() {
+//   const res = await fetch(`${API_URL.news}?_embed&orderby=date&order=desc`);
+//   const posts = await res.json();
 
-  const paths = posts.map((post) => ({
-    params: { id: post.id.toString() },
-  }));
+//   const paths = posts.map((post) => ({
+//     params: { id: post.id.toString() },
+//   }));
 
-  return { paths, fallback: false };
-}
+//   return { paths, fallback: false };
+// }
 
-export async function getStaticProps({ params }) {
-  const res = await fetch(`${API_URL.news}/${params.id}?_embed`);
-  const post = await res.json();
+// export async function getStaticProps({ params }) {
+//   const res = await fetch(`${API_URL.news}/${params.id}?_embed`);
+//   const post = await res.json();
 
-  return {
-    props: { post },
-    revalidate: 60,
-  };
-}
+//   return {
+//     props: { post },
+//     revalidate: 60,
+//   };
+// }
 
-export default function NewsDetail({ post }) {
+export default function NewsDetail() {
+  const router = useRouter();
+  const { id } = router.query;
+
+  const [post, setPost] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!id) return; // idがまだ取得できていない場合はスキップ
+
+    const fetchPost = async () => {
+      try {
+        const res = await fetch(`${API_URL.news}/${id}?_embed`);
+        const data = await res.json();
+        setPost(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("データ取得エラー:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchPost();
+  }, [id]);
+
+  if (loading) return <p>読み込み中...</p>;
+  if (!post) return <p>記事が見つかりません</p>;
+
   const title = post.title.rendered;
   const title_en = "news";
 
