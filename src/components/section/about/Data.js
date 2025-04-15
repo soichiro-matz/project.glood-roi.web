@@ -129,7 +129,7 @@ export default function Data() {
         })}
       </dl>
       <div
-        className={`${styles.imageWrapper} absolute bottom-[-5] left-[50%] w-fluid-[160,230,350,768] md:w-fluid-[230,240]`}
+        className={`${styles.imageWrapper} absolute bottom-[-5px] left-[50%] w-fluid-[160,230,350,768] md:w-fluid-[230,240]`}
       >
         <img
           src="/assets/img/about/img-data-01.svg"

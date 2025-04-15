@@ -49,14 +49,6 @@
             content: "";
             background-color: var(--main-color);
             transform: translateX(-50%);
-
-            // @include md {
-            //   height: calc(100% + 3rem);
-            // }
-
-            // @include sp {
-            //   height: calc(100% + 2.5rem);
-            // }
           }
 
           &.-last {
@@ -67,14 +59,6 @@
         }
       }
     }
-
-    // &:last-child {
-    //   .line {
-    //     &::after {
-    //       display: none;
-    //     }
-    //   }
-    // }
 
     .detail {
       grid-column: 2;

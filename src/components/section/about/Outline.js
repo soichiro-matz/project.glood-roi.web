@@ -175,7 +175,7 @@ export default function Outline() {
               <div className={`c-dl__items`}>
                 <dt className={`c-dl__dt ${styles.dlDt}`}>事業内容</dt>
                 <dd className={`c-dl__dd ${styles.dlDd}`}>
-                  <ul className="flex flex-col gap-[2] md:gap-1 lg:gap-2">
+                  <ul className="flex flex-col gap-[2px] md:gap-1 lg:gap-2">
                     <li>国内EC物販事業</li>
                     <li>越境EC物販事業</li>
                     <li>卸売事業</li>
@@ -185,7 +185,7 @@ export default function Outline() {
               <div className={`c-dl__items`}>
                 <dt className={`c-dl__dt ${styles.dlDt}`}>取引銀行</dt>
                 <dd className={`c-dl__dd ${styles.dlDd}`}>
-                  <ul className="flex flex-col gap-[2] md:gap-1 lg:gap-2">
+                  <ul className="flex flex-col gap-[2px] md:gap-1 lg:gap-2">
                     <li>武蔵野銀行 大宮支店</li>
                     <li>埼玉りそな銀行 大宮支店</li>
                     <li>群馬銀行 大宮支店</li>

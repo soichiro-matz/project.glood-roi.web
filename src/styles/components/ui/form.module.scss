@@ -71,7 +71,7 @@
     }
 
     input[type="radio"] {
-      @apply relative mr-1 mt-[1] h-4 w-4 appearance-none rounded-[50%];
+      @apply relative mr-1 mt-[1px] h-4 w-4 appearance-none rounded-[50%];
 
       border: 1px solid var(--main-color);
     }
@@ -104,18 +104,15 @@
   }
 
   .privacyPolicy {
-    // @apply pt-fluid-[16,24];
-
     a {
       color: #2d60af;
       text-decoration: underline;
-
-      // transition: 0.2s var(--ease-in-out);
-      // transition-property:opacity;
+      transition: 0.2s ease-in-out;
+      transition-property: opacity;
 
       &:hover,
       &:focus-visible {
-        opacity: 0.8;
+        opacity: 0.6;
       }
     }
   }

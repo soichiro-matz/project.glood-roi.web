@@ -19,29 +19,42 @@
   }
 
   ul {
-    @apply space-y-[1.5] pt-1 lg:space-y-1;
+    @apply space-y-[1.5] pt-1;
 
-    margin-left: 2em;
-    list-style: disc;
+    margin-left: 1em;
 
     li {
-      // @apply leading-[1.8];
-      text-indent: -0.5em;
+      @apply relative pl-1;
 
-      &::marker {
-        @apply leading-none text-fluid-[24,24];
+      &::before {
+        position: absolute;
+        top: 0.65em;
+        left: -0.75em;
+        display: block;
+        width: 0.75em;
+        height: 0.75em;
+        content: "";
+        background: var(--main-color);
+        border-radius: 50%;
       }
 
       span {
-        // @apply inline-block;
-
-        // margin-left: -0.65em;
         vertical-align: 0.2em;
 
         @include md {
           vertical-align: 0.05em;
         }
       }
+    }
+  }
+
+  a {
+    transition: 0.2s ease-in-out;
+    transition-property: opacity;
+
+    &:hover,
+    &:focus-visible {
+      opacity: 0.6;
     }
   }
 }

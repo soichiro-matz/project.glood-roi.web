@@ -93,9 +93,12 @@ export default function Requirements() {
     >
       {requirements.map((info) => {
         return (
-          <li className="l-container l-grid__12" key={nanoid()}>
+          <li
+            className="l-container l-grid__12 text-fluid-[15,16]"
+            key={nanoid()}
+          >
             <section
-              className={`${styles.card} js-requirement c-dl rounded-xl bg-white px-fluid-[24,64,350,768] py-fluid-[56,64,350,768] md:px-fluid-[64,112] md:py-fluid-[64,112]`}
+              className={`${styles.card} js-requirement c-dl rounded-xl bg-white px-fluid-[16,64,350,768] py-fluid-[56,64,350,768] md:px-fluid-[64,112] md:py-fluid-[64,112]`}
               id={info.anchorlinkId}
               data-offset-sp="-40"
               data-offset-lg="-100"

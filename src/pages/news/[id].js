@@ -73,8 +73,6 @@ export default function NewsDetail() {
     },
   ];
 
-  // console.log(post);
-
   return (
     <Layout title={title} description={description}>
       <Heading titleEn={title_en} titleJp={title} breadcrumbs={breadcrumbs} />
@@ -86,7 +84,7 @@ export default function NewsDetail() {
             dangerouslySetInnerHTML={{ __html: post.title.rendered }}
             className={`font-bold text-fluid-[18,28,350,768] md:text-fluid-[28,32]`}
           />
-          <div className="flex justify-between pt-fluid-[0,8]">
+          <div className="flex justify-between pt-2 md:pt-fluid-[0,8]">
             <p className="">
               <span
                 className={`${styles.category} inline-block rounded-full bg-white leading-none px-fluid-[8,12] py-fluid-[4,5] text-fluid-[12,15]`}
@@ -94,7 +92,11 @@ export default function NewsDetail() {
                 お知らせ
               </span>
             </p>
-            <time className={`font-bold`} lang="en" dateTime={post.date}>
+            <time
+              className={`${styles.date} font-bold`}
+              lang="en"
+              dateTime={post.date}
+            >
               {new Date(post.date).toLocaleDateString()}
             </time>
           </div>

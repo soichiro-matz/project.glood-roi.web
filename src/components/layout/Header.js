@@ -55,7 +55,7 @@ export default function Header() {
         }
       });
     }
-  }, [focusedMenu]); // 👈 focusedMenu の変化を監視
+  }, [focusedMenu]);
 
   // ドロワーメニューの状態が変わった時に `body` のスクロールを制御する
   useEffect(() => {

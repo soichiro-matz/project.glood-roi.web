@@ -26,7 +26,7 @@
 
   .card {
     .cardBody {
-      @apply relative gap-[10] lg:gap-4;
+      @apply relative gap-[0.6rem] lg:gap-4;
 
       .heading {
         @apply flex items-center pb-0 gap-y-fluid-[6,10] pt-fluid-[56,112] md:flex-col md:items-start md:pb-fluid-[56,88];

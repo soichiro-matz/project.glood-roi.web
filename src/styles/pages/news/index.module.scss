@@ -72,8 +72,6 @@
 
       .icon {
         background-color: #fff;
-
-        // border: 0.01px solid #232b65;
         transform: scale(1.2);
         transition:
           background-color 0.4s 0.2s ease-in-out,
@@ -98,6 +96,10 @@
 
   @include sp {
     grid-column: 1 / span 12;
+  }
+
+  .date {
+    color: #747474;
   }
 
   .contents {

@@ -15,7 +15,7 @@ export default function Document() {
         {/* Google Fonts のスタイルシート */}
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200;300;400;500;600;700&family=Inter:wght@400;500;600;700&family=Piazzolla:wght@700&family=Romanesco&family=Zen+Kurenaido&family=Klee+One&family=Roboto+Serif:ital,opsz,wght@700;800&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200;300;400;500;600;700&family=Inter:wght@400;500;600;700&family=Piazzolla:wght@700&family=Romanesco&family=Zen+Kurenaido&family=Klee+One&display=swap"
         />
 
         {/* Google Fonts のプリロード設定 */}

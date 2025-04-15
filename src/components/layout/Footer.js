@@ -33,11 +33,11 @@ export default function Footer() {
           </p>
 
           <p className="z-10 flex items-center gap-fluid-[4,8]">
-            <span className="leading-none text-fluid-[14,16]">
-              お問い合わせはこちらから
-            </span>
             <span className="p-icon-arrow inline-block flex items-center justify-center rounded-[50%] wh-fluid-[48,56]">
               <span className="font-extralight text-fluid-[24,32]">→</span>
+            </span>
+            <span className="leading-none text-fluid-[14,16]">
+              お問い合わせはこちらから
             </span>
           </p>
         </div>
