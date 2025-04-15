@@ -14,7 +14,8 @@ import Button from "@/components/ui/Button";
 export default function EntryForm() {
   const title = "採用エントリー";
   const title_en = "entry";
-  const description = "entry";
+  const description =
+    SITE.description + "採用エントリーはこちらのページより承っております。";
 
   const breadcrumbs = [
     { title: "ホーム", url: SITE.base },

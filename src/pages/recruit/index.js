@@ -11,7 +11,8 @@ const recruitChildren = getChildren("recruit");
 export default function Recruit() {
   const title = "採用情報";
   const title_en = "recruit";
-  const description = "recruit";
+  const description =
+    SITE.description + "このページは「採用情報」を紹介しております。";
 
   const breadcrumbs = [
     {

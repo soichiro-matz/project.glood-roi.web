@@ -4,7 +4,8 @@
 export const SITE = {
   name: "株式会社Glood roi",
   nameEn: "Glood roi Inc.",
-  description: "description",
+  description:
+    "Glood roiは、良いモノをつなぎ届けることで、日常に彩りと豊かさをもたらす、価値あるショッピング体験を提供するEC企業です。",
   url: "https://gloodroi.com/",
   base: "/",
   trackingId: "G-xxxxxxxx",

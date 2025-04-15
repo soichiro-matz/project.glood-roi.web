@@ -14,7 +14,7 @@ const aboutChildren = getChildren("about");
 export default function About() {
   const title = "私たちについて";
   const title_en = "about us";
-  const description = "About Us";
+  const description = SITE.description;
 
   const breadcrumbs = [
     {

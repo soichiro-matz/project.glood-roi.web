@@ -4,11 +4,10 @@ import Layout from "@/components/layout/Layout";
 import Heading from "@/components/parts/Heading";
 import Button from "@/components/ui/Button";
 
-export default function Thanks() {
-  const title = "お問い合わせ";
-  const title_en = "contact";
-  const description =
-    SITE.description + "お問い合わせいただきありがとうございました。";
+export default function NotFound() {
+  const title = "404 Not Found";
+  const title_en = "404 not nound";
+  const description = "404 Not Found";
 
   const breadcrumbs = [
     {
@@ -28,16 +27,14 @@ export default function Thanks() {
         <div
           className={`${styles.formContainer} space-y-1 pt-fluid-[40,48,350,768] text-fluid-[15,16] md:pt-fluid-[40,56]`}
         >
-          <h3>お問い合わせいただき、誠にありがとうございます。</h3>
+          <p>お探しのページが見つかりませんでした。</p>
           <p>
-            内容を確認次第、折り返しご連絡いたしますので、少々お待ちください。
+            URLに誤りがあるか、ページが移動もしくは削除された可能性がございます
           </p>
-          <p>お問い合わせ内容によってはご返答が出来ない場合もございます。</p>
-          <p>予めご了承くださいませ。</p>
         </div>
       </div>
       <div
-        className={`pb-[20vh] text-center pt-fluid-[56,72,350,768] md:pb-[20vh] md:pt-fluid-[72,88]`}
+        className={`pb-[20vh] text-center pt-fluid-[56,72,350,768] md:pb-[20vh] md:pt-fluid-[104,120]`}
       >
         <Button
           tag="a"

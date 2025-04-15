@@ -7,7 +7,9 @@ import styles from "@/styles/pages/privacy-policy/index.module.scss";
 export default function PrivacyPolicyIndex() {
   const title = "プライバシーポリシー";
   const title_en = "privacy polycy";
-  const description = "privacy polycy";
+  const description =
+    SITE.description +
+    "このページは「プライバシーポリシー」を紹介しております。";
 
   const breadcrumbs = [
     {

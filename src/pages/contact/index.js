@@ -14,7 +14,9 @@ import Button from "@/components/ui/Button";
 export default function ContactForm() {
   const title = "お問い合わせ";
   const title_en = "contact";
-  const description = "Contact";
+
+  const description =
+    SITE.description + "お問い合わせはこちらのページより承っております。";
 
   const breadcrumbs = [
     {

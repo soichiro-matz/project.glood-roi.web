@@ -8,7 +8,8 @@ import styles from "@/styles/pages/news/index.module.scss";
 export default function NewsIndex({}) {
   const title = "お知らせ一覧";
   const title_en = "news";
-  const description = "News";
+  const description =
+    SITE.description + "このページは「お知らせ」を紹介しております。";
 
   const breadcrumbs = [
     {

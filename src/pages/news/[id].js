@@ -68,6 +68,10 @@ export default function NewsDetail() {
       url: SITE.base,
     },
     {
+      title: "お知らせ一覧",
+      url: "/news",
+    },
+    {
       title: title,
       url: "",
     },
