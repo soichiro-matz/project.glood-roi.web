@@ -66,12 +66,11 @@ export default function Home() {
         <section className="card"></section>
         <section className="card"></section>
       </div>
-    </div>
-
-    <div className="flex flex-col max-h-[70vh]">
+      <div className="flex max-h-[70vh] flex-col">
         <div className="aaa"></div>
         <div className="bbb"></div>
         <div className="ccc"></div>
+      </div>
     </div>
   );
 }

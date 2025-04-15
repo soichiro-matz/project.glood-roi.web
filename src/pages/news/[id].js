@@ -45,7 +45,7 @@ export default function NewsDetail({ post }) {
     },
   ];
 
-  console.log(post);
+  // console.log(post);
 
   return (
     <Layout title={title} description={description}>

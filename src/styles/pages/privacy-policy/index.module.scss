@@ -1,0 +1,47 @@
+@charset "UTF-8";
+@use "@/styles/base/mixins" as *;
+
+.privacypolicy {
+  @apply leading-[1.8];
+
+  grid-column: 3 / span 8;
+
+  @include xl {
+    grid-column: 2 / span 10;
+  }
+
+  @include sp {
+    grid-column: 1 / span 12;
+  }
+
+  h3 {
+    @apply pb-1 font-bold text-fluid-[18,22,350,768] md:text-fluid-[22,24];
+  }
+
+  ul {
+    @apply space-y-[1.5] pt-1 lg:space-y-1;
+
+    margin-left: 2em;
+    list-style: disc;
+
+    li {
+      // @apply leading-[1.8];
+      text-indent: -0.5em;
+
+      &::marker {
+        @apply leading-none text-fluid-[24,24];
+      }
+
+      span {
+        // @apply inline-block;
+
+        // margin-left: -0.65em;
+        vertical-align: 0.2em;
+
+        @include md {
+          vertical-align: 0.05em;
+        }
+      }
+    }
+  }
+}
