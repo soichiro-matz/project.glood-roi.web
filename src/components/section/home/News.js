@@ -6,6 +6,7 @@ import styles from "@/styles/pages/home/news.module.scss";
 import SectionTitle from "@/components/parts/SectionTitle";
 import Button from "@/components/ui/Button";
 import useRola from "@hooks/useRola";
+import NewsList from "@/components/section/common/NewsList";
 
 export default function News({ posts }) {
   useRola("[data-rola-trigger01]", {
@@ -74,57 +75,7 @@ export default function News({ posts }) {
           </div>
         </div>
         <div className={`${styles.newsBody}`}>
-          <ul>
-            {Array.isArray(posts) && posts.length > 0 ? (
-              posts.map((post) => (
-                <li key={post.id} className={`${styles.newsItem} relative`}>
-                  <Link
-                    href={`/news/detail/${post.id}`}
-                    className={`${styles.link}`}
-                    data-rola-trigger01
-                    data-rola-transition="slide"
-                  >
-                    <article
-                      className={`${styles.articleWrapper} relative flex items-center pb-fluid-[32,40] pt-fluid-[28,36] px-fluid-[10,16]`}
-                    >
-                      <div
-                        className={`${styles.article} flex flex-col gap-fluid-[16,18]`}
-                      >
-                        <h3
-                          className={`font-medium leading-none text-fluid-[14,16]`}
-                        >
-                          {post.title.rendered}
-                        </h3>
-                        <div
-                          className={`order-first flex items-center leading-none gap-fluid-[16,24]`}
-                        >
-                          <time
-                            className={`font-bold`}
-                            lang="en"
-                            dateTime={post.date}
-                          >
-                            {new Date(post.date).toLocaleDateString()}
-                          </time>
-                          <span
-                            className={`rounded-full bg-white px-fluid-[8,12] py-fluid-[4,6] text-fluid-[12,14]`}
-                          >
-                            お知らせ
-                          </span>
-                        </div>
-                      </div>
-                      <span
-                        className={`${styles.icon} inline-block flex items-center justify-center rounded-[50%] font-medium wh-fluid-[32,40]`}
-                      >
-                        →
-                      </span>
-                    </article>
-                  </Link>
-                </li>
-              ))
-            ) : (
-              <li>お知らせはありません</li>
-            )}
-          </ul>
+          <NewsList posts={posts} />
           <div
             className={`${styles.buttonContainer} text-center pt-fluid-[56,72] md:text-right`}
           >

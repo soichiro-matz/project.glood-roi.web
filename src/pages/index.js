@@ -32,7 +32,7 @@ export default function Home() {
   useEffect(() => {
     const fetchPosts = async () => {
       const res = await fetch(
-        `${API_URL.news}&per_page=${newsCount}&orderby=date&order=desc`,
+        `${API_URL.news}?_embed&per_page=${newsCount}&orderby=date&order=desc`,
       );
       const data = await res.json();
       setPosts(data);
