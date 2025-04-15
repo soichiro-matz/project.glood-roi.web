@@ -27,9 +27,12 @@ export async function getStaticProps({ params }) {
 }
 
 export default function NewsDetail({ post }) {
-  const title = "お知らせ一覧";
+  const title = post.title.rendered;
   const title_en = "news";
-  const description = "News";
+
+  const rawExcerpt = post.excerpt?.rendered || "";
+
+  const description = rawExcerpt.replace(/<[^>]+>/g, "").trim(); // HTMLタグ除去;
 
   const breadcrumbs = [
     {
@@ -41,6 +44,8 @@ export default function NewsDetail({ post }) {
       url: "",
     },
   ];
+
+  console.log(post);
 
   return (
     <Layout title={title} description={description}>
