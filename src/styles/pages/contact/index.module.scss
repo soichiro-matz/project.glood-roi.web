@@ -14,16 +14,24 @@
 }
 
 .confirmContainer {
-  .inputData {
-    .item {
-      @apply md:py-fluid-[12,16];
+  .confirmModal {
+    max-width: min(1024px, 75%);
 
-      &::after {
-        background-color: var(--border-color);
-      }
+    @include md {
+      max-width: 90%;
+    }
 
-      .dlDt {
-        @apply w-full md:w-[40%];
+    .inputData {
+      .item {
+        @apply gap-y-0 py-2 md:py-fluid-[6,8];
+
+        &::after {
+          background-color: var(--border-color);
+        }
+
+        .dlDt {
+          @apply w-full md:w-[35%];
+        }
       }
     }
   }

@@ -11,20 +11,14 @@ import Layout from "@/components/layout/Layout";
 import Heading from "@/components/parts/Heading";
 import Button from "@/components/ui/Button";
 
-export default function ContactForm() {
-  const title = "お問い合わせ";
-  const title_en = "contact";
-  const description = "Contact";
+export default function EntryForm() {
+  const title = "採用エントリー";
+  const title_en = "entry";
+  const description = "entry";
 
   const breadcrumbs = [
-    {
-      title: "ホーム",
-      url: SITE.base,
-    },
-    {
-      title: title,
-      url: "",
-    },
+    { title: "ホーム", url: SITE.base },
+    { title: title, url: "" },
   ];
 
   const {
@@ -38,53 +32,91 @@ export default function ContactForm() {
 
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
+  const [resumeName, setResumeName] = useState(null);
   const [sending, setSending] = useState(false);
   const formValues = watch();
 
   useEffect(() => {
-    const saved = sessionStorage.getItem("formData");
+    const saved = sessionStorage.getItem("entryFormData");
     if (saved) {
       const data = JSON.parse(saved);
-      setValue("contactType", data.contactType || []);
+      setValue("jobType", data.jobType || "");
       setValue("company", data.company || "");
       setValue("name", data.name || "");
+      setValue("kana", data.kana || "");
       setValue("email", data.email || "");
       setValue("tel", data.tel || "");
-      setValue("url", data.url || "");
+      setResumeName(data.resumeName || null);
       setValue("message", data.message || "");
       setValue("privacy", data.privacy || false);
     }
   }, [setValue]);
 
+  useEffect(() => {
+    if (showModal) {
+      document.body.classList.add("modal-open");
+    } else {
+      document.body.classList.remove("modal-open");
+    }
+
+    return () => {
+      document.body.classList.remove("modal-open"); // クリーンアップ
+    };
+  }, [showModal]);
+
+  const handleResumeClear = () => {
+    resetField("resume");
+    setResumeName(null);
+  };
+
   const handleConfirm = (data) => {
+    const file = data.resume?.[0];
+    const name = file?.name || null;
+    setResumeName(name);
     setShowModal(true);
   };
 
   const handleSend = async () => {
     try {
       setSending(true);
-
       const token = await window.grecaptcha.execute(
         process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
         { action: "submit" },
       );
 
-      const res = await fetch("/api/contact", {
+      const formData = new FormData();
+      formData.append("jobType", formValues.jobType || "");
+      formData.append("company", formValues.company || "");
+      formData.append("name", formValues.name || "");
+      formData.append("kana", formValues.kana || "");
+      formData.append("email", formValues.email || "");
+      formData.append("tel", formValues.tel || "");
+
+      formData.append("message", formValues.message || "");
+      formData.append("privacy", formValues.privacy ? "1" : "0");
+      formData.append("token", token);
+
+      const resumeFile = formValues.resume?.[0];
+      if (resumeFile) {
+        formData.append("resume", resumeFile);
+        formData.append("resumeName", resumeFile.name); // ファイル名だけ別途送信
+      }
+
+      const res = await fetch("/api/entry", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formValues, token }),
+        body: formData,
       });
 
       if (res.ok) {
-        sessionStorage.removeItem("formData");
-        router.push("/contact/thanks"); // ← この行が動かない原因
+        sessionStorage.removeItem("entryFormData");
+        router.push("/entry/thanks");
       } else {
-        alert("送信失敗しました");
-        router.push("/contact");
+        alert("送信に失敗しました");
+        setShowModal(false);
       }
     } catch (err) {
       alert("送信中にエラーが発生しました");
-      console.error("送信エラー:", err);
+      console.error(err);
     } finally {
       setSending(false);
     }
@@ -102,10 +134,9 @@ export default function ContactForm() {
           className={`${styles.formContainer} pb-fluid-[32,32,350,768] pt-fluid-[40,48,350,768] md:pb-fluid-[32,40] md:pt-fluid-[40,56]`}
         >
           <p className="lg-pr-0 pr-4 leading-[1.8] pb-fluid-[40,48,350,768] text-fluid-[15,16] md:pb-fluid-[48,80]">
-            お問合せありがとうございます。
+            ご応募いただきありがとうございます。
             <br aria-hidden="true" />
-            必要事項の入力をお願いいたします。
-            担当より２営業日以内に追ってご連絡させて頂きます。
+            必須事項を入力の上、送信してください。
           </p>
           <form
             onSubmit={handleSubmit(handleConfirm)}
@@ -113,7 +144,7 @@ export default function ContactForm() {
           >
             <fieldset className={`${formStyles.inputWrapper}`}>
               <legend className={`${formStyles.label}`}>
-                <span className={`${formStyles.title}`}>お問い合わせ内容</span>
+                <span className={`${formStyles.title}`}>機能職種</span>
                 <span className={`${formStyles.required} ${formStyles._true}`}>
                   必須
                 </span>
@@ -121,67 +152,31 @@ export default function ContactForm() {
               <div className="flex gap-4">
                 <div className={`${formStyles.chkboxWrapper}`}>
                   <input
-                    id="request"
-                    type="checkbox"
-                    value="依頼したい"
-                    {...register("contactType", {
-                      validate: (value) =>
-                        (value && value.length > 0) ||
-                        "1つ以上選択してください",
+                    type="radio"
+                    id="jobFull"
+                    value="正社員（総合職）"
+                    {...register("jobType", {
+                      required: "機能職種を選択してください",
                     })}
                   />
-                  <label htmlFor="request">依頼したい</label>
+                  <label htmlFor="jobFull">正社員（総合職）</label>
                 </div>
                 <div className={`${formStyles.chkboxWrapper}`}>
                   <input
-                    id="consult"
-                    type="checkbox"
-                    value="相談したい"
-                    {...register("contactType")}
+                    type="radio"
+                    id="jobPart"
+                    value="アルバイト"
+                    {...register("jobType")}
                   />
-                  <label htmlFor="consult">相談したい</label>
-                </div>
-                <div className={`${formStyles.chkboxWrapper}`}>
-                  <input
-                    id="other"
-                    type="checkbox"
-                    value="その他"
-                    {...register("contactType")}
-                  />
-                  <label htmlFor="other">その他</label>
+                  <label htmlFor="jobPart">アルバイト</label>
                 </div>
               </div>
-              {errors.contactType && (
+              {errors.jobType && (
                 <p role="alert" className={`${formStyles.alert}`}>
-                  {errors.contactType.message}
+                  {errors.jobType.message}
                 </p>
               )}
             </fieldset>
-
-            <div className={`${formStyles.inputWrapper}`}>
-              <label htmlFor="company" className={`${formStyles.label}`}>
-                <span className={`${formStyles.title}`}>貴社名</span>
-                <span className={`${formStyles.required} ${formStyles._true}`}>
-                  必須
-                </span>
-              </label>
-              <input
-                id="company"
-                type="text"
-                {...register("company", {
-                  required: "貴社名を入力してください",
-                  maxLength: {
-                    value: 20,
-                    message: "20文字以内で入力してください",
-                  },
-                })}
-              />
-              {errors.company && (
-                <p role="alert" className={`${formStyles.alert}`}>
-                  {errors.company.message}
-                </p>
-              )}
-            </div>
 
             <div className={`${formStyles.inputWrapper}`}>
               <label htmlFor="name" className={`${formStyles.label}`}>
@@ -204,6 +199,37 @@ export default function ContactForm() {
               {errors.name && (
                 <p role="alert" className={`${formStyles.alert}`}>
                   {errors.name.message}
+                </p>
+              )}
+            </div>
+
+            <div className={`${formStyles.inputWrapper}`}>
+              <label htmlFor="kana" className={`${formStyles.label}`}>
+                <span className={`${formStyles.title}`}>
+                  お名前（フリガナ）
+                </span>
+                <span className={`${formStyles.required} ${formStyles._true}`}>
+                  必須
+                </span>
+              </label>
+              <input
+                id="kana"
+                type="text"
+                {...register("kana", {
+                  required: "お名前（フリガナ）を入力してください",
+                  maxLength: {
+                    value: 20,
+                    message: "20文字以内で入力してください",
+                  },
+                  pattern: {
+                    value: /^[ァ-ヶー　]+$/, // 全角カタカナと全角スペース・長音符（ー）のみ
+                    message: "全角カタカナで入力してください",
+                  },
+                })}
+              />
+              {errors.kana && (
+                <p role="alert" className={`${formStyles.alert}`}>
+                  {errors.kana.message}
                 </p>
               )}
             </div>
@@ -253,17 +279,59 @@ export default function ContactForm() {
                 </p>
               )}
             </div>
-
-            <div className={`${formStyles.inputWrapper}`}>
-              <label htmlFor="url" className={`${formStyles.label}`}>
-                <span className={`${formStyles.title}`}>URL</span>
+            <div
+              className={`${formStyles.inputWrapper} ${formStyles._typeFile}`}
+            >
+              <label htmlFor="resume" className={`${formStyles.label}`}>
+                <span className={`${formStyles.title}`}>履歴書添付</span>
                 <span className={`${formStyles.required} ${formStyles._false}`}>
                   任意
                 </span>
               </label>
-              <input id="url" type="url" {...register("url")} />
-            </div>
+              <input
+                id="resume"
+                type="file"
+                accept=".pdf,.doc,.docx,.jpg,.png"
+                {...register("resume", {
+                  validate: (fileList) => {
+                    const file = fileList?.[0];
+                    if (!file) return true;
 
+                    const maxSizeMB = 5;
+                    if (file.size > maxSizeMB * 1024 * 1024) {
+                      return `ファイルサイズは${maxSizeMB}MB以内にしてください`;
+                    }
+
+                    const allowedTypes = [
+                      "application/pdf",
+                      "application/msword",
+                      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                      "image/jpeg",
+                      "image/png",
+                    ];
+                    if (!allowedTypes.includes(file.type)) {
+                      return "PDF、Word、JPEG、PNGファイルのみ添付できます";
+                    }
+
+                    return true;
+                  },
+                })}
+                // ref={resumeRef}
+              />
+
+              <button
+                type="button"
+                onClick={handleResumeClear}
+                className={`${formStyles.fileClearButton} flex text-sm text-blue-600 underline`}
+              >
+                選択ファイルをクリア
+              </button>
+              {errors.resume && (
+                <p role="alert" className={`${formStyles.alert}`}>
+                  {errors.resume.message}
+                </p>
+              )}
+            </div>
             <div className={`${formStyles.inputWrapper}`}>
               <label htmlFor="message" className={`${formStyles.label}`}>
                 <span className={`${formStyles.title}`}>メッセージ内容</span>
@@ -327,6 +395,7 @@ export default function ContactForm() {
                 </div>
               </div>
             </div>
+            {/* フォームフィールドここに記述されている前提です（省略） */}
             <div
               className={`text-center pb-fluid-[72,80,350,768] pt-fluid-[16,24,350,768] md:pb-fluid-[80,104] md:pt-fluid-[16,24]`}
             >
@@ -357,24 +426,23 @@ export default function ContactForm() {
                     <div className={`c-dl__items ${styles.item}`}>
                       <dt className={`c-dl__dt ${styles.dlDt}`}>希望職種</dt>
                       <dd className={`c-dl__dd ${styles.dlDd}`}>
-                        <ul>
-                          {formValues.contactType?.map((item, index) => (
-                            <li key={index}>・{item}</li>
-                          ))}
-                        </ul>
+                        {formValues.jobType || "（未選択）"}
                       </dd>
                     </div>
 
                     <div className={`c-dl__items ${styles.item}`}>
-                      <dt className={`c-dl__dt ${styles.dlDt}`}>貴社名</dt>
-                      <dd className={`c-dl__dd ${styles.dlDd}`}>
-                        {formValues.company}
-                      </dd>
-                    </div>
-                    <div className={`c-dl__items ${styles.item}`}>
                       <dt className={`c-dl__dt ${styles.dlDt}`}>お名前</dt>
                       <dd className={`c-dl__dd ${styles.dlDd}`}>
                         {formValues.name}
+                      </dd>
+                    </div>
+
+                    <div className={`c-dl__items ${styles.item}`}>
+                      <dt className={`c-dl__dt ${styles.dlDt}`}>
+                        お名前（フリガナ）
+                      </dt>
+                      <dd className={`c-dl__dd ${styles.dlDd}`}>
+                        {formValues.kana}
                       </dd>
                     </div>
 
@@ -388,16 +456,16 @@ export default function ContactForm() {
                     </div>
 
                     <div className={`c-dl__items ${styles.item}`}>
-                      <dt className={`c-dl__dt ${styles.dlDt}`}>URL</dt>
+                      <dt className={`c-dl__dt ${styles.dlDt}`}>お電話番号</dt>
                       <dd className={`c-dl__dd ${styles.dlDd}`}>
-                        {formValues.url}
+                        {formValues.tel}
                       </dd>
                     </div>
 
                     <div className={`c-dl__items ${styles.item}`}>
-                      <dt className={`c-dl__dt ${styles.dlDt}`}>お電話番号</dt>
+                      <dt className={`c-dl__dt ${styles.dlDt}`}>履歴書添付</dt>
                       <dd className={`c-dl__dd ${styles.dlDd}`}>
-                        {formValues.tel}
+                        {resumeName || "（添付なし）"}
                       </dd>
                     </div>
 
@@ -422,7 +490,6 @@ export default function ContactForm() {
                     </div>
                   </dl>
                 </div>
-
                 <div className="flex shrink-0 justify-center gap-4 pt-4 md:gap-8 md:pt-6 lg:gap-10">
                   <Button
                     tag="button"
@@ -432,7 +499,6 @@ export default function ContactForm() {
                   >
                     修正する
                   </Button>
-
                   <Button
                     tag="button"
                     type="button"

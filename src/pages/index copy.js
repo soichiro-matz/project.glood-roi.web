@@ -67,5 +67,11 @@ export default function Home() {
         <section className="card"></section>
       </div>
     </div>
+
+    <div className="flex flex-col max-h-[70vh]">
+        <div className="aaa"></div>
+        <div className="bbb"></div>
+        <div className="ccc"></div>
+    </div>
   );
 }
