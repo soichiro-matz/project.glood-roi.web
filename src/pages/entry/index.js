@@ -490,24 +490,45 @@ export default function EntryForm() {
                     </div>
                   </dl>
                 </div>
-                <div className="flex shrink-0 justify-center gap-4 pt-4 md:gap-8 md:pt-6 lg:gap-10">
-                  <Button
-                    tag="button"
-                    type="button"
-                    onClick={() => setShowModal(false)}
-                    className="c-button p-button -secondary -reverse"
-                  >
-                    修正する
-                  </Button>
-                  <Button
-                    tag="button"
-                    type="button"
-                    onClick={handleSend}
-                    className="c-button p-button -primary"
-                    disabled={sending}
-                  >
-                    送信する
-                  </Button>
+                <div>
+                  <div className="pt-1 text-gray-400 text-fluid-[11,12]">
+                    このサイトは reCAPTCHA によって保護されており、Google の
+                    <Link
+                      href="https://policies.google.com/privacy"
+                      target="_blank"
+                      className="text-blue-500"
+                    >
+                      プライバシー ポリシー
+                    </Link>
+                    と
+                    <Link
+                      href="https://policies.google.com/terms"
+                      target="_blank"
+                      className="text-blue-500"
+                    >
+                      利用規約
+                    </Link>{" "}
+                    が適用されます。
+                  </div>
+                  <div className="flex shrink-0 justify-center gap-4 pt-4 md:gap-8 md:pt-6 lg:gap-10">
+                    <Button
+                      tag="button"
+                      type="button"
+                      onClick={() => setShowModal(false)}
+                      className="c-button p-button -secondary -reverse"
+                    >
+                      修正する
+                    </Button>
+                    <Button
+                      tag="button"
+                      type="button"
+                      onClick={handleSend}
+                      className="c-button p-button -primary"
+                      disabled={sending}
+                    >
+                      送信する
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
