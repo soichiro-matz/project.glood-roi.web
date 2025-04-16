@@ -1,20 +1,22 @@
 import { useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import { initLenis, destroyLenis } from "@libs/lenis";
+import gsap from "gsap";
 import "@/styles/globals.scss";
 import "@/styles/components/layout/_header.scss";
 import "@/styles/components/layout/_footer.scss";
 import "@/styles/components/ui/ui.scss";
 import "@scss/libs/Rola.scss";
 import Meta from "@components/layout/Meta";
-import GoogleAnalytics from "@/components/utils/GoogleAnalytics";
-import Header from "@/components/layout/Header";
+import GoogleAnalytics from "@components/utils/GoogleAnalytics";
+import Header from "@components/layout/Header";
 import Layout from "@components/layout/Layout";
 
 export default function App({ Component, pageProps }) {
   const meta = Component.meta || pageProps.meta || {};
   const router = useRouter();
-  const lenisRef = useRef(null); // ✅ Lenis インスタンス保持用
+  const lenisRef = useRef(null);
+  const pageRef = useRef(null);
 
   const bindAnchorEvents = (lenisInstance) => {
     const anchors = document.querySelectorAll('a[href*="#"]');
@@ -48,73 +50,74 @@ export default function App({ Component, pageProps }) {
     });
   };
 
-  useEffect(() => {
-    const handleRouteChangeStart = () => {
-      destroyLenis(); // ✅ ページ遷移前にリセット
-    };
+  const scrollToHash = async (lenis) => {
+    if (!window.location.hash) return;
 
-    const handleRouteChangeComplete = async () => {
-      const lenis = await initLenis();
-      lenis.start();
-      lenisRef.current = lenis;
+    const id = window.location.hash.replace("#", "");
 
-      bindAnchorEvents(lenis);
-
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          import("gsap/ScrollTrigger").then(({ ScrollTrigger }) => {
-            ScrollTrigger.refresh(true);
-          });
-        });
+    const waitForTarget = (retries = 10) =>
+      new Promise((resolve) => {
+        const check = () => {
+          const el = document.getElementById(id);
+          if (el || retries <= 0) return resolve(el);
+          setTimeout(() => resolve(waitForTarget(retries - 1)), 100);
+        };
+        check();
       });
 
-      // ✅ ページにハッシュがあれば遅延スクロール
-      if (window.location.hash) {
-        const id = window.location.hash.replace("#", "");
+    const target = await waitForTarget();
+    if (target) {
+      const offset = getOffsetByScreen(target);
+      lenis.scrollTo(target, {
+        offset,
+        duration: 1.2,
+        easing: (t) => 1 - Math.pow(1 - t, 3),
+        onComplete: () => {
+          const { ScrollTrigger } = require("gsap/ScrollTrigger");
+          ScrollTrigger.refresh(true);
+        },
+      });
+    }
+  };
 
-        const waitForTarget = (retries = 10) =>
-          new Promise((resolve) => {
-            const check = () => {
-              const el = document.getElementById(id);
-              if (el || retries <= 0) return resolve(el);
-              setTimeout(() => resolve(waitForTarget(retries - 1)), 100);
-            };
-            check();
-          });
-
-        const target = await waitForTarget();
-        if (target) {
-          const offset = getOffsetByScreen(target);
-          lenis.scrollTo(target, {
-            offset,
-            duration: 1.2,
-            easing: (t) => 1 - Math.pow(1 - t, 3),
-            onComplete: () => {
-              const { ScrollTrigger } = require("gsap/ScrollTrigger");
-              ScrollTrigger.refresh(true);
-            },
-          });
-        }
-      }
-    };
-
+  useEffect(() => {
     if ("scrollRestoration" in window.history) {
       window.history.scrollRestoration = "manual";
     }
 
+    const handleRouteChangeStart = async () => {
+      await gsap.to(pageRef.current, {
+        opacity: 0,
+        duration: 1.2,
+        ease: "power2.out",
+      });
+    };
+
+    const handleRouteChangeComplete = async () => {
+      destroyLenis();
+      const lenis = await initLenis();
+      lenisRef.current = lenis;
+      lenis.start?.();
+
+      bindAnchorEvents(lenis);
+      await scrollToHash(lenis);
+
+      await gsap.fromTo(
+        pageRef.current,
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          ease: "power2.out",
+        },
+      );
+    };
+
     router.events.on("routeChangeStart", handleRouteChangeStart);
     router.events.on("routeChangeComplete", handleRouteChangeComplete);
 
-    handleRouteChangeComplete(); // 初回描画にも対応
-
-    let resizeTimeoutId;
-    window.addEventListener("resize", () => {
-      document.documentElement.classList.add("is-resize");
-      clearTimeout(resizeTimeoutId);
-      resizeTimeoutId = setTimeout(() => {
-        document.documentElement.classList.remove("is-resize");
-      }, 500);
-    });
+    handleRouteChangeComplete(); // 初回表示時
 
     return () => {
       router.events.off("routeChangeStart", handleRouteChangeStart);
@@ -127,14 +130,15 @@ export default function App({ Component, pageProps }) {
       <Meta {...meta} />
       <GoogleAnalytics />
       <Header />
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <div ref={pageRef}>
+        <Layout key={router.route}>
+          <Component {...pageProps} />
+        </Layout>
+      </div>
     </>
   );
 }
 
-// スクリーン幅による offset 判定
 function getOffsetByScreen(target) {
   const width = window.innerWidth;
   let offsetAttr = "0";

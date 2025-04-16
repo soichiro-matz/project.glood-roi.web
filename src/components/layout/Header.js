@@ -308,6 +308,7 @@ export default function Header() {
                                   setIsOpen(false);
                                   setFocusedMenu(null);
                                 }}
+                                // scroll={false}
                               >
                                 <span className="p-textLink">{child.text}</span>
                               </Link>
