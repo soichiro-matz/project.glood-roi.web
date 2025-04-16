@@ -9,6 +9,20 @@ import styles from "@/styles/pages/news/index.module.scss";
 
 export async function getStaticPaths() {
   const res = await fetch(`${API_URL.news}?_embed&orderby=date&order=desc`);
+
+  // ✅ 1. ステータス確認
+  if (!res.ok) {
+    throw new Error(`Failed to fetch posts: ${res.status}`);
+  }
+
+  // ✅ 2. 応答が JSON であるかをチェック（必要なら content-type 確認も）
+  const contentType = res.headers.get("content-type") || "";
+  if (!contentType.includes("application/json")) {
+    const text = await res.text(); // HTMLが返っている場合は確認しやすいようログ
+    console.error("Unexpected response (not JSON):", text.slice(0, 300));
+    throw new Error("Expected JSON but got HTML");
+  }
+
   const posts = await res.json();
 
   const paths = posts.map((post) => ({
@@ -20,6 +34,19 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const res = await fetch(`${API_URL.news}/${params.id}?_embed`);
+
+  // ✅ 1. ステータス確認
+  if (!res.ok) {
+    throw new Error(`Failed to fetch post ${params.id}: ${res.status}`);
+  }
+
+  const contentType = res.headers.get("content-type") || "";
+  if (!contentType.includes("application/json")) {
+    const text = await res.text();
+    console.error("Unexpected response (not JSON):", text.slice(0, 300));
+    throw new Error("Expected JSON but got HTML");
+  }
+
   const post = await res.json();
 
   const title = post.title.rendered;
