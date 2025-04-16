@@ -17,7 +17,7 @@ export default function Layout({
   const pageTitle = (title === "" ? "" : `${title} | `) + SITE.name;
 
   const topDescription = description ? description : SITE.description;
-  const topOgpImage = ogpImage ? ogpImage : "/ogp.png";
+  const topOgpImage = ogpImage ? ogpImage : "/ogp.jpg";
 
   const router = useRouter();
   const fullUrl = getFullUrl(router.pathname);
