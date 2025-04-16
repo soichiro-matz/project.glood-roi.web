@@ -56,6 +56,32 @@ export default function ContactForm() {
     }
   }, [setValue]);
 
+  const [modalTop, setModalTop] = useState(0);
+
+  useEffect(() => {
+    if (showModal) {
+      const scrollY = window.scrollY;
+
+      // Lenis 停止＋body固定
+      window.lenis?.stop();
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = "100%";
+      document.body.style.overflow = "hidden";
+
+      setModalTop(scrollY);
+    } else {
+      const y = parseInt(document.body.style.top || "0", 10) * -1;
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      window.scrollTo(0, y);
+
+      window.lenis?.start();
+    }
+  }, [showModal]);
+
   const handleConfirm = (data) => {
     setShowModal(true);
   };
@@ -305,7 +331,7 @@ export default function ContactForm() {
                       type="checkbox"
                       {...register("privacy", {
                         validate: (value) =>
-                          value || "「個人情報の取り扱い」に同意してください",
+                          value || "「個人情報保護方針」に同意してください",
                       })}
                     />
                     <label htmlFor="privacy" className={`${formStyles.label}`}>
@@ -343,6 +369,7 @@ export default function ContactForm() {
           {showModal && (
             <div
               className={`${styles.confirmContainer} fixed inset-0 z-[999] flex items-center justify-center bg-black bg-opacity-60 lg:top-[5rem]`}
+              style={{ top: `${modalTop}px`, height: "100vh" }}
             >
               <div
                 className={`${styles.confirmModal} flex max-h-[75vh] w-full flex-col rounded bg-white p-4 shadow-md md:max-h-[75vh] md:p-6`}

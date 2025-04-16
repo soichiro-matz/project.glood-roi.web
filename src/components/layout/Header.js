@@ -326,6 +326,10 @@ export default function Header() {
                     tag="a"
                     linkProps={{ href: "/contact" }}
                     className="c-button p-button -primary"
+                    onClick={() => {
+                      setIsOpen(false);
+                      setFocusedMenu(null);
+                    }}
                   >
                     お問い合わせ
                   </Button>

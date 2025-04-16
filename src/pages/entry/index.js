@@ -34,6 +34,7 @@ export default function EntryForm() {
   const [resumeName, setResumeName] = useState(null);
   const [sending, setSending] = useState(false);
   const formValues = watch();
+  const [modalTop, setModalTop] = useState(0);
 
   useEffect(() => {
     const saved = sessionStorage.getItem("entryFormData");
@@ -54,8 +55,26 @@ export default function EntryForm() {
   useEffect(() => {
     if (showModal) {
       document.body.classList.add("modal-open");
+      const scrollY = window.scrollY;
+
+      // Lenis 停止＋body固定
+      window.lenis?.stop();
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = "100%";
+      document.body.style.overflow = "hidden";
+
+      setModalTop(scrollY);
     } else {
       document.body.classList.remove("modal-open");
+      const y = parseInt(document.body.style.top || "0", 10) * -1;
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      window.scrollTo(0, y);
+
+      window.lenis?.start();
     }
 
     return () => {
@@ -411,6 +430,7 @@ export default function EntryForm() {
           {showModal && (
             <div
               className={`${styles.confirmContainer} fixed inset-0 z-[999] flex items-center justify-center bg-black bg-opacity-60 lg:top-[5rem]`}
+              style={{ top: `${modalTop}px`, height: "100vh", height: "100vh" }}
             >
               <div
                 className={`${styles.confirmModal} flex max-h-[75vh] w-full flex-col rounded bg-white p-4 shadow-md md:max-h-[75vh] md:p-6`}
