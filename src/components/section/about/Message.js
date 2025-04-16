@@ -1,41 +1,49 @@
 import { useEffect } from "react";
-import gsap from "gsap";
+// import gsap from "gsap";
+import { gsap, registerScrollTrigger } from "@libs/gsap";
 import styles from "@/styles/pages/about/message.module.scss";
 import SectionTitle from "@/components/parts/SectionTitle";
 import Marquee from "@components/parts/marquee";
 export default function Message() {
   useEffect(() => {
-    const load = async () => {
-      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-      gsap.registerPlugin(ScrollTrigger);
+    const ctx = gsap.context(() => {
+      const init = async () => {
+        const ScrollTrigger = await registerScrollTrigger();
+        if (!ScrollTrigger) return;
+        // const load = async () => {
+        //   const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+        //   gsap.registerPlugin(ScrollTrigger);
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: ".js-bg",
-          start: "top 80%",
-          // end: "bottom top",
-          // scrub: true,
-          // markers: true,
-        },
-      });
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: ".js-bg",
+            start: "top 80%",
+            // end: "bottom top",
+            // scrub: true,
+            // markers: true,
+          },
+        });
 
-      tl.to(".js-bg", {
-        opacity: 1,
-        duration: 1,
-        ease: "power3.out",
-      }).to(
-        ".js-greeting",
-        {
+        tl.to(".js-bg", {
           opacity: 1,
-          y: 0,
           duration: 1,
           ease: "power3.out",
-        },
-        "<0.8",
-      );
-    };
+        }).to(
+          ".js-greeting",
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power3.out",
+          },
+          "<0.8",
+        );
+      };
 
-    load();
+      // load();
+      init();
+    });
+    return () => ctx.revert();
   }, []);
   return (
     <div className={`${styles.messageContainer}`}>

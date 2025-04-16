@@ -1,30 +1,38 @@
 import { useEffect } from "react";
-import gsap from "gsap";
+// import gsap from "gsap";
+import { gsap, registerScrollTrigger } from "@libs/gsap";
 import Link from "next/link";
-import { nanoid } from "nanoid";
+
 import styles from "@/styles/pages/about/outline.module.scss";
 import SectionTitle from "@/components/parts/SectionTitle";
 import { SITE, COMPANY } from "@/config/config";
 
 export default function Outline() {
   useEffect(() => {
-    const load = async () => {
-      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-      gsap.registerPlugin(ScrollTrigger);
+    const ctx = gsap.context(() => {
+      const init = async () => {
+        const ScrollTrigger = await registerScrollTrigger();
+        if (!ScrollTrigger) return;
+        // const load = async () => {
+        //   const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+        //   gsap.registerPlugin(ScrollTrigger);
 
-      gsap.to(".js-outline__bg", {
-        opacity: 1,
-        scrollTrigger: {
-          trigger: ".js-outline__bg",
-          start: "top 80%",
-          end: "top 20%",
-          scrub: true,
-          // markers: true,
-        },
-      });
-    };
+        gsap.to(".js-outline__bg", {
+          opacity: 1,
+          scrollTrigger: {
+            trigger: ".js-outline__bg",
+            start: "top 80%",
+            end: "top 20%",
+            scrub: true,
+            // markers: true,
+          },
+        });
+      };
 
-    load();
+      // load();
+      init();
+    });
+    return () => ctx.revert();
   }, []);
   return (
     <div className={`${styles.outlineContainer} `}>

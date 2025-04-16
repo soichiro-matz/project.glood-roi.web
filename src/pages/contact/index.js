@@ -7,17 +7,15 @@ import { useEffect, useState } from "react";
 import { SITE } from "@/config/config";
 import styles from "@/styles/pages/contact/index.module.scss";
 import formStyles from "@/styles/components/ui/form.module.scss";
-import Layout from "@/components/layout/Layout";
 import Heading from "@/components/parts/Heading";
 import Button from "@/components/ui/Button";
 
+const title = "お問い合わせ";
+const title_en = "contact";
+
+const description =
+  SITE.description + "お問い合わせはこちらのページより承っております。";
 export default function ContactForm() {
-  const title = "お問い合わせ";
-  const title_en = "contact";
-
-  const description =
-    SITE.description + "お問い合わせはこちらのページより承っております。";
-
   const breadcrumbs = [
     {
       title: "ホーム",
@@ -93,7 +91,7 @@ export default function ContactForm() {
   };
 
   return (
-    <Layout title={title} description={description}>
+    <>
       <Script
         src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
         strategy="afterInteractive"
@@ -471,6 +469,12 @@ export default function ContactForm() {
           )}
         </div>
       </div>
-    </Layout>
+    </>
   );
 }
+
+ContactForm.meta = {
+  title: title,
+  description: description,
+  ogImage: "",
+};

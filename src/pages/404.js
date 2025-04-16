@@ -1,14 +1,12 @@
 import { SITE } from "@/config/config";
 import styles from "@/styles/pages/contact/index.module.scss";
-import Layout from "@/components/layout/Layout";
 import Heading from "@/components/parts/Heading";
 import Button from "@/components/ui/Button";
 
+const title = "404 Not Found";
+const title_en = "404 not nound";
+const description = "404 Not Found";
 export default function NotFound() {
-  const title = "404 Not Found";
-  const title_en = "404 not nound";
-  const description = "404 Not Found";
-
   const breadcrumbs = [
     {
       title: "ホーム",
@@ -21,7 +19,7 @@ export default function NotFound() {
   ];
 
   return (
-    <Layout title={title} description={description}>
+    <>
       <Heading titleEn={title_en} titleJp={title} breadcrumbs={breadcrumbs} />
       <div className="l-container l-grid__12">
         <div
@@ -44,6 +42,12 @@ export default function NotFound() {
           ホームへ
         </Button>
       </div>
-    </Layout>
+    </>
   );
 }
+
+NotFound.meta = {
+  title: title,
+  description: description,
+  ogImage: "",
+};

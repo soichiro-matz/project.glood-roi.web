@@ -4,13 +4,11 @@ import Layout from "@/components/layout/Layout";
 import Heading from "@/components/parts/Heading";
 import styles from "@/styles/pages/privacy-policy/index.module.scss";
 
+const title = "プライバシーポリシー";
+const title_en = "privacy polycy";
+const description =
+  SITE.description + "このページは「プライバシーポリシー」を紹介しております。";
 export default function PrivacyPolicyIndex() {
-  const title = "プライバシーポリシー";
-  const title_en = "privacy polycy";
-  const description =
-    SITE.description +
-    "このページは「プライバシーポリシー」を紹介しております。";
-
   const breadcrumbs = [
     {
       title: "ホーム",
@@ -23,7 +21,7 @@ export default function PrivacyPolicyIndex() {
   ];
 
   return (
-    <Layout title={title} description={description}>
+    <>
       <Heading titleEn={title_en} titleJp={title} breadcrumbs={breadcrumbs} />
       <section>
         <div className="l-container l-grid__12">
@@ -275,6 +273,12 @@ export default function PrivacyPolicyIndex() {
           </div>
         </div>
       </section>
-    </Layout>
+    </>
   );
 }
+
+PrivacyPolicyIndex.meta = {
+  title: title,
+  description: description,
+  ogImage: "",
+};

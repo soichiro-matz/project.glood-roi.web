@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useLayoutEffect } from "react";
-import gsap from "gsap";
+// import gsap from "gsap";
+import { gsap, registerScrollTrigger } from "@libs/gsap";
 import { nanoid } from "nanoid";
 import styles from "@/styles/pages/recruit/index.module.scss";
 import { SITE } from "@/config/config";
@@ -63,28 +64,35 @@ const requirements = [
 
 export default function Requirements() {
   useLayoutEffect(() => {
-    const load = async () => {
-      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-      gsap.registerPlugin(ScrollTrigger);
+    const ctx = gsap.context(() => {
+      const init = async () => {
+        const ScrollTrigger = await registerScrollTrigger();
+        if (!ScrollTrigger) return;
+        // const load = async () => {
+        //   const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+        //   gsap.registerPlugin(ScrollTrigger);
 
-      gsap.utils.toArray(".js-requirement").forEach((el, i) => {
-        if (!el) return;
+        gsap.utils.toArray(".js-requirement").forEach((el, i) => {
+          if (!el) return;
 
-        gsap.to(el, {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 80%",
-            // markers: true,
-          },
+          gsap.to(el, {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 80%",
+              // markers: true,
+            },
+          });
         });
-      });
-    };
+      };
 
-    load();
+      // load();
+      init();
+    });
+    return () => ctx.revert();
   }, []);
 
   return (

@@ -10,12 +10,11 @@ import IndexMenu from "@/components/parts/IndexMenu";
 import { getChildren } from "@/data/navLinks";
 
 const aboutChildren = getChildren("about");
+const title = "私たちについて";
+const title_en = "about us";
+const description = SITE.description;
 
 export default function About() {
-  const title = "私たちについて";
-  const title_en = "about us";
-  const description = SITE.description;
-
   const breadcrumbs = [
     {
       title: "ホーム",
@@ -28,7 +27,7 @@ export default function About() {
   ];
 
   return (
-    <Layout title={title} description={description}>
+    <>
       <Heading titleEn={title_en} titleJp={title} breadcrumbs={breadcrumbs} />
       <IndexMenu menu={aboutChildren} />
       <Mvv />
@@ -36,6 +35,12 @@ export default function About() {
       <Data />
       <Outline />
       <History />
-    </Layout>
+    </>
   );
 }
+
+About.meta = {
+  title: title,
+  description: description,
+  ogImage: "",
+};

@@ -6,8 +6,13 @@ import "@/styles/components/layout/_header.scss";
 import "@/styles/components/layout/_footer.scss";
 import "@/styles/components/ui/ui.scss";
 import "@scss/libs/Rola.scss";
+import Meta from "@components/layout/Meta";
+import GoogleAnalytics from "@/components/utils/GoogleAnalytics";
+import Header from "@/components/layout/Header";
+import Layout from "@/components/Layout/Layout";
 
 export default function App({ Component, pageProps }) {
+  const meta = Component.meta || pageProps.meta || {};
   const router = useRouter();
   const lenisRef = useRef(null); // ✅ Lenis インスタンス保持用
 
@@ -117,7 +122,16 @@ export default function App({ Component, pageProps }) {
     };
   }, []);
 
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <Meta {...meta} />
+      <GoogleAnalytics />
+      <Header />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </>
+  );
 }
 
 // スクリーン幅による offset 判定

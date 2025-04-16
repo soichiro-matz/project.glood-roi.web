@@ -1,5 +1,6 @@
 import { useLayoutEffect } from "react";
-import gsap from "gsap";
+// import gsap from "gsap";
+import { gsap, registerScrollTrigger } from "@libs/gsap";
 import SectionTitle from "@/components/parts/SectionTitle";
 import styles from "@/styles/pages/home/recruit.module.scss";
 import { zeroPad } from "@utils/utils";
@@ -9,34 +10,41 @@ const images = ["", "", "", ""];
 
 export default function Recruit() {
   useLayoutEffect(() => {
-    const load = async () => {
-      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-      gsap.registerPlugin(ScrollTrigger);
+    // const load = async () => {
+    //   const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+    //   gsap.registerPlugin(ScrollTrigger);
+    const ctx = gsap.context(() => {
+      const init = async () => {
+        const ScrollTrigger = await registerScrollTrigger();
+        if (!ScrollTrigger) return;
 
-      requestAnimationFrame(() => {
-        setTimeout(() => {
-          const elems = document.querySelectorAll(".js-employee");
+        requestAnimationFrame(() => {
+          setTimeout(() => {
+            const elems = document.querySelectorAll(".js-employee");
 
-          if (!elems.length) return;
+            if (!elems.length) return;
 
-          gsap.to(".js-employee", {
-            opacity: 1,
-            x: 0,
-            ease: "power3.out",
-            stagger: 0.2,
-            duration: 1.5,
-            scrollTrigger: {
-              trigger: ".js-employee",
-              start: "top 85%",
-              // scrub: true,
-              // markers: true,
-            },
-          });
-        }, 5000);
-      });
-    };
+            gsap.to(".js-employee", {
+              opacity: 1,
+              x: 0,
+              ease: "power3.out",
+              stagger: 0.2,
+              duration: 1.5,
+              scrollTrigger: {
+                trigger: ".js-employee",
+                start: "top 85%",
+                // scrub: true,
+                // markers: true,
+              },
+            });
+          }, 5000);
+        });
+      };
 
-    load();
+      // load();
+      init();
+    });
+    return () => ctx.revert();
   }, []);
   return (
     <section className={`${styles.recruit} relative`}>

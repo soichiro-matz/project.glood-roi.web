@@ -1,40 +1,48 @@
 import { useEffect } from "react";
-import gsap from "gsap";
+// import gsap from "gsap";
+import { gsap, registerScrollTrigger } from "@libs/gsap";
 import styles from "@/styles/pages/about/mvv.module.scss";
 export default function Mvv() {
   useEffect(() => {
-    const load = async () => {
-      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-      gsap.registerPlugin(ScrollTrigger);
+    const ctx = gsap.context(() => {
+      const init = async () => {
+        const ScrollTrigger = await registerScrollTrigger();
+        if (!ScrollTrigger) return;
+        // const load = async () => {
+        //   const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+        //   gsap.registerPlugin(ScrollTrigger);
 
-      const width = window.innerWidth;
-      let isLg = width >= 768;
+        const width = window.innerWidth;
+        let isLg = width >= 768;
 
-      gsap.to(".js-employee01", {
-        y: isLg ? 50 : 30,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".js-description",
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
-          // markers: true,
-        },
-      });
-      gsap.to(".js-employee02", {
-        y: isLg ? 80 : 50,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".js-description",
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
-          // markers: true,
-        },
-      });
-    };
+        gsap.to(".js-employee01", {
+          y: isLg ? 50 : 30,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".js-description",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+            // markers: true,
+          },
+        });
+        gsap.to(".js-employee02", {
+          y: isLg ? 80 : 50,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".js-description",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+            // markers: true,
+          },
+        });
+      };
 
-    load();
+      // load();
+      init();
+    });
+    return () => ctx.revert();
   }, []);
 
   return (

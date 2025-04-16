@@ -1,5 +1,4 @@
 import { SITE } from "@/config/config";
-import Layout from "@/components/layout/Layout";
 import Heading from "@/components/parts/Heading";
 import IndexMenu from "@/components/parts/IndexMenu";
 import Requirements from "@/components/section/recruit/Requirements";
@@ -7,13 +6,12 @@ import styles from "@/styles/pages/recruit/index.module.scss";
 import { getChildren } from "@/data/navLinks";
 
 const recruitChildren = getChildren("recruit");
+const title = "採用情報";
+const title_en = "recruit";
+const description =
+  SITE.description + "このページは「採用情報」を紹介しております。";
 
 export default function Recruit() {
-  const title = "採用情報";
-  const title_en = "recruit";
-  const description =
-    SITE.description + "このページは「採用情報」を紹介しております。";
-
   const breadcrumbs = [
     {
       title: "ホーム",
@@ -26,7 +24,7 @@ export default function Recruit() {
   ];
 
   return (
-    <Layout title={title} description={description}>
+    <>
       <Heading titleEn={title_en} titleJp={title} breadcrumbs={breadcrumbs} />
       <IndexMenu menu={recruitChildren} />
 
@@ -52,6 +50,12 @@ export default function Recruit() {
         </div>
         <Requirements />
       </section>
-    </Layout>
+    </>
   );
 }
+
+Recruit.meta = {
+  title: title,
+  description: description,
+  ogImage: "",
+};

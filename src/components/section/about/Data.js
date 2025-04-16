@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import gsap from "gsap";
+// import gsap from "gsap";
+import { gsap, registerScrollTrigger } from "@libs/gsap";
 import { nanoid } from "nanoid";
 
 import styles from "@/styles/pages/about/data.module.scss";
@@ -17,70 +18,78 @@ const datas = [
 ];
 export default function Data() {
   useEffect(() => {
-    const load = async () => {
-      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-      const { CustomEase } = await import("gsap/CustomEase");
-      gsap.registerPlugin(ScrollTrigger, CustomEase);
-      gsap.to(".js-dataSection", {
-        clipPath: "inset(0% round 0rem)",
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: ".js-dataSection",
-          start: "top bottom",
-          end: "top 10%",
-          scrub: true,
-          // markers: true,
-        },
-      });
+    const ctx = gsap.context(() => {
+      const init = async () => {
+        const ScrollTrigger = await registerScrollTrigger();
+        if (!ScrollTrigger) return;
 
-      gsap.to(".js-datas", {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        scrollTrigger: {
-          trigger: ".js-datas",
-          start: "top 60%",
-          once: true,
-          onEnter: () => {
-            const countElms = document.querySelectorAll(".js-num");
-
-            countElms.forEach((elm) => {
-              const countMax = parseInt(elm.getAttribute("data-to"), 10);
-              const countFrom =
-                parseInt(elm.getAttribute("data-from"), 10) || 0;
-
-              const obj = { val: countFrom };
-
-              gsap.fromTo(
-                obj,
-                { val: countFrom },
-                {
-                  val: countMax,
-                  duration: 1.2,
-                  ease: "none",
-                  onUpdate: () => {
-                    elm.textContent = Math.floor(obj.val);
-                  },
-                },
-              );
-            });
+        // const load = async () => {
+        //   const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+        //   const { CustomEase } = await import("gsap/CustomEase");
+        // gsap.registerPlugin(ScrollTrigger, CustomEase);
+        gsap.to(".js-dataSection", {
+          clipPath: "inset(0% round 0rem)",
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".js-dataSection",
+            start: "top bottom",
+            end: "top 10%",
+            scrub: true,
+            // markers: true,
           },
-        },
-      });
+        });
 
-      gsap.to(".js-people", {
-        y: 10,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".js-people",
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
-          // markers: true,
-        },
-      });
-    };
-    load();
+        gsap.to(".js-datas", {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          scrollTrigger: {
+            trigger: ".js-datas",
+            start: "top 60%",
+            once: true,
+            onEnter: () => {
+              const countElms = document.querySelectorAll(".js-num");
+
+              countElms.forEach((elm) => {
+                const countMax = parseInt(elm.getAttribute("data-to"), 10);
+                const countFrom =
+                  parseInt(elm.getAttribute("data-from"), 10) || 0;
+
+                const obj = { val: countFrom };
+
+                gsap.fromTo(
+                  obj,
+                  { val: countFrom },
+                  {
+                    val: countMax,
+                    duration: 1.2,
+                    ease: "none",
+                    onUpdate: () => {
+                      elm.textContent = Math.floor(obj.val);
+                    },
+                  },
+                );
+              });
+            },
+          },
+        });
+
+        gsap.to(".js-people", {
+          y: 10,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".js-people",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+            // markers: true,
+          },
+        });
+      };
+      // load();
+      init();
+    });
+    return () => ctx.revert();
   }, []);
   return (
     <section

@@ -2,65 +2,74 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Button from "@/components/ui/Button";
 import { SITE, API_URL } from "@/config/config";
-import Layout from "@/components/layout/Layout";
 import Heading from "@/components/parts/Heading";
 import styles from "@/styles/pages/news/index.module.scss";
 
-// export async function getStaticPaths() {
-//   const res = await fetch(`${API_URL.news}?_embed&orderby=date&order=desc`);
-//   const posts = await res.json();
+// const title = "";
 
-//   const paths = posts.map((post) => ({
-//     params: { id: post.id.toString() },
-//   }));
+export async function getStaticPaths() {
+  const res = await fetch(`${API_URL.news}?_embed&orderby=date&order=desc`);
+  const posts = await res.json();
 
-//   return { paths, fallback: false };
-// }
+  const paths = posts.map((post) => ({
+    params: { id: post.id.toString() },
+  }));
 
-// export async function getStaticProps({ params }) {
-//   const res = await fetch(`${API_URL.news}/${params.id}?_embed`);
-//   const post = await res.json();
+  return { paths, fallback: false };
+}
 
-//   return {
-//     props: { post },
-//     revalidate: 60,
-//   };
-// }
+export async function getStaticProps({ params }) {
+  const res = await fetch(`${API_URL.news}/${params.id}?_embed`);
+  const post = await res.json();
 
-export default function NewsDetail() {
-  const router = useRouter();
-  const { id } = router.query;
+  const title = post.title.rendered;
+  const rawExcerpt = post.excerpt?.rendered || "";
+  const description = rawExcerpt.replace(/<[^>]+>/g, "").trim(); // HTMLタグ除去;
+  const ogImage = "";
 
-  const [post, setPost] = useState(null);
-  const [loading, setLoading] = useState(true);
+  return {
+    props: {
+      post,
+      meta: {
+        title,
+        description,
+        ogImage,
+      },
+    },
+    revalidate: 60,
+  };
+}
 
-  useEffect(() => {
-    if (!id) return; // idがまだ取得できていない場合はスキップ
+export default function NewsDetail({ post, meta }) {
+  // const router = useRouter();
+  // const { id } = router.query;
 
-    const fetchPost = async () => {
-      try {
-        const res = await fetch(`${API_URL.news}/${id}?_embed`);
-        const data = await res.json();
-        setPost(data);
-        setLoading(false);
-      } catch (error) {
-        console.error("データ取得エラー:", error);
-        setLoading(false);
-      }
-    };
+  // const [post, setPost] = useState(null);
+  // const [loading, setLoading] = useState(true);
 
-    fetchPost();
-  }, [id]);
+  // useEffect(() => {
+  //   if (!id) return; // idがまだ取得できていない場合はスキップ
 
-  if (loading) return <p>読み込み中...</p>;
-  if (!post) return <p>記事が見つかりません</p>;
+  //   const fetchPost = async () => {
+  //     try {
+  //       const res = await fetch(`${API_URL.news}/${id}?_embed`);
+  //       const data = await res.json();
+  //       setPost(data);
+  //       setLoading(false);
+  //     } catch (error) {
+  //       console.error("データ取得エラー:", error);
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchPost();
+  // }, [id]);
+
+  // if (loading) return <p>読み込み中...</p>;
+  // if (!post) return <p>記事が見つかりません</p>;
 
   const title = post.title.rendered;
   const title_en = "news";
-
-  const rawExcerpt = post.excerpt?.rendered || "";
-
-  const description = rawExcerpt.replace(/<[^>]+>/g, "").trim(); // HTMLタグ除去;
 
   const breadcrumbs = [
     {
@@ -78,7 +87,7 @@ export default function NewsDetail() {
   ];
 
   return (
-    <Layout title={title} description={description}>
+    <>
       <Heading titleEn={title_en} titleJp={title} breadcrumbs={breadcrumbs} />
       <article
         className={`l-container l-grid__12 md:py-fluid-[80,104]" py-fluid-[40,80,350,768]`}
@@ -126,6 +135,12 @@ export default function NewsDetail() {
           </div>
         </div>
       </article>
-    </Layout>
+    </>
   );
 }
+
+// NewsDetail.meta = {
+//   title: title,
+//   description: description,
+//   ogImage: "",
+// };

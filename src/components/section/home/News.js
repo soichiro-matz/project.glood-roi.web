@@ -1,7 +1,7 @@
 import { useLayoutEffect } from "react";
-import Link from "next/link";
 import Image from "next/image";
-import gsap from "gsap";
+// import gsap from "gsap";
+import { gsap, registerScrollTrigger } from "@libs/gsap";
 import styles from "@/styles/pages/home/news.module.scss";
 import SectionTitle from "@/components/parts/SectionTitle";
 import Button from "@/components/ui/Button";
@@ -15,37 +15,44 @@ export default function News({ posts }) {
   });
 
   useLayoutEffect(() => {
-    const load = async () => {
-      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-      gsap.registerPlugin(ScrollTrigger);
+    const ctx = gsap.context(() => {
+      const init = async () => {
+        const ScrollTrigger = await registerScrollTrigger();
+        if (!ScrollTrigger) return;
+        // const load = async () => {
+        //   const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+        //   gsap.registerPlugin(ScrollTrigger);
 
-      gsap.to(".js-newsSection", {
-        clipPath: "inset(0% round 0rem)",
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: ".js-newsSection",
-          start: "top bottom",
-          end: "top 10%",
-          scrub: true,
-          // markers: true,
-        },
-      });
+        gsap.to(".js-newsSection", {
+          clipPath: "inset(0% round 0rem)",
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".js-newsSection",
+            start: "top bottom",
+            end: "top 10%",
+            scrub: true,
+            // markers: true,
+          },
+        });
 
-      gsap.to(".js-paper-airplane", {
-        y: -100,
-        x: 50,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".js-newsSection",
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
-          // markers: true,
-        },
-      });
-    };
+        gsap.to(".js-paper-airplane", {
+          y: -100,
+          x: 50,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".js-newsSection",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+            // markers: true,
+          },
+        });
+      };
 
-    load();
+      // load();
+      init();
+    });
+    return () => ctx.revert();
   }, []);
 
   return (

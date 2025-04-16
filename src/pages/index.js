@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { API_URL } from "@/config/config";
 import styles from "@/styles/pages/index.module.scss";
-import Layout from "@/components/layout/Layout";
 import Hero from "@/components/section/home/Hero";
 import AboutUs from "@/components/section/home/AboutUs";
 import Services from "@/components/section/home/Services";
@@ -42,7 +41,7 @@ export default function Home() {
   }, []);
 
   return (
-    <Layout>
+    <>
       <div className={styles.home}>
         <Hero />
         <AboutUs />
@@ -51,6 +50,6 @@ export default function Home() {
         <News posts={posts} />
         <Recruit />
       </div>
-    </Layout>
+    </>
   );
 }

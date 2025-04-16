@@ -1,6 +1,7 @@
 import { nanoid } from "nanoid";
 import { useEffect } from "react";
-import gsap from "gsap";
+// import gsap from "gsap";
+import { gsap, registerScrollTrigger } from "@libs/gsap";
 import styles from "@/styles/pages/home/productLines.module.scss";
 import SectionTitle from "@/components/parts/SectionTitle";
 import { zeroPad } from "@utils/utils";
@@ -18,137 +19,145 @@ const Items = [
 
 export default function ProductLines() {
   useEffect(() => {
-    const load = async () => {
-      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-      gsap.registerPlugin(ScrollTrigger);
+    const ctx = gsap.context(() => {
+      const init = async () => {
+        const ScrollTrigger = await registerScrollTrigger();
+        if (!ScrollTrigger) return;
 
-      gsap.utils.toArray(".js-transition").forEach((section) => {
-        const items = section.querySelectorAll(".js-transition-item");
+        // const load = async () => {
+        //   const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+        //   gsap.registerPlugin(ScrollTrigger);
 
-        gsap.fromTo(
-          items,
-          {
-            y: 500,
-            opacity: 0,
-          },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            ease: "power3.out",
-            stagger: 0.2,
-            scrollTrigger: {
-              trigger: section,
-              start: "top 90%",
-              // toggleActions: "play none none reverse",
-              // markers: true,
+        gsap.utils.toArray(".js-transition").forEach((section) => {
+          const items = section.querySelectorAll(".js-transition-item");
+
+          gsap.fromTo(
+            items,
+            {
+              y: 500,
+              opacity: 0,
             },
-          },
-        );
-      });
-
-      // setTimeout(() => {
-      // const tl = gsap.timeline({
-      //   scrollTrigger: {
-      //     trigger: ".js-productCategories",
-      //     start: "top 80%",
-      //     markers: true,
-      //   },
-      // });
-
-      // tl.to(".js-productCategory", {
-      //   y: 0,
-      //   stagger: 0.1,
-      //   duration: 1,
-      //   ease: "power3.out",
-      // }).to(
-      //   ".js-productCategory",
-      //   {
-      //     opacity: 1,
-      //     stagger: 0.1,
-      //     duration: 1,
-      //     ease: "power3.out",
-      //   },
-      //   "<0.2",
-      // );
-
-      // gsap.fromTo(
-      //   ".js-productCategory",
-      //   {
-      //     y: "160",
-      //     opacity: 0,
-      //   },
-      //   {
-      //     y: 0,
-      //     opacity: 1,
-      //     // stagger: 0.15, // ← ここでタイミングをずらす
-      //     duration: 5,
-      //     ease: "power3.out",
-      //     scrollTrigger: {
-      //       trigger: ".js-main-section", // ← トリガーは親
-      //       start: "top 80%", // スクロール位置調整
-      //       markers: true, // 開発中は見えるように
-      //       // once: true, // ← 1回だけ再生するなら（必要に応じて）
-      //     },
-      //   },
-      // );
-
-      gsap.utils.toArray(".js-productCategory").forEach((el, i) => {
-        console.log(el);
-
-        gsap.fromTo(
-          el,
-          {
-            y: 500,
-            opacity: 0,
-          },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 5,
-            ease: "power3.out",
-            delay: i * 0.1, // ← 疑似 stagger
-            scrollTrigger: {
-              trigger: el,
-              start: "top-=640px 80%",
-              markers: true,
+            {
+              y: 0,
+              opacity: 1,
+              duration: 1,
+              ease: "power3.out",
+              stagger: 0.2,
+              scrollTrigger: {
+                trigger: section,
+                start: "top 90%",
+                // toggleActions: "play none none reverse",
+                // markers: true,
+              },
             },
-          },
-        );
-      });
+          );
+        });
 
-      // gsap.utils.toArray(".js-productCategory").forEach((item, index) => {
-      //   console.log(item);
+        // setTimeout(() => {
+        // const tl = gsap.timeline({
+        //   scrollTrigger: {
+        //     trigger: ".js-productCategories",
+        //     start: "top 80%",
+        //     markers: true,
+        //   },
+        // });
 
-      //   gsap.fromTo(
-      //     item,
-      //     {
-      //       y: 500,
-      //       opacity: 0,
-      //     },
-      //     {
-      //       y: 0,
-      //       opacity: 1,
-      //       duration: 1,
-      //       ease: "power3.out",
-      //       // stagger: 0.2,
-      //       scrollTrigger: {
-      //         trigger: item,
-      //         start: "top 90%",
-      //         // toggleActions: "play none none reverse",
-      //         markers: true,
-      //       },
-      //     },
-      //   );
-      // });
+        // tl.to(".js-productCategory", {
+        //   y: 0,
+        //   stagger: 0.1,
+        //   duration: 1,
+        //   ease: "power3.out",
+        // }).to(
+        //   ".js-productCategory",
+        //   {
+        //     opacity: 1,
+        //     stagger: 0.1,
+        //     duration: 1,
+        //     ease: "power3.out",
+        //   },
+        //   "<0.2",
+        // );
 
-      // setTimeout(() => ScrollTrigger.refresh(), 100);
+        // gsap.fromTo(
+        //   ".js-productCategory",
+        //   {
+        //     y: "160",
+        //     opacity: 0,
+        //   },
+        //   {
+        //     y: 0,
+        //     opacity: 1,
+        //     // stagger: 0.15, // ← ここでタイミングをずらす
+        //     duration: 5,
+        //     ease: "power3.out",
+        //     scrollTrigger: {
+        //       trigger: ".js-main-section", // ← トリガーは親
+        //       start: "top 80%", // スクロール位置調整
+        //       markers: true, // 開発中は見えるように
+        //       // once: true, // ← 1回だけ再生するなら（必要に応じて）
+        //     },
+        //   },
+        // );
 
-      // ScrollTrigger.refresh();
-      // }, 1000);
-    };
+        gsap.utils.toArray(".js-productCategory").forEach((el, i) => {
+          console.log(el);
 
-    load();
+          gsap.fromTo(
+            el,
+            {
+              y: 500,
+              opacity: 0,
+            },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 5,
+              ease: "power3.out",
+              delay: i * 0.1, // ← 疑似 stagger
+              scrollTrigger: {
+                trigger: el,
+                start: "top-=640px 80%",
+                markers: true,
+              },
+            },
+          );
+        });
+
+        // gsap.utils.toArray(".js-productCategory").forEach((item, index) => {
+        //   console.log(item);
+
+        //   gsap.fromTo(
+        //     item,
+        //     {
+        //       y: 500,
+        //       opacity: 0,
+        //     },
+        //     {
+        //       y: 0,
+        //       opacity: 1,
+        //       duration: 1,
+        //       ease: "power3.out",
+        //       // stagger: 0.2,
+        //       scrollTrigger: {
+        //         trigger: item,
+        //         start: "top 90%",
+        //         // toggleActions: "play none none reverse",
+        //         markers: true,
+        //       },
+        //     },
+        //   );
+        // });
+
+        // setTimeout(() => ScrollTrigger.refresh(), 100);
+
+        // ScrollTrigger.refresh();
+        // }, 1000);
+      };
+
+      // load();
+      init();
+    });
+    return () => ctx.revert();
   }, []);
 
   return (

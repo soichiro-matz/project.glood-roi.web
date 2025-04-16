@@ -1,15 +1,13 @@
 import { SITE } from "@/config/config";
 import styles from "@/styles/pages/contact/index.module.scss";
-import Layout from "@/components/layout/Layout";
 import Heading from "@/components/parts/Heading";
 import Button from "@/components/ui/Button";
 
+const title = "採用エントリー";
+const title_en = "entry";
+const description =
+  SITE.description + "エントリーいただきありがとうございました。";
 export default function Thanks() {
-  const title = "採用エントリー";
-  const title_en = "entry";
-  const description =
-    SITE.description + "エントリーいただきありがとうございました。";
-
   const breadcrumbs = [
     {
       title: "ホーム",
@@ -22,7 +20,7 @@ export default function Thanks() {
   ];
 
   return (
-    <Layout title={title} description={description}>
+    <>
       <Heading titleEn={title_en} titleJp={title} breadcrumbs={breadcrumbs} />
       <div className="l-container l-grid__12">
         <div
@@ -45,6 +43,12 @@ export default function Thanks() {
           ホームへ
         </Button>
       </div>
-    </Layout>
+    </>
   );
 }
+
+Thanks.meta = {
+  title: title,
+  description: description,
+  ogImage: "",
+};

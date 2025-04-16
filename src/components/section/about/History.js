@@ -1,5 +1,6 @@
 import { useEffect, Fragment } from "react";
-import gsap from "gsap";
+// import gsap from "gsap";
+import { gsap, registerScrollTrigger } from "@libs/gsap";
 import { nanoid } from "nanoid";
 import styles from "@/styles/pages/about/history.module.scss";
 import SectionTitle from "@/components/parts/SectionTitle";
@@ -29,61 +30,68 @@ const histories = [
 
 export default function Outline() {
   useEffect(() => {
-    const load = async () => {
-      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-      gsap.registerPlugin(ScrollTrigger);
+    const ctx = gsap.context(() => {
+      const init = async () => {
+        const ScrollTrigger = await registerScrollTrigger();
+        if (!ScrollTrigger) return;
+        // const load = async () => {
+        //   const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+        //   gsap.registerPlugin(ScrollTrigger);
 
-      const width = window.innerWidth;
-      let lineHeight = "0";
+        const width = window.innerWidth;
+        let lineHeight = "0";
 
-      if (width < 768) {
-        //sp
-        lineHeight = "calc(100% + 2.5rem)";
-      } else if (width < 1024) {
-        //md
-        lineHeight = "calc(100% + 3rem)";
-        //lg
-      } else {
-        lineHeight = "calc(100% + 4rem)";
-      }
+        if (width < 768) {
+          //sp
+          lineHeight = "calc(100% + 2.5rem)";
+        } else if (width < 1024) {
+          //md
+          lineHeight = "calc(100% + 3rem)";
+          //lg
+        } else {
+          lineHeight = "calc(100% + 4rem)";
+        }
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: ".js-histories",
-          start: "top 80%",
-          // markers: true,
-        },
-      });
-
-      tl.to(".js-year", {
-        opacity: 1,
-        duration: 0.8,
-        stagger: 0.5,
-        // ease: "power3.out",
-      })
-        .to(
-          ".js-detail",
-          {
-            opacity: 1,
-            duration: 0.8,
-            stagger: 0.5,
-            // ease: "power3.out",
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: ".js-histories",
+            start: "top 80%",
+            // markers: true,
           },
-          "<",
-        )
-        .to(
-          ".js-line",
-          {
-            "--after-line-height": lineHeight,
-            duration: 0.5,
-            stagger: 0.5,
-            // ease: "power3.out",
-          },
-          "<",
-        );
-    };
+        });
 
-    load();
+        tl.to(".js-year", {
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.5,
+          // ease: "power3.out",
+        })
+          .to(
+            ".js-detail",
+            {
+              opacity: 1,
+              duration: 0.8,
+              stagger: 0.5,
+              // ease: "power3.out",
+            },
+            "<",
+          )
+          .to(
+            ".js-line",
+            {
+              "--after-line-height": lineHeight,
+              duration: 0.5,
+              stagger: 0.5,
+              // ease: "power3.out",
+            },
+            "<",
+          );
+      };
+
+      // load();
+      init();
+    });
+    return () => ctx.revert();
   }, []);
 
   return (

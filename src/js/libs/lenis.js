@@ -60,7 +60,7 @@ function waitForLenisReady(callback, retries = 10) {
   } else if (retries > 0) {
     setTimeout(() => waitForLenisReady(callback, retries - 1), 50);
   } else {
-    console.error("Lenis.scroll.instance.scroll.y が初期化されませんでした");
+    // console.error("Lenis.scroll.instance.scroll.y が初期化されませんでした");
   }
 }
 

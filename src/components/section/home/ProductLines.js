@@ -1,6 +1,7 @@
 import { nanoid } from "nanoid";
 import { useLayoutEffect } from "react";
-import gsap from "gsap";
+// import gsap from "gsap";
+import { gsap, registerScrollTrigger } from "@libs/gsap";
 import styles from "@/styles/pages/home/productLines.module.scss";
 import SectionTitle from "@/components/parts/SectionTitle";
 import { zeroPad } from "@utils/utils";
@@ -19,9 +20,13 @@ const Items = [
 export default function ProductLines() {
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      const load = async () => {
-        const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-        gsap.registerPlugin(ScrollTrigger);
+      const init = async () => {
+        const ScrollTrigger = await registerScrollTrigger();
+        if (!ScrollTrigger) return;
+        // const ctx = gsap.context(() => {
+        //   const load = async () => {
+        //     const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+        //     gsap.registerPlugin(ScrollTrigger);
 
         // 背景アニメーション
         gsap.utils.toArray(".js-transition").forEach((section) => {
@@ -88,7 +93,8 @@ export default function ProductLines() {
         }, 200);
       };
 
-      load();
+      // load();
+      init();
     });
 
     return () => ctx.revert();
