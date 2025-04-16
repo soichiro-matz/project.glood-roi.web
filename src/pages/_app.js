@@ -69,6 +69,17 @@ export default function App({ Component, pageProps }) {
     // ページ遷移のたびにアンカーイベント再設定
     router.events.on("routeChangeComplete", bindAnchorEvents);
 
+    let resizeTimeoutId;
+    window.addEventListener("resize", () => {
+      document.documentElement.classList.add("is-resize");
+
+      clearTimeout(resizeTimeoutId);
+
+      resizeTimeoutId = setTimeout(() => {
+        document.documentElement.classList.remove("is-resize");
+      }, 500);
+    });
+
     // クリーンアップ
     return () => {
       router.events.off("routeChangeComplete", bindAnchorEvents);

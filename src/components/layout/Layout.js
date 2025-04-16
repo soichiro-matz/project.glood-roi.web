@@ -42,16 +42,9 @@ export default function Layout({
           content="telephone=no, email=no, address=no"
         />
         <link rel="canonical" href={fullUrl} />
-        <link
-          rel="icon"
-          type="image/svg+xml"
-          href={`${SITE.base}favicon.svg`}
-        />
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href={`${SITE.base}apple-touch-icon.png`}
-        />
+
+        <link rel="icon" href={`${SITE.base}icon.png`}></link>
+        <link rel="apple-touch-icon" href={`${SITE.base}icon.png`} />
         <title>{pageTitle}</title>
         <script
           type="application/ld+json"
