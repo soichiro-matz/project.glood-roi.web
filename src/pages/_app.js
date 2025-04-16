@@ -88,6 +88,14 @@ export default function App({ Component, pageProps }) {
       }, 500);
     });
 
+    document.documentElement.style.overflow = "auto";
+    document.body.style.overflow = "auto";
+    window.addEventListener("wheel", () => {
+      console.log("scrollHeight:", document.documentElement.scrollHeight);
+      console.log("innerHeight:", window.innerHeight);
+      console.log("scrollY:", window.scrollY);
+    });
+
     // クリーンアップ
     return () => {
       router.events.off("routeChangeComplete", bindAnchorEvents);
@@ -142,6 +150,22 @@ export default function App({ Component, pageProps }) {
     scrollToHash();
     //
   }, [router.asPath]);
+
+  useEffect(() => {
+    setTimeout(async () => {
+      const lenis = await initLenis();
+      lenis?.start();
+
+      // rAF ×2 でフレームを確実に待つ
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          import("gsap/ScrollTrigger").then(({ ScrollTrigger }) => {
+            ScrollTrigger.refresh(true);
+          });
+        });
+      });
+    }, 1000); // もしくは300～500msでもOK
+  }, []);
 
   return <Component {...pageProps} />;
 }

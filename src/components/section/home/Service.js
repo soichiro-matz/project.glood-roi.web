@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import gsap from "gsap";
+// import gsap from "gsap";
+import { gsap, registerScrollTrigger } from "@libs/gsap";
 import { nanoid } from "nanoid";
 import useRola from "@hooks/useRola";
 import styles from "@/styles/pages/home/services.module.scss";
@@ -15,130 +16,137 @@ export default function Service({ service, index }) {
   });
 
   useEffect(() => {
-    const load = async () => {
-      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-      gsap.registerPlugin(ScrollTrigger);
+    const ctx = gsap.context(() => {
+      const init = async () => {
+        const ScrollTrigger = await registerScrollTrigger();
+        if (!ScrollTrigger) return;
+        // const load = async () => {
+        //   const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+        //   gsap.registerPlugin(ScrollTrigger);
 
-      if (!sectionRef.current) return;
+        if (!sectionRef.current) return;
 
-      if (index !== 0) {
-        const sectionAnim = gsap.fromTo(
-          sectionRef.current,
-          {
-            y: 0,
-          },
-          {
-            y: -300,
+        if (index !== 0) {
+          const sectionAnim = gsap.fromTo(
+            sectionRef.current,
+            {
+              y: 0,
+            },
+            {
+              y: -300,
+              ease: "none",
+              scrollTrigger: {
+                trigger: sectionRef.current,
+                start: "top bottom",
+                end: "top 30%",
+                scrub: true,
+                // markers: true,
+              },
+            },
+          );
+        }
+
+        const slows =
+          sectionRef.current?.querySelectorAll(".js-move-Slow") ?? [];
+
+        if (slows.length > 0) {
+          gsap.to(slows, {
+            y: 300,
             ease: "none",
             scrollTrigger: {
               trigger: sectionRef.current,
               start: "top bottom",
-              end: "top 30%",
+              end: "bottom top",
               scrub: true,
               // markers: true,
+              id: `scroll-${index}`,
             },
-          },
+          });
+        }
+
+        const moreSlows =
+          sectionRef.current.querySelectorAll(".js-move-moreSlow") ?? [];
+
+        if (moreSlows.length > 0) {
+          gsap.to(moreSlows, {
+            y: 100,
+            ease: "none",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+              // markers: true,
+              id: `scroll-${index}-moreSlow`, // 👈 IDを固有に！
+            },
+          });
+        }
+
+        const serviceTitle = sectionRef.current.querySelector(
+          ".js-serviceTitleWrapper",
         );
-      }
+        const text = sectionRef.current.querySelector(".js-serviceTitle");
+        const image = sectionRef.current.querySelector(".js-serviseImage");
+        const description = sectionRef.current.querySelector(".js-description");
 
-      const slows = sectionRef.current?.querySelectorAll(".js-move-Slow") ?? [];
+        const windowWidth = window.innerWidth;
 
-      if (slows.length > 0) {
-        gsap.to(slows, {
-          y: 300,
-          ease: "none",
+        const tl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
+            start: "top 80%",
             // markers: true,
-            id: `scroll-${index}`,
           },
         });
-      }
 
-      const moreSlows =
-        sectionRef.current.querySelectorAll(".js-move-moreSlow") ?? [];
+        tl.to(serviceTitle, {
+          "--before-width": "100%",
+          duration: 0.8,
+          ease: "power3.out",
+        })
+          .to(
+            text,
+            {
+              x: 0,
+              opacity: 1,
+              duration: 0.8,
+              ease: "power3.out",
+            },
+            "<0.1",
+          )
+          .to(
+            image,
+            {
+              y: windowWidth >= 1024 ? "-3rem" : "0",
+              opacity: 1,
+              // stagger: 0.05,
+              duration: 1.5,
+              ease: "power3.out",
+            },
+            "<",
+          );
 
-      if (moreSlows.length > 0) {
-        gsap.to(moreSlows, {
-          y: 100,
-          ease: "none",
+        gsap.to(description, {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          ease: "power3.out",
           scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
+            trigger: description,
+            start: `top ${index == 0 ? "80%" : "bottom"}`,
             // markers: true,
-            id: `scroll-${index}-moreSlow`, // 👈 IDを固有に！
           },
         });
-      }
 
-      const serviceTitle = sectionRef.current.querySelector(
-        ".js-serviceTitleWrapper",
-      );
-      const text = sectionRef.current.querySelector(".js-serviceTitle");
-      const image = sectionRef.current.querySelector(".js-serviseImage");
-      const description = sectionRef.current.querySelector(".js-description");
-
-      const windowWidth = window.innerWidth;
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          // markers: true,
-        },
-      });
-
-      tl.to(serviceTitle, {
-        "--before-width": "100%",
-        duration: 0.8,
-        ease: "power3.out",
-      })
-        .to(
-          text,
-          {
-            x: 0,
-            opacity: 1,
-            duration: 0.8,
-            ease: "power3.out",
-          },
-          "<0.1",
-        )
-        .to(
-          image,
-          {
-            y: windowWidth >= 1024 ? "-3rem" : "0",
-            opacity: 1,
-            // stagger: 0.05,
-            duration: 1.5,
-            ease: "power3.out",
-          },
-          "<",
-        );
-
-      gsap.to(description, {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: description,
-          start: `top ${index == 0 ? "80%" : "bottom"}`,
-          // markers: true,
-        },
-      });
-
-      return () => {
-        sectionAnim.scrollTrigger?.kill();
-        scrollTriggerInstance?.kill();
+        // return () => {
+        //   sectionAnim.scrollTrigger?.kill();
+        //   scrollTriggerInstance?.kill();
+        // };
       };
-    };
 
-    load();
+      // load();
+      init();
+    });
   }, []);
 
   const bg = styles[`bg-${index % 2 === 0 ? "gray" : "white"}`];
@@ -177,7 +185,7 @@ export default function Service({ service, index }) {
     <li ref={sectionRef} className={`${bgReverce} ${styles.service} relative`}>
       <section>
         <div
-          className={`${styles.serviceContainer} l-container l-grid__12 pt-fluid-[56,104,350,1024] lg:gap-x-8 lg:pt-fluid-[270,320,1024,1480]`}
+          className={`${styles.serviceContainer} l-container l-grid__12 pt-fluid-[56,104,350,1024] lg:gap-x-10 lg:pt-fluid-[270,320,1024,1480]`}
         >
           <h3 className={`${styles.heading}`}>
             <span
@@ -236,7 +244,7 @@ export default function Service({ service, index }) {
             </span>
           </p>
           <div
-            className={`${styles.imageContainer} js-serviseImage relative pb-fluid-[32,48,350.1024] lg:pb-fluid-[80,120,1024.1480]`}
+            className={`${styles.imageContainer} js-serviseImage relative pb-fluid-[32,48,350.1024] lg:pb-[80px]`}
           >
             <Image
               src={service.image}
@@ -244,7 +252,7 @@ export default function Service({ service, index }) {
               height={1607}
               alt="Slider Image"
               sizes="(max-width: 768px) 350px, (max-width: 1024px) 500px, 1000px"
-              className={styles.image}
+              className={`${styles.image} `}
             />
             {index === 0 &&
               getIcon(

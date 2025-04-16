@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useEffect } from "react";
-import gsap from "gsap";
+// import gsap from "gsap";
+import { gsap, registerScrollTrigger } from "@libs/gsap";
 import Lettering from "@/js/libs/Lettering";
 import styles from "@/styles/pages/home/hero.module.scss";
 import useSetRealHeight from "@hooks/useSetRealHeight";
@@ -36,92 +37,98 @@ export default function Hero() {
       swiper.style.height = "100%";
     }
 
-    const load = async () => {
-      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-      gsap.registerPlugin(ScrollTrigger);
+    const ctx = gsap.context(() => {
+      const init = async () => {
+        const ScrollTrigger = await registerScrollTrigger();
+        if (!ScrollTrigger) return;
+        // const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+        // gsap.registerPlugin(ScrollTrigger);
 
-      const jsCopy = document.querySelectorAll(".js-copy");
+        const jsCopy = document.querySelectorAll(".js-copy");
 
-      jsCopy.forEach((copy, index) => {
-        const chars = copy.querySelectorAll("span");
+        jsCopy.forEach((copy, index) => {
+          const chars = copy.querySelectorAll("span");
 
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: copy,
-            start: "top 80%",
-            end: "bottom top",
-            toggleActions: "play none none none",
-            // markers: true,
-          },
-        });
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: copy,
+              start: "top 80%",
+              end: "bottom top",
+              toggleActions: "play none none none",
+              // markers: true,
+            },
+          });
 
-        const beforeDulation = 1;
-        const charsDulation = 1.5;
-        const baseDelay = 0.5;
-        const delayOffset = index * 0.3;
+          const beforeDulation = 1;
+          const charsDulation = 1.5;
+          const baseDelay = 0.5;
+          const delayOffset = index * 0.3;
 
-        tl.to(copy, {
-          "--before-opacity": 1,
-          "--before-scale": 1,
-          duration: beforeDulation,
-          delay: baseDelay + delayOffset,
-          ease: "power3.out",
-        })
-          .set(copy, {
-            backgroundColor: "rgb(255 255 255 / 90%)",
-            color: "var(--main-color)",
-            "--before-transform-origin": "right",
-            "--before-origin": "right",
-          })
-          .to(copy, {
-            "--before-scale": 0,
+          tl.to(copy, {
+            "--before-opacity": 1,
+            "--before-scale": 1,
             duration: beforeDulation,
+            delay: baseDelay + delayOffset,
             ease: "power3.out",
           })
-          .fromTo(
-            chars,
-            { y: 100, opacity: 0 },
-            {
-              y: 0,
-              stagger: 0.04,
-              duration: 1,
-              ease: "power4.out",
-            },
-            "<-=0.1",
-          )
-          .fromTo(
-            chars,
-            { opacity: 0 },
-            {
-              opacity: 1,
-              stagger: 0.04,
-              duration: charsDulation,
-              ease: "power4.out",
-            },
-            "<0.2",
-          )
-          .to(
-            copy,
-            {
-              borderRadius: "0.5rem",
+            .set(copy, {
+              backgroundColor: "rgb(255 255 255 / 90%)",
+              color: "var(--main-color)",
+              "--before-transform-origin": "right",
+              "--before-origin": "right",
+            })
+            .to(copy, {
+              "--before-scale": 0,
               duration: beforeDulation,
               ease: "power3.out",
-            },
-            "<",
-          )
-          .to(
-            copy,
-            {
-              boxShadow: "0 4px 30px 0 rgb(35 43 101 / 15%)",
-              duration: 0.2,
-              ease: "power3.out",
-            },
-            "<",
-          );
-      });
-    };
+            })
+            .fromTo(
+              chars,
+              { y: 100, opacity: 0 },
+              {
+                y: 0,
+                stagger: 0.04,
+                duration: 1,
+                ease: "power4.out",
+              },
+              "<-=0.1",
+            )
+            .fromTo(
+              chars,
+              { opacity: 0 },
+              {
+                opacity: 1,
+                stagger: 0.04,
+                duration: charsDulation,
+                ease: "power4.out",
+              },
+              "<0.2",
+            )
+            .to(
+              copy,
+              {
+                borderRadius: "0.5rem",
+                duration: beforeDulation,
+                ease: "power3.out",
+              },
+              "<",
+            )
+            .to(
+              copy,
+              {
+                boxShadow: "0 4px 30px 0 rgb(35 43 101 / 15%)",
+                duration: 0.2,
+                ease: "power3.out",
+              },
+              "<",
+            );
+        });
+      };
 
-    load();
+      // load();
+      init();
+    });
+    return () => ctx.revert();
   }, []);
 
   return (

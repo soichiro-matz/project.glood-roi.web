@@ -156,18 +156,41 @@
         }
 
         .image {
+          width: 100%;
           border-radius: 1rem;
         }
       }
 
       .backGround {
+        position: relative;
         z-index: 0;
         grid-row: 1/3;
-        grid-column: 2 / span 11;
-        width: 100vw;
+        grid-column: 1 / span 12;
+
+        // width: 100vw;
 
         // height: 50rem;
         margin-right: calc(50% - 50vw);
+        background-color: var(--base-gray-color);
+
+        &.bg-gray {
+          background-color: #fff;
+
+          &::before {
+            background-color: var(--base-gray-color);
+          }
+        }
+
+        &::before {
+          @apply lg:rounded-l-3xl;
+
+          position: absolute;
+          inset: 0 0 0 6%;
+          width: 100%;
+          height: 100%;
+          content: "";
+          background-color: #fff;
+        }
 
         @include md {
           grid-row: 3;
@@ -188,7 +211,8 @@
         @include md {
           grid-row: 5;
           grid-column: 1 / span 12;
-          width: 100vw;
+
+          // width: 100vw;
           margin: 0 calc(50% - 50vw);
           background-color: var(--base-gray-color) !important;
         }
