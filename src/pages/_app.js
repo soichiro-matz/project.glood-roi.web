@@ -143,21 +143,21 @@ export default function App({ Component, pageProps }) {
     //
   }, [router.asPath]);
 
-  useEffect(() => {
-    setTimeout(async () => {
-      const lenis = await initLenis();
-      lenis?.start();
+  // useEffect(() => {
+  //   setTimeout(async () => {
+  //     const lenis = await initLenis();
+  //     lenis?.start();
 
-      // rAF ×2 でフレームを確実に待つ
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          import("gsap/ScrollTrigger").then(({ ScrollTrigger }) => {
-            ScrollTrigger.refresh(true);
-          });
-        });
-      });
-    }, 1000); // もしくは300～500msでもOK
-  }, []);
+  //     // rAF ×2 でフレームを確実に待つ
+  //     requestAnimationFrame(() => {
+  //       requestAnimationFrame(() => {
+  //         import("gsap/ScrollTrigger").then(({ ScrollTrigger }) => {
+  //           ScrollTrigger.refresh(true);
+  //         });
+  //       });
+  //     });
+  //   }, 1000); // もしくは300～500msでもOK
+  // }, []);
 
   return <Component {...pageProps} />;
 }
