@@ -9,7 +9,7 @@ import "@scss/libs/Rola.scss";
 import Meta from "@components/layout/Meta";
 import GoogleAnalytics from "@/components/utils/GoogleAnalytics";
 import Header from "@/components/layout/Header";
-import Layout from "@/components/Layout/Layout";
+import Layout from "@components/layout/Layout";
 
 export default function App({ Component, pageProps }) {
   const meta = Component.meta || pageProps.meta || {};
