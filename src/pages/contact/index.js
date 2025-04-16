@@ -295,7 +295,7 @@ export default function ContactForm() {
               <p>
                 お問合せフォームのご入力内容を送信いただく前に
                 <Link href="/privacy-policy" target="_blank">
-                  「個人情報の取り扱い」
+                  「個人情報保護方針」
                 </Link>
                 をお読みいただき、内容にご同意いただく必要があります。
               </p>
@@ -312,7 +312,7 @@ export default function ContactForm() {
                     />
                     <label htmlFor="privacy" className={`${formStyles.label}`}>
                       <span className={``}>
-                        「個人情報の取り扱い」に同意します
+                        「個人情報保護方針」に同意します
                       </span>
                       <span
                         className={`${formStyles.required} ${formStyles._true}`}

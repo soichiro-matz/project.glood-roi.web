@@ -309,7 +309,7 @@ export default function Header() {
                                   setFocusedMenu(null);
                                 }}
                               >
-                                {child.text}
+                                <span className="p-textLink">{child.text}</span>
                               </Link>
                             </li>
                           ))}
