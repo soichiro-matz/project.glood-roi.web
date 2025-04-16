@@ -28,7 +28,7 @@ export default function PrivacyPolicyIndex() {
       <section>
         <div className="l-container l-grid__12">
           <div
-            className={`${styles.privacypolicy} py-fluid-[48,56,350,768] text-fluid-[15,16] md:py-fluid-[64,80]`}
+            className={`${styles.privacypolicy} pb-fluid-[64,120,350,768] pt-fluid-[48,56,350,768] text-fluid-[15,16] md:pb-fluid-[120,144] md:pt-fluid-[64,104]`}
           >
             <div className="text-center">
               <h2 className="font-bold pb-fluid-[32,40,350,768] text-fluid-[20,32,350,768] md:pb-fluid-[56,72] md:text-fluid-[32,36]">
