@@ -88,14 +88,6 @@ export default function App({ Component, pageProps }) {
       }, 500);
     });
 
-    document.documentElement.style.overflow = "auto";
-    document.body.style.overflow = "auto";
-    window.addEventListener("wheel", () => {
-      console.log("scrollHeight:", document.documentElement.scrollHeight);
-      console.log("innerHeight:", window.innerHeight);
-      console.log("scrollY:", window.scrollY);
-    });
-
     // クリーンアップ
     return () => {
       router.events.off("routeChangeComplete", bindAnchorEvents);
