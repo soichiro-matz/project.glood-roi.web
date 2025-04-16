@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import { initLenis } from "@libs/lenis";
+import { initLenis, destroyLenis } from "@libs/lenis";
 import "@/styles/globals.scss";
 import "@/styles/components/layout/_header.scss";
 import "@/styles/components/layout/_footer.scss";
@@ -11,6 +11,8 @@ export default function App({ Component, pageProps }) {
   const router = useRouter();
 
   const bindAnchorEvents = async () => {
+    // destroyLenis();
+
     let lenis;
 
     (async () => {
@@ -53,12 +55,18 @@ export default function App({ Component, pageProps }) {
     })();
 
     return () => {
-      if (lenis) lenis.destroy();
+      destroyLenis();
     };
     // }, []);
   };
 
   useEffect(() => {
+    const cleanup = () => {
+      // destroyLenis(); // ページ切り替え前に一旦破棄
+    };
+
+    router.events.on("routeChangeStart", cleanup);
+
     if ("scrollRestoration" in window.history) {
       window.history.scrollRestoration = "manual";
     }
@@ -83,6 +91,7 @@ export default function App({ Component, pageProps }) {
     // クリーンアップ
     return () => {
       router.events.off("routeChangeComplete", bindAnchorEvents);
+      router.events.off("routeChangeStart", cleanup);
     };
   }, []);
 
@@ -99,8 +108,20 @@ export default function App({ Component, pageProps }) {
     const scrollToHash = async () => {
       const lenis = await initLenis();
       const id = hash.replace("#", "");
-      const target = document.getElementById(id);
+
+      const waitForTarget = (retries = 10) =>
+        new Promise((resolve) => {
+          const check = () => {
+            const el = document.getElementById(id);
+            if (el || retries <= 0) return resolve(el);
+            setTimeout(() => resolve(waitForTarget(retries - 1)), 100);
+          };
+          check();
+        });
+
+      const target = await waitForTarget();
       if (!target) return;
+
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           const offset = getOffsetByScreen(target);
