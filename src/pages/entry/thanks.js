@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { SITE } from "@/config/config";
 import styles from "@/styles/pages/contact/index.module.scss";
 import Heading from "@/components/parts/Heading";
@@ -18,6 +19,13 @@ export default function Thanks() {
       url: "",
     },
   ];
+
+  useEffect(() => {
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.width = "";
+    document.body.style.overflow = "";
+  }, []);
 
   return (
     <>

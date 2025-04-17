@@ -29,7 +29,7 @@ export default async function handler(req, res) {
       email,
       tel,
       resumeName,
-      message,
+      entryMessage,
       privacy,
       token,
     } = fields;
@@ -90,7 +90,7 @@ ${tel || "（未入力）"}
 ${resumeName || "（添付なし）"}
 
 【メッセージ内容】
-${message || "（未入力）"}
+${entryMessage || "（未入力）"}
 
 【プライバシーポリシー同意】
 ${isPrivacyAgreed ? "✔ 同意あり" : "✘ 未同意"}

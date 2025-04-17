@@ -1,7 +1,9 @@
+import { useEffect } from "react";
 import { SITE } from "@/config/config";
 import styles from "@/styles/pages/contact/index.module.scss";
 import Heading from "@/components/parts/Heading";
 import Button from "@/components/ui/Button";
+import { getLenisInstance } from "@libs/lenis"; // ← lenis取得関数がある場合
 
 const title = "お問い合わせ";
 const title_en = "contact";
@@ -18,6 +20,13 @@ export default function Thanks() {
       url: "",
     },
   ];
+
+  useEffect(() => {
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.width = "";
+    document.body.style.overflow = "";
+  }, []);
 
   return (
     <>

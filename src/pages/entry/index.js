@@ -47,7 +47,7 @@ export default function EntryForm() {
       setValue("email", data.email || "");
       setValue("tel", data.tel || "");
       setResumeName(data.resumeName || null);
-      setValue("message", data.message || "");
+      setValue("entryMessage", data.entryMessage || "");
       setValue("privacy", data.privacy || false);
     }
   }, [setValue]);
@@ -110,7 +110,7 @@ export default function EntryForm() {
       formData.append("email", formValues.email || "");
       formData.append("tel", formValues.tel || "");
 
-      formData.append("message", formValues.message || "");
+      formData.append("entryMessage", formValues.entryMessage || "");
       formData.append("privacy", formValues.privacy ? "1" : "0");
       formData.append("token", token);
 
@@ -351,16 +351,16 @@ export default function EntryForm() {
               )}
             </div>
             <div className={`${formStyles.inputWrapper}`}>
-              <label htmlFor="message" className={`${formStyles.label}`}>
+              <label htmlFor="entryMessage" className={`${formStyles.label}`}>
                 <span className={`${formStyles.title}`}>メッセージ内容</span>
                 <span className={`${formStyles.required} ${formStyles._true}`}>
                   必須
                 </span>
               </label>
               <textarea
-                id="message"
+                id="entryMessage"
                 rows="5"
-                {...register("message", {
+                {...register("entryMessage", {
                   required: "メッセージを入力してください",
                   maxLength: {
                     value: 1000,
@@ -368,9 +368,9 @@ export default function EntryForm() {
                   },
                 })}
               />
-              {errors.message && (
+              {errors.entryMessage && (
                 <p role="alert" className={`${formStyles.alert}`}>
-                  {errors.message.message}
+                  {errors.entryMessage.message}
                 </p>
               )}
             </div>
@@ -494,7 +494,7 @@ export default function EntryForm() {
                       </dt>
                       <dd className={`c-dl__dd ${styles.dlDd}`}>
                         <div style={{ whiteSpace: "pre-wrap" }}>
-                          {formValues.message}
+                          {formValues.entryMessage}
                         </div>
                       </dd>
                     </div>

@@ -4,6 +4,7 @@ import Script from "next/script";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import { SITE } from "@/config/config";
 import styles from "@/styles/pages/contact/index.module.scss";
 import formStyles from "@/styles/components/ui/form.module.scss";
@@ -51,7 +52,7 @@ export default function ContactForm() {
       setValue("email", data.email || "");
       setValue("tel", data.tel || "");
       setValue("url", data.url || "");
-      setValue("message", data.message || "");
+      setValue("contactMessage", data.contactMessage || "");
       setValue("privacy", data.privacy || false);
     }
   }, [setValue]);
@@ -60,6 +61,7 @@ export default function ContactForm() {
 
   useEffect(() => {
     if (showModal) {
+      document.body.classList.add("modal-open");
       const scrollY = window.scrollY;
 
       // Lenis 停止＋body固定
@@ -71,6 +73,7 @@ export default function ContactForm() {
 
       setModalTop(scrollY);
     } else {
+      document.body.classList.remove("modal-open");
       const y = parseInt(document.body.style.top || "0", 10) * -1;
       document.body.style.position = "";
       document.body.style.top = "";
@@ -80,6 +83,9 @@ export default function ContactForm() {
 
       window.lenis?.start();
     }
+    return () => {
+      document.body.classList.remove("modal-open"); // クリーンアップ
+    };
   }, [showModal]);
 
   const handleConfirm = (data) => {
@@ -103,7 +109,8 @@ export default function ContactForm() {
 
       if (res.ok) {
         sessionStorage.removeItem("formData");
-        router.push("/contact/thanks"); // ← この行が動かない原因
+        // router.push("/contact/thanks");
+        router.replace("/contact/thanks");
       } else {
         alert("送信失敗しました");
         router.push("/contact");
@@ -291,16 +298,16 @@ export default function ContactForm() {
             </div>
 
             <div className={`${formStyles.inputWrapper}`}>
-              <label htmlFor="message" className={`${formStyles.label}`}>
+              <label htmlFor="contactMessage" className={`${formStyles.label}`}>
                 <span className={`${formStyles.title}`}>メッセージ内容</span>
                 <span className={`${formStyles.required} ${formStyles._true}`}>
                   必須
                 </span>
               </label>
               <textarea
-                id="message"
+                id="contactMessage"
                 rows="5"
-                {...register("message", {
+                {...register("contactMessage", {
                   required: "メッセージを入力してください",
                   maxLength: {
                     value: 1000,
@@ -308,9 +315,9 @@ export default function ContactForm() {
                   },
                 })}
               />
-              {errors.message && (
+              {errors.contactMessage && (
                 <p role="alert" className={`${formStyles.alert}`}>
-                  {errors.message.message}
+                  {errors.contactMessage.message}
                 </p>
               )}
             </div>
@@ -434,7 +441,7 @@ export default function ContactForm() {
                       </dt>
                       <dd className={`c-dl__dd ${styles.dlDd}`}>
                         <div style={{ whiteSpace: "pre-wrap" }}>
-                          {formValues.message}
+                          {formValues.contactMessage}
                         </div>
                       </dd>
                     </div>

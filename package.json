@@ -17,6 +17,7 @@
     "nodemailer": "^6.10.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-error-boundary": "^5.0.0",
     "react-hook-form": "^7.55.0",
     "split-type": "^0.3.4",
     "swiper": "^11.2.6"

@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     email,
     tel,
     url,
-    message,
+    contactMessage,
     privacy,
     token,
   } = req.body;
@@ -72,7 +72,7 @@ ${tel || "（未入力）"}
 ${url || "（未入力）"}
 
 【メッセージ内容】
-${message || "（未入力）"}
+${contactMessage || "（未入力）"}
 
 【プライバシーポリシー同意】
 ${privacy ? "✔ 同意あり" : "✘ 未同意"}

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import { initLenis, destroyLenis } from "@libs/lenis";
+import { ErrorBoundary } from "react-error-boundary";
 import gsap from "gsap";
 import "@/styles/globals.scss";
 import "@/styles/components/layout/_header.scss";
@@ -89,6 +90,7 @@ export default function App({ Component, pageProps }) {
     }
 
     const handleRouteChangeStart = async () => {
+      destroyLenis();
       await gsap.to(pageRef.current, {
         opacity: 0,
         duration: 1.2,
@@ -152,7 +154,7 @@ export default function App({ Component, pageProps }) {
   }, [router.pathname]);
 
   return (
-    <>
+    <ErrorBoundary fallback={<div>エラーが発生しました</div>}>
       <Meta {...meta} />
       <GoogleAnalytics />
       <Header />
@@ -164,7 +166,7 @@ export default function App({ Component, pageProps }) {
           <Component {...pageProps} />
         </Layout>
       </div>
-    </>
+    </ErrorBoundary>
   );
 }
 
