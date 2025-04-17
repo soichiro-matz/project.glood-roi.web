@@ -4,10 +4,6 @@ import { gsap, registerScrollTrigger } from "@libs/gsap";
 import Link from "next/link";
 import styles from "@/styles/components/parts/indexmenu.module.scss";
 export default function IndexMenu({ menu }) {
-  if (!menu || menu.length === 0) {
-    return null;
-  }
-
   const router = useRouter();
   const [isIndexOpen, setIsIndexOpen] = useState(false);
   const indexMenuRef = useRef(null);
