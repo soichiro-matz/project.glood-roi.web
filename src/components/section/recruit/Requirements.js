@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useLayoutEffect } from "react";
+import useRola from "@hooks/useRola";
 // import gsap from "gsap";
 import { gsap, registerScrollTrigger } from "@libs/gsap";
 import { nanoid } from "nanoid";
@@ -63,6 +64,10 @@ const requirements = [
 ];
 
 export default function Requirements() {
+  useRola("[data-rola-trigger01]", {
+    once: true,
+    rootMargin: "0px 0px -40%",
+  });
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const init = async () => {
@@ -72,21 +77,21 @@ export default function Requirements() {
         //   const { ScrollTrigger } = await import("gsap/ScrollTrigger");
         //   gsap.registerPlugin(ScrollTrigger);
 
-        gsap.utils.toArray(".js-requirement").forEach((el, i) => {
-          if (!el) return;
+        // gsap.utils.toArray(".js-requirement").forEach((el, i) => {
+        //   if (!el) return;
 
-          gsap.to(el, {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: el,
-              start: "top 80%",
-              // markers: true,
-            },
-          });
-        });
+        //   gsap.to(el, {
+        //     y: 0,
+        //     opacity: 1,
+        //     duration: 1,
+        //     ease: "power3.out",
+        //     scrollTrigger: {
+        //       trigger: el,
+        //       start: "top 80%",
+        //       // markers: true,
+        //     },
+        //   });
+        // });
       };
 
       // load();
@@ -104,6 +109,8 @@ export default function Requirements() {
           <li
             className="l-container l-grid__12 text-fluid-[15,16]"
             key={nanoid()}
+            data-rola-trigger01
+            data-rola-transition="slide"
           >
             <section
               className={`${styles.card} js-requirement c-dl rounded-xl bg-white px-fluid-[16,64,350,768] py-fluid-[56,64,350,768] md:px-fluid-[64,112] md:py-fluid-[64,112]`}

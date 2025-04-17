@@ -24,8 +24,9 @@
 
   .card {
     grid-column: 2 / span 10;
-    opacity: 0;
-    transform: translateY(6rem);
+
+    // opacity: 0;
+    // transform: translateY(6rem);
 
     @include lg {
       grid-column: 3 / span 8;
