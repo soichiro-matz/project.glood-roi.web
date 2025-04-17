@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import { initLenis, destroyLenis } from "@libs/lenis";
 import gsap from "gsap";
@@ -11,12 +11,15 @@ import Meta from "@components/layout/Meta";
 import GoogleAnalytics from "@components/utils/GoogleAnalytics";
 import Header from "@components/layout/Header";
 import Layout from "@components/layout/Layout";
+import { getChildren } from "@/data/navLinks";
+import IndexMenu from "@/components/parts/IndexMenu";
 
 export default function App({ Component, pageProps }) {
   const meta = Component.meta || pageProps.meta || {};
   const router = useRouter();
   const lenisRef = useRef(null);
   const pageRef = useRef(null);
+  const [menuItems, setMenuItems] = useState(undefined);
 
   const bindAnchorEvents = (lenisInstance) => {
     const anchors = document.querySelectorAll('a[href*="#"]');
@@ -90,6 +93,16 @@ export default function App({ Component, pageProps }) {
         opacity: 0,
         duration: 1.2,
         ease: "power2.out",
+        onStart: () => {
+          const indexMenu = pageRef.current.querySelector(".js-indexMenu");
+          if (indexMenu) {
+            gsap.to(indexMenu, {
+              opacity: 0,
+              duration: 1.2,
+              easing: "power2.out",
+            });
+          }
+        },
       });
     };
 
@@ -125,11 +138,25 @@ export default function App({ Component, pageProps }) {
     };
   }, []);
 
+  useEffect(() => {
+    // ルートに応じてIndexMenuに渡す内容を切り替える
+    if (router.pathname.startsWith("/about")) {
+      setMenuItems(getChildren("about"));
+    } else if (router.pathname.startsWith("/recruit")) {
+      setMenuItems(getChildren("recruit"));
+    } else {
+      setMenuItems(undefined);
+    }
+  }, [router.pathname]);
+
   return (
     <>
       <Meta {...meta} />
       <GoogleAnalytics />
       <Header />
+      {menuItems && menuItems.length > 0 ? (
+        <IndexMenu key={router.asPath} menu={menuItems} />
+      ) : null}
       <div ref={pageRef}>
         <Layout key={router.route}>
           <Component {...pageProps} />

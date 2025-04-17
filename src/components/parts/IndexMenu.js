@@ -1,8 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
+import { gsap, registerScrollTrigger } from "@libs/gsap";
 import Link from "next/link";
 import styles from "@/styles/components/parts/indexmenu.module.scss";
 export default function IndexMenu({ menu }) {
+  if (!menu || menu.length === 0) {
+    return null;
+  }
+
   const router = useRouter();
   const [isIndexOpen, setIsIndexOpen] = useState(false);
   const indexMenuRef = useRef(null);
@@ -35,6 +40,7 @@ export default function IndexMenu({ menu }) {
       setIsIndexOpen(false);
       requestAnimationFrame(() => {
         indexMenu.style.transition = "";
+        toggleMenu();
       });
     }
   }, [router.asPath]);
@@ -43,7 +49,32 @@ export default function IndexMenu({ menu }) {
     toggleMenu();
   }, [isIndexOpen]);
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const init = async () => {
+        const ScrollTrigger = await registerScrollTrigger();
+        if (!ScrollTrigger) return;
+
+        const indexMenu = document.querySelector(".js-indexMenu");
+
+        if (indexMenu) {
+          gsap.to(indexMenu, {
+            opacity: 1,
+            duration: 0.9,
+            delay: 0.3,
+            easing: "power3.out",
+          });
+        }
+      };
+      init();
+    });
+
+    toggleMenu();
+    return () => ctx.revert();
+  }, [menu]);
+
   function toggleMenu() {
+    if (!indexMenuRef.current) return;
     const indexMenuRight =
       indexMenuRef.current.querySelector(".js-indexMenuRight");
 

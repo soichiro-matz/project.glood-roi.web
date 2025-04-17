@@ -2,6 +2,7 @@
 @use "@/styles/base/mixins" as *;
 
 .indexMenu {
+  opacity: 0;
   filter: drop-shadow(0 4px 30px rgb(16 20 65 / 10%));
   transition: transform 0.3s ease-in-out;
 
