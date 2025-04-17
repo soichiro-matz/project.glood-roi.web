@@ -19,7 +19,6 @@ export default function Heading({
         if (!ScrollTrigger) return;
 
         const title = document.querySelector(".js-headingTtitle");
-        console.log(title);
 
         if (title) {
           const chars = title.querySelectorAll("span");

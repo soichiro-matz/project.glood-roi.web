@@ -99,7 +99,7 @@ export default function App({ Component, pageProps }) {
             gsap.to(indexMenu, {
               opacity: 0,
               duration: 1.2,
-              easing: "power2.out",
+              ease: "power2.out",
             });
           }
         },
@@ -125,6 +125,8 @@ export default function App({ Component, pageProps }) {
           ease: "power2.out",
         },
       );
+
+      bindAnchorEvents(lenis);
     };
 
     router.events.on("routeChangeStart", handleRouteChangeStart);

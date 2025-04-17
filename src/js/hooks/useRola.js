@@ -1,4 +1,5 @@
 import { useEffect, useMemo } from "react";
+import { useRouter } from "next/router";
 
 // 全インスタンスを管理するグローバルキャッシュ
 // 複数コンポーネントで共通の Rola インスタンスを再利用するためのキャッシュとして使用
@@ -12,13 +13,18 @@ const rolaInstanceCache = new Map();
  * @param {function} [callback=null] - ビューポート内に要素が入った際に実行されるコールバック関数 (省略可能)
  */
 const useRola = (selector, options, callback = null) => {
+  const router = useRouter(); // ← ページURLを取得する
   /**
    * キャッシュキーを生成
    * - セレクタとオプションを組み合わせたユニークな文字列を生成する
    * - options は JSON.stringify で変換しておくことで同一設定を文字列として比較可能にする
    * - callback はキャッシュに影響しない (後から適用される)
    */
-  const configKey = JSON.stringify([selector, JSON.stringify(options)]);
+  const configKey = JSON.stringify([
+    selector,
+    JSON.stringify(options),
+    router.asPath,
+  ]);
 
   /**
    * useMemo - インスタンスのメモ化
@@ -130,7 +136,13 @@ const useRola = (selector, options, callback = null) => {
     }, 200);
 
     // クリーンアップ処理 (タイマーをクリア)
-    return () => clearTimeout(forceLoadTimeout);
+    return () => {
+      clearTimeout(forceLoadTimeout);
+      // インスタンス破棄
+      if (rolaInstance.instance) {
+        rolaInstance.instance = null;
+      }
+    };
   }, [rolaInstance]); // rolaInstance が更新されると再実行される
 };
 

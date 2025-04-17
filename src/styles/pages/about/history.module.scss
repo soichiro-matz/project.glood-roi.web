@@ -8,7 +8,7 @@
     .year {
       grid-column: 1;
       color: var(--aqua-blue-color);
-      opacity: 0;
+      opacity: 1;
 
       .lineWrapper {
         --width: 3.5rem;
@@ -45,10 +45,18 @@
             top: 0.5rem;
             left: 50%;
             width: 1px;
-            height: var(--after-line-height, 0);
+            height: var(--after-line-height, calc(100% + 4rem));
             content: "";
             background-color: var(--main-color);
             transform: translateX(-50%);
+
+            @include md {
+              height: var(--after-line-height, calc(100% + 3rem));
+            }
+
+            @include sp {
+              height: var(--after-line-height, calc(100% + 2.5rem));
+            }
           }
 
           &.-last {
@@ -62,7 +70,7 @@
 
     .detail {
       grid-column: 2;
-      opacity: 0;
+      opacity: 1;
     }
   }
 }

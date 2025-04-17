@@ -10,11 +10,15 @@ export const navLinks = {
     text: "私たちについて",
     text_en: "about us",
     children: [
-      { href: "/about#mvv", text: "ミッション／ビジョン／バリュー" },
-      { href: "/about#message", text: "代表挨拶" },
-      { href: "/about#data", text: "データでみるGlood roi" },
-      { href: "/about#outline", text: "会社概要" },
-      { href: "/about#history", text: "沿革" },
+      {
+        href: "/about#mvv",
+        text: "ミッション／ビジョン／バリュー",
+        anchor: "mvv",
+      },
+      { href: "/about#message", text: "代表挨拶", anchor: "message" },
+      { href: "/about#data", text: "データでみるGlood roi", anchor: "data" },
+      { href: "/about#outline", text: "会社概要", anchor: "outline" },
+      { href: "/about#history", text: "沿革", anchor: "history" },
     ],
   },
   service: {
@@ -42,9 +46,13 @@ export const navLinks = {
     text: "採用情報",
     text_en: "recruit",
     children: [
-      { href: "/recruit#full-time", text: "正社員(総合職)" },
-      { href: "/recruit#part-time", text: "アルバイト" },
-      { href: "/entry", text: "エントリー" },
+      {
+        href: "/recruit#full-time",
+        text: "正社員(総合職)",
+        anchor: "full-time",
+      },
+      { href: "/recruit#part-time", text: "アルバイト", anchor: "part-time" },
+      { href: "/entry", text: "エントリー", anchor: "" },
     ],
   },
   contact: {

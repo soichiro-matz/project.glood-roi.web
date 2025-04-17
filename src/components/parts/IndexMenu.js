@@ -58,7 +58,7 @@ export default function IndexMenu({ menu }) {
             opacity: 1,
             duration: 0.9,
             delay: 0.3,
-            easing: "power3.out",
+            ease: "power3.out",
           });
         }
       };
@@ -126,7 +126,7 @@ export default function IndexMenu({ menu }) {
             return (
               <li key={item.href} className="font-medium">
                 <Link
-                  href={item.href}
+                  href={item.anchor ? `#${item.anchor}` : item.href}
                   className={`${styles.textLink} block flex items-center justify-between gap-4 py-1.5 text-lg md:gap-7 lg:py-2`}
                   onClick={() => setIsIndexOpen(false)}
                 >

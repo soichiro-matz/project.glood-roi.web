@@ -1,5 +1,6 @@
 import { useEffect, Fragment } from "react";
 // import gsap from "gsap";
+import useRola from "@hooks/useRola";
 import { gsap, registerScrollTrigger } from "@libs/gsap";
 import { nanoid } from "nanoid";
 import styles from "@/styles/pages/about/history.module.scss";
@@ -28,70 +29,66 @@ const histories = [
   },
 ];
 
-export default function Outline() {
+export default function History() {
+  useRola("[data-rola-trigger01]", {
+    once: true,
+    rootMargin: "0px 0px -40%",
+  });
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      const init = async () => {
-        const ScrollTrigger = await registerScrollTrigger();
-        if (!ScrollTrigger) return;
-        // const load = async () => {
-        //   const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-        //   gsap.registerPlugin(ScrollTrigger);
-
-        const width = window.innerWidth;
-        let lineHeight = "0";
-
-        if (width < 768) {
-          //sp
-          lineHeight = "calc(100% + 2.5rem)";
-        } else if (width < 1024) {
-          //md
-          lineHeight = "calc(100% + 3rem)";
-          //lg
-        } else {
-          lineHeight = "calc(100% + 4rem)";
-        }
-
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: ".js-histories",
-            start: "top 80%",
-            // markers: true,
-          },
-        });
-
-        tl.to(".js-year", {
-          opacity: 1,
-          duration: 0.8,
-          stagger: 0.5,
-          // ease: "power3.out",
-        })
-          .to(
-            ".js-detail",
-            {
-              opacity: 1,
-              duration: 0.8,
-              stagger: 0.5,
-              // ease: "power3.out",
-            },
-            "<",
-          )
-          .to(
-            ".js-line",
-            {
-              "--after-line-height": lineHeight,
-              duration: 0.5,
-              stagger: 0.5,
-              // ease: "power3.out",
-            },
-            "<",
-          );
-      };
-
-      // load();
-      init();
-    });
-    return () => ctx.revert();
+    // const ctx = gsap.context(() => {
+    //   const init = async () => {
+    //     const ScrollTrigger = await registerScrollTrigger();
+    //     if (!ScrollTrigger) return;
+    //     const width = window.innerWidth;
+    //     let lineHeight = "0";
+    //     if (width < 768) {
+    //       //sp
+    //       lineHeight = "calc(100% + 2.5rem)";
+    //     } else if (width < 1024) {
+    //       //md
+    //       lineHeight = "calc(100% + 3rem)";
+    //       //lg
+    //     } else {
+    //       lineHeight = "calc(100% + 4rem)";
+    //     }
+    //     const tl = gsap.timeline({
+    //       scrollTrigger: {
+    //         trigger: ".js-histories",
+    //         start: "top 80%",
+    //         // markers: true,
+    //       },
+    //     });
+    //     tl.to(".js-year", {
+    //       opacity: 1,
+    //       duration: 0.8,
+    //       stagger: 0.5,
+    //       // ease: "power3.out",
+    //     })
+    //       .to(
+    //         ".js-detail",
+    //         {
+    //           opacity: 1,
+    //           duration: 0.8,
+    //           stagger: 0.5,
+    //           // ease: "power3.out",
+    //         },
+    //         "<",
+    //       )
+    //       .to(
+    //         ".js-line",
+    //         {
+    //           "--after-line-height": lineHeight,
+    //           duration: 0.5,
+    //           stagger: 0.5,
+    //           // ease: "power3.out",
+    //         },
+    //         "<",
+    //       );
+    //   };
+    //   // load();
+    //   init();
+    // });
+    // return () => ctx.revert();
   }, []);
 
   return (
@@ -104,6 +101,8 @@ export default function Outline() {
       >
         <dl
           className={`${styles.histories} js-histories grid justify-center gap-y-[2.5rem] md:gap-y-[3rem] lg:gap-y-[4rem]`}
+          data-rola-trigger01
+          data-rola-transition="slide"
         >
           {histories.map((history, index) => {
             const dtName = styles[`dt_${index}`];
