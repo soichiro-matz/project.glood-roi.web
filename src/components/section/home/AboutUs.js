@@ -1,11 +1,14 @@
 import { useEffect, useRef } from "react";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import useRola from "@hooks/useRola";
 import styles from "@/styles/pages/home/aboutUs.module.scss";
 import SubTitle from "@components/parts/SubTitle";
 import Button from "@/components/ui/Button";
 const image01 = "/assets/img/home/img-aoutUs.svg";
-import lottie from "lottie-web";
+// import lottie from "lottie-web";
+
+const Lottie = dynamic(() => import("lottie-web"), { ssr: false });
 
 export default function AboutUs() {
   const containerRef = useRef(null);
@@ -20,16 +23,26 @@ export default function AboutUs() {
   });
 
   useEffect(() => {
-    if (!containerRef.current) return;
-    const instance = lottie.loadAnimation({
-      container: containerRef.current,
-      renderer: "svg",
-      loop: true,
-      autoplay: true,
-      path: "/assets/lottie/home/town.json",
-    });
+    let instance;
 
-    return () => instance.destroy(); // クリーンアップ
+    async function loadAnimation() {
+      if (!containerRef.current) return;
+
+      const lottie = await import("lottie-web");
+      instance = lottie.default.loadAnimation({
+        container: containerRef.current,
+        renderer: "svg",
+        loop: true,
+        autoplay: true,
+        path: "/assets/lottie/home/town.json",
+      });
+    }
+
+    loadAnimation();
+
+    return () => {
+      if (instance) instance.destroy();
+    };
   }, []);
 
   return (
