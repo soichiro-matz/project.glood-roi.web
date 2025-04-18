@@ -12,6 +12,7 @@
     "@studio-freight/lenis": "^1.0.42",
     "formidable": "^3.5.2",
     "gsap": "^3.12.7",
+    "lottie-web": "^5.12.2",
     "nanoid": "^5.1.5",
     "next": "^15.2.4",
     "nodemailer": "^6.10.1",

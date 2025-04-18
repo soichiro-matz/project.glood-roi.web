@@ -1,11 +1,15 @@
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import useRola from "@hooks/useRola";
 import styles from "@/styles/pages/home/aboutUs.module.scss";
 import SubTitle from "@components/parts/SubTitle";
 import Button from "@/components/ui/Button";
 const image01 = "/assets/img/home/img-aoutUs.svg";
+import lottie from "lottie-web";
 
 export default function AboutUs() {
+  const containerRef = useRef(null);
+
   useRola("[data-rola-trigger01]", {
     once: true,
     rootMargin: "0px 0px -30%",
@@ -14,6 +18,18 @@ export default function AboutUs() {
     once: true,
     rootMargin: "0px 0px -50%",
   });
+
+  useEffect(() => {
+    const instance = lottie.loadAnimation({
+      container: containerRef.current,
+      renderer: "svg",
+      loop: true,
+      autoplay: true,
+      path: "/assets/lottie/home/town.json",
+    });
+
+    return () => instance.destroy(); // クリーンアップ
+  }, []);
 
   return (
     <section
@@ -66,15 +82,11 @@ export default function AboutUs() {
             </div>
           </div>
           <div
+            ref={containerRef}
             className={`${styles.videoWrapper} pr-fluid-[8,40] pt-fluid-[40,56,768,350] md:pt-0`}
-          >
-            <Image
-              src="/assets/img/home/video.jpg"
-              width={449}
-              height={382}
-              alt=""
-            />
-          </div>
+            data-rola-trigger01
+            data-rola-transition="slide"
+          ></div>
           <div
             className={`${styles.imageContainer} top-fluid-[-32,-120,768,1280]`}
           >
