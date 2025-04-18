@@ -53,7 +53,6 @@ export default function AboutUs() {
     }
 
     loadLottie();
-    console.log("run");
 
     return () => {
       mounted = false;

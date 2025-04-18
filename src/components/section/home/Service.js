@@ -182,7 +182,7 @@ export default function Service({ service, index }) {
 
   return (
     <li ref={sectionRef} className={`${bgReverce} ${styles.service} relative`}>
-      <section>
+      <section className="overflow-x-hidden">
         <div
           className={`${styles.serviceContainer} l-container l-grid__12 pt-fluid-[56,104,350,1024] lg:gap-x-10 lg:pt-fluid-[270,320,1024,1480]`}
         >
