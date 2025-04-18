@@ -20,6 +20,7 @@ export default function AboutUs() {
   });
 
   useEffect(() => {
+    if (!containerRef.current) return;
     const instance = lottie.loadAnimation({
       container: containerRef.current,
       renderer: "svg",
