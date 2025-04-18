@@ -172,8 +172,7 @@ export default function Service({ service, index }) {
       >
         <Image
           src={imagePath + num + "-0" + count + ".svg"}
-          width={width}
-          height={height}
+          fill
           alt=""
           className={`${styles.iconImage} ${imageClass}`}
         />

@@ -7,6 +7,12 @@
   will-change: clip-path;
 
   .heading {
+    .imageWrapper {
+      .iconImage {
+        width: 100%;
+        height: auto;
+      }
+    }
   }
 
   .newsBody {

@@ -70,12 +70,11 @@ export default function News({ posts }) {
             align="left"
           />
           <div
-            className={`${styles.imageWrapper} absolute left-[40%] top-[70%] w-fluid-[120,160,350,768] md:left-0 md:top-[40%] md:w-fluid-[160,235] lg:top-[50%]`}
+            className={`${styles.imageWrapper} absolute left-[40%] top-[70%] h-fluid-[60,80,350,768] w-fluid-[120,160,350,768] md:left-0 md:top-[40%] md:h-fluid-[80,118] md:w-fluid-[160,235] lg:top-[50%]`}
           >
             <Image
               src="/assets/img/home/icon-news-01.svg"
-              width={235}
-              height={130}
+              fill
               alt=""
               className={`${styles.iconImage} js-paper-airplane`}
             />

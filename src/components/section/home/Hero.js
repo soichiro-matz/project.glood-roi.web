@@ -177,15 +177,15 @@ export default function Hero() {
                   <SwiperSlide key={index} className={styles.customSlide}>
                     <picture>
                       <source
-                        srcSet={`${src}_sp.jpg 1x, ${src}_sp@2x.jpeg 2x"`}
+                        srcSet={`${src}_sp.jpg 1x, ${src}_sp@2x.jpg 2x`}
                         media="(max-width: 768px)"
                       />
                       <source
-                        srcSet={`${src}_tab.jpg 1x, ${src}_tab@2x.jpeg 2x"`}
+                        srcSet={`${src}_tab.jpg 1x, ${src}_tab@2x.jpg 2x`}
                         media="(max-width: 1024px)"
                       />
                       <source
-                        srcSet={`${src}_lg.jpg 1x, ${src}_lg@2x.jpeg 2x"`}
+                        srcSet={`${src}_lg.jpg 1x, ${src}_lg@2x.jpg 2x`}
                         media="(max-width: 1400px)"
                       />
                       <Image
@@ -194,6 +194,7 @@ export default function Hero() {
                         height={3334}
                         alt="Slider Image"
                         className={styles.slideImage}
+                        priority
                       />
                     </picture>
                   </SwiperSlide>

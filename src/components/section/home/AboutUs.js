@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import useRola from "@hooks/useRola";
 import styles from "@/styles/pages/home/aboutUs.module.scss";
@@ -12,6 +13,8 @@ const Lottie = dynamic(() => import("lottie-web"), { ssr: false });
 
 export default function AboutUs() {
   const containerRef = useRef(null);
+  const router = useRouter();
+  let instanceRef = useRef(null);
 
   useRola("[data-rola-trigger01]", {
     once: true,
@@ -23,27 +26,46 @@ export default function AboutUs() {
   });
 
   useEffect(() => {
-    let instance;
+    let mounted = true; // マウントチェック用
 
-    async function loadAnimation() {
+    async function loadLottie() {
       if (!containerRef.current) return;
 
-      const lottie = await import("lottie-web");
-      instance = lottie.default.loadAnimation({
+      if (instanceRef.current) {
+        instanceRef.current.destroy();
+        instanceRef.current = null;
+      }
+      containerRef.current.innerHTML = "";
+
+      const lottie = (await import("lottie-web")).default;
+
+      if (!mounted) return; // マウントチェック
+
+      const instance = lottie.loadAnimation({
         container: containerRef.current,
         renderer: "svg",
         loop: true,
         autoplay: true,
         path: "/assets/lottie/home/town.json",
       });
+
+      instanceRef.current = instance;
     }
 
-    loadAnimation();
+    loadLottie();
+    console.log("run");
 
     return () => {
-      if (instance) instance.destroy();
+      mounted = false;
+      if (instanceRef.current) {
+        instanceRef.current.destroy();
+        instanceRef.current = null;
+      }
+      if (containerRef.current) {
+        containerRef.current.innerHTML = "";
+      }
     };
-  }, []);
+  }, [router.asPath]);
 
   return (
     <section
