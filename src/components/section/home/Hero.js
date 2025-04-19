@@ -163,7 +163,7 @@ export default function Hero() {
                 loop={true} // スライドをループさせる
                 speed={1500} // スライドが切り替わる時の速度
                 autoplay={{
-                  delay: 50000,
+                  delay: 5000,
                   disableOnInteraction: false,
                 }} // スライド表示時間
                 pagination={{
@@ -207,10 +207,14 @@ export default function Hero() {
                         srcSet={`${src}_pc.webp 1x, ${src}_pc@2x.webp 2x`}
                         media="(min-width: 1401px)"
                       />
+                      <source
+                        srcSet={`${src}_pc.jpg 1x, ${src}_pc@2x.jpg 2x`}
+                        media="(min-width: 1401px)"
+                      />
                       <img
-                        src={`${src}_pc.jpg`}
-                        width={5000}
-                        height={3334}
+                        src={`${src}_sp.jpg`}
+                        width={768}
+                        height={768}
                         alt="Slider Image"
                         className={styles.slideImage}
                       />
