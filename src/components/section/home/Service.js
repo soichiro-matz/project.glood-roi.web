@@ -5,6 +5,7 @@ import { gsap, registerScrollTrigger } from "@libs/gsap";
 import { nanoid } from "nanoid";
 import useRola from "@hooks/useRola";
 import styles from "@/styles/pages/home/services.module.scss";
+import { initLenis, destroyLenis } from "@libs/lenis";
 
 export default function Service({ service, index }) {
   const sectionRef = useRef(null);
@@ -14,6 +15,50 @@ export default function Service({ service, index }) {
     once: true,
     rootMargin: "0px 0px -30%",
   });
+
+  useEffect(() => {
+    const updateBackground = () => {
+      if (!sectionRef.current) return;
+
+      const backGround = sectionRef.current.querySelector(".js-backGround");
+      const serviseImage = sectionRef.current.querySelector(".js-serviseImage");
+
+      if (backGround && serviseImage) {
+        backGround.style.height = "";
+        backGround.style.transform = "";
+        backGround.style.marginLeft = "";
+        const height = backGround.clientHeight;
+
+        const width = window.innerWidth;
+        let offset = "";
+
+        if (width < 1024) {
+          offset = "clamp(2rem, 1.481rem + 2.37vw, 3rem)";
+          backGround.style.transform = `translateY(${offset})`;
+          serviseImage.style.transform = `translateY(0)`;
+        } else {
+          offset = "96px";
+          serviseImage.style.transform = `translateY(-3rem)`;
+        }
+        backGround.style.height = `calc(${height}px + ${offset})`;
+        console.log(`calc(${height}px + ${offset})`);
+      }
+    };
+
+    setTimeout(() => {
+      updateBackground();
+      destroyLenis();
+      initLenis();
+    }, 300);
+
+    window.addEventListener("resize", updateBackground);
+    window.addEventListener("load", updateBackground);
+
+    return () => {
+      window.removeEventListener("resize", updateBackground);
+      window.removeEventListener("load", updateBackground);
+    };
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -114,8 +159,12 @@ export default function Service({ service, index }) {
             },
             "<0.1",
           )
-          .to(
+          .fromTo(
             image,
+            {
+              y: windowWidth >= 1024 ? "0" : "3rem",
+              opacity: 0,
+            },
             {
               y: windowWidth >= 1024 ? "-3rem" : "0",
               opacity: 1,
@@ -196,8 +245,11 @@ export default function Service({ service, index }) {
               </span>
             </span>
           </h3>
-          <div
+          {/* <div
             className={`${styles.description} js-description relative pb-fluid-[64,80,350.1024] pt-fluid-[24,40,350.1024] text-fluid-[15,17] lg:pb-fluid-[80,120,1024.1480] lg:pt-fluid-[10,16,1024.1480]`}
+          > */}
+          <div
+            className={`${styles.description} js-description relative pb-fluid-[64,80,350.1024] pt-fluid-[56,88,350.1024] text-fluid-[15,17] lg:pb-0 lg:pt-fluid-[10,16,1024.1480]`}
           >
             {service.description.map((text) => (
               <p key={nanoid()} className="leading-loose">
@@ -231,7 +283,7 @@ export default function Service({ service, index }) {
           </div>
           <p
             lang="en"
-            className={`${styles.enTitle} pb-fluid-[0,16,350,1024] lg:pb-0`}
+            className={`${styles.enTitle} relative pb-fluid-[0,16,350,1024] top-fluid-[25,50%] lg:pb-0`}
           >
             <span className="hidden font-medium text-fluid-[40,64] lg:block">
               service-0{index + 1}
@@ -242,9 +294,10 @@ export default function Service({ service, index }) {
               0{index + 1}
             </span>
           </p>
-          <div
+          <div className={`${styles.imageContainer} js-serviseImage relative`}>
+            {/* <div
             className={`${styles.imageContainer} js-serviseImage relative pb-fluid-[32,48,350.1024] lg:pb-[80px]`}
-          >
+          > */}
             <Image
               src={service.image}
               width={1203}
@@ -275,11 +328,11 @@ export default function Service({ service, index }) {
                 2,
                 143,
                 203,
-                "-left-[2%] lg:-left-[15%] bottom-[7%] w-fluid-[124,143,1024,1480] h-fluid-[176,203,1024,1480] hidden lg:block js-move-moreSlow",
+                "lg:-left-[18%] bottom-[7%] w-fluid-[124,143,1024,1480] h-fluid-[176,203,1024,1480] hidden lg:block js-move-moreSlow",
               )}
           </div>
           <div
-            className={`${bg} ${styles.backGround} relative lg:rounded-l-3xl`}
+            className={`${bg} ${styles.backGround} js-backGround relative lg:rounded-l-3xl`}
           >
             {index === 0 &&
               getIcon(
@@ -287,7 +340,7 @@ export default function Service({ service, index }) {
                 4,
                 114,
                 111,
-                "left-[10%] bottom-[2%] w-fluid-[114,114,1024,1280] h-fluid-[111,111,1024,1280] hidden lg:block  js-move-moreSlow",
+                "left-[10%] bottom-[2%] w-fluid-[114,124,1024,1280] h-fluid-[111,121,1024,1280] hidden lg:block  js-move-moreSlow",
               )}
             {index === 1 &&
               getIcon(
@@ -298,10 +351,7 @@ export default function Service({ service, index }) {
                 "left-[3%] bottom-[10%] w-fluid-[60,90,1024,1280] h-fluid-[77,115,1024,1280] hidden lg:block js-move-Slow",
               )}
           </div>
-          <div
-            // className={`${bgReverce} ${styles.bgBottom} h-fluid-[325,370,350.1024] lg:h-fluid-[320,370,1024.1480]`}
-            className={`${bgReverce} ${styles.bgBottom} h-[880px]`}
-          ></div>
+          <div className={`${bgReverce} ${styles.bgBottom} h-[880px]`}></div>
         </div>
         {index === 0 &&
           getIcon(

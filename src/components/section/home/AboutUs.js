@@ -118,7 +118,7 @@ export default function AboutUs() {
           </div>
           <div
             ref={containerRef}
-            className={`${styles.videoWrapper} pr-fluid-[8,40] pt-fluid-[40,56,768,350] md:pt-0`}
+            className={`${styles.videoWrapper} pr-0 pt-fluid-[40,56,768,350] md:pt-0 lg:pr-fluid-[8,40]`}
             data-rola-trigger01
             data-rola-transition="slide"
           ></div>

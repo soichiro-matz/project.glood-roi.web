@@ -136,6 +136,17 @@ export default function App({ Component, pageProps }) {
 
     handleRouteChangeComplete(); // 初回表示時
 
+    let resizeTimeoutId;
+    window.addEventListener("resize", () => {
+      document.documentElement.classList.add("is-resize");
+
+      clearTimeout(resizeTimeoutId);
+
+      resizeTimeoutId = setTimeout(() => {
+        document.documentElement.classList.remove("is-resize");
+      }, 500);
+    });
+
     return () => {
       router.events.off("routeChangeStart", handleRouteChangeStart);
       router.events.off("routeChangeComplete", handleRouteChangeComplete);
