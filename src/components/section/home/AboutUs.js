@@ -82,7 +82,7 @@ export default function AboutUs() {
               addClass={["text-fluid-[32,48,350,768]", "md:text-fluid-[48,64]"]}
               ariaHidden="true"
             >
-              us
+              about us
             </SubTitle>
             <span className="sr-only">私達について</span>
           </h2>
