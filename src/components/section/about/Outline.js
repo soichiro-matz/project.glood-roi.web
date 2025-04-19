@@ -107,10 +107,6 @@ export default function Outline() {
                       <dt>取締役 副社長</dt>
                       <dd>中西 純</dd>
                     </div>
-                    <div className="flex gap-[1em]">
-                      <dt>社外取締役 CFO</dt>
-                      <dd>安川　森平</dd>
-                    </div>
                   </dl>
                 </dd>
               </div>
@@ -169,7 +165,7 @@ export default function Outline() {
                 </dd>
               </div>
               <div className={`c-dl__items`}>
-                <dt className={`c-dl__dt ${styles.dlDt}`}>設立</dt>
+                <dt className={`c-dl__dt ${styles.dlDt}`}>従業員</dt>
                 <dd className={`c-dl__dd ${styles.dlDd}`}>
                   38名
                   <time
