@@ -70,3 +70,50 @@ export function destroyLenis() {
     lenis = null;
   }
 }
+
+export function bindAnchorEvents(lenisInstance) {
+  const anchors = document.querySelectorAll('a[href*="#"]');
+  anchors.forEach((anchor) => {
+    anchor.addEventListener("click", (e) => {
+      const href = anchor.getAttribute("href");
+      if (!href || href === "#" || href.startsWith("http")) return;
+
+      const hash = href.split("#")[1];
+      if (!hash) return;
+
+      const target = document.getElementById(hash);
+      if (!target) return;
+
+      e.preventDefault();
+
+      const offset = getOffsetByScreen(target);
+
+      lenisInstance.scrollTo(target, {
+        offset,
+        duration: 1.2,
+        easing: (t) => 1 - Math.pow(1 - t, 3),
+      });
+
+      setTimeout(() => {
+        const { ScrollTrigger } = require("gsap/ScrollTrigger");
+        ScrollTrigger.refresh();
+        ScrollTrigger.update();
+      }, 1200);
+    });
+  });
+}
+
+function getOffsetByScreen(target) {
+  const width = window.innerWidth;
+  let offsetAttr = "0";
+
+  if (width < 768) {
+    offsetAttr = target.dataset.offsetSp;
+  } else if (width < 1024) {
+    offsetAttr = target.dataset.offsetMd;
+  } else {
+    offsetAttr = target.dataset.offsetLg;
+  }
+
+  return parseInt(offsetAttr, 10) || 0;
+}

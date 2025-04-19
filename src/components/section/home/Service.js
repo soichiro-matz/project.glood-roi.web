@@ -5,7 +5,7 @@ import { gsap, registerScrollTrigger } from "@libs/gsap";
 import { nanoid } from "nanoid";
 import useRola from "@hooks/useRola";
 import styles from "@/styles/pages/home/services.module.scss";
-import { initLenis, destroyLenis } from "@libs/lenis";
+import { initLenis, destroyLenis, bindAnchorEvents } from "@libs/lenis";
 
 export default function Service({ service, index }) {
   const sectionRef = useRef(null);
@@ -17,7 +17,8 @@ export default function Service({ service, index }) {
   });
 
   useEffect(() => {
-    const updateBackground = () => {
+    let timer;
+    const updateBackground = async () => {
       if (!sectionRef.current) return;
 
       const backGround = sectionRef.current.querySelector(".js-backGround");
@@ -44,19 +45,20 @@ export default function Service({ service, index }) {
         // console.log(`calc(${height}px + ${offset})`);
       }
     };
-
-    setTimeout(() => {
+    timer = setTimeout(async () => {
       updateBackground();
-      destroyLenis();
-      initLenis();
-    }, 300);
+      await destroyLenis();
+      const lenis = await initLenis();
+      bindAnchorEvents(lenis);
+    }, 500);
 
     window.addEventListener("resize", updateBackground);
-    window.addEventListener("load", updateBackground);
+    // window.addEventListener("load", updateBackground);
 
     return () => {
+      clearTimeout(timer);
       window.removeEventListener("resize", updateBackground);
-      window.removeEventListener("load", updateBackground);
+      // window.removeEventListener("load", updateBackground);
     };
   }, []);
 

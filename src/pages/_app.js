@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
-import { initLenis, destroyLenis } from "@libs/lenis";
+import { initLenis, destroyLenis, bindAnchorEvents } from "@libs/lenis";
 import { ErrorBoundary } from "react-error-boundary";
 import gsap from "gsap";
 import "@/styles/globals.scss";
@@ -22,37 +22,37 @@ export default function App({ Component, pageProps }) {
   const pageRef = useRef(null);
   const [menuItems, setMenuItems] = useState(undefined);
 
-  const bindAnchorEvents = (lenisInstance) => {
-    const anchors = document.querySelectorAll('a[href*="#"]');
-    anchors.forEach((anchor) => {
-      anchor.addEventListener("click", (e) => {
-        const href = anchor.getAttribute("href");
-        if (!href || href === "#" || href.startsWith("http")) return;
+  // const bindAnchorEvents = (lenisInstance) => {
+  //   const anchors = document.querySelectorAll('a[href*="#"]');
+  //   anchors.forEach((anchor) => {
+  //     anchor.addEventListener("click", (e) => {
+  //       const href = anchor.getAttribute("href");
+  //       if (!href || href === "#" || href.startsWith("http")) return;
 
-        const hash = href.split("#")[1];
-        if (!hash) return;
+  //       const hash = href.split("#")[1];
+  //       if (!hash) return;
 
-        const target = document.getElementById(hash);
-        if (!target) return;
+  //       const target = document.getElementById(hash);
+  //       if (!target) return;
 
-        e.preventDefault();
+  //       e.preventDefault();
 
-        const offset = getOffsetByScreen(target);
+  //       const offset = getOffsetByScreen(target);
 
-        lenisInstance.scrollTo(target, {
-          offset,
-          duration: 1.2,
-          easing: (t) => 1 - Math.pow(1 - t, 3),
-        });
+  //       lenisInstance.scrollTo(target, {
+  //         offset,
+  //         duration: 1.2,
+  //         easing: (t) => 1 - Math.pow(1 - t, 3),
+  //       });
 
-        setTimeout(() => {
-          const { ScrollTrigger } = require("gsap/ScrollTrigger");
-          ScrollTrigger.refresh();
-          ScrollTrigger.update();
-        }, 1200);
-      });
-    });
-  };
+  //       setTimeout(() => {
+  //         const { ScrollTrigger } = require("gsap/ScrollTrigger");
+  //         ScrollTrigger.refresh();
+  //         ScrollTrigger.update();
+  //       }, 1200);
+  //     });
+  //   });
+  // };
 
   const scrollToHash = async (lenis) => {
     if (!window.location.hash) return;
