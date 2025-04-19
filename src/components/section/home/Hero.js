@@ -141,14 +141,17 @@ export default function Hero() {
             >
               <span
                 className={`${styles.copyText} js-copy relative font-bold leading-none pb-fluid-[14,18,350,768] pt-fluid-[10,18,350,768] px-fluid-[16,24,350,768] text-fluid-[28,48,350,768] md:pb-fluid-[20,24,768,1480] md:pt-fluid-[14,18,768,1480] md:px-fluid-[24,32,768,1480] md:text-fluid-[48,64,1024,1480]`}
+                aria-hidden="true"
               >
                 良いモノを、
               </span>
               <span
                 className={`${styles.copyText} js-copy relative font-bold leading-none pb-fluid-[14,18,350,768] pt-fluid-[10,18,350,768] px-fluid-[16,24,350,768] text-fluid-[28,48,350,768] md:pb-fluid-[20,24,768,1480] md:pt-fluid-[14,18,768,1480] md:px-fluid-[24,32,768,1480] md:text-fluid-[48,64,1024,1480]`}
+                aria-hidden="true"
               >
                 必要な人へ。
               </span>
+              <span className="sr-only">良いモノを、必要な人へ。</span>
             </p>
             <div className={`${styles.mySwiperWrapper}`}>
               <Swiper
@@ -160,7 +163,7 @@ export default function Hero() {
                 loop={true} // スライドをループさせる
                 speed={1500} // スライドが切り替わる時の速度
                 autoplay={{
-                  delay: 5000,
+                  delay: 50000,
                   disableOnInteraction: false,
                 }} // スライド表示時間
                 pagination={{
@@ -177,12 +180,24 @@ export default function Hero() {
                   <SwiperSlide key={index} className={styles.customSlide}>
                     <picture>
                       <source
+                        srcSet={`${src}_sp.webp 1x, ${src}_sp@2x.webp 2x`}
+                        media="(max-width: 768px)"
+                      />
+                      <source
                         srcSet={`${src}_sp.jpg 1x, ${src}_sp@2x.jpg 2x`}
                         media="(max-width: 768px)"
                       />
                       <source
+                        srcSet={`${src}_tab.webp 1x, ${src}_tab@2x.webp 2x`}
+                        media="(max-width: 1024px)"
+                      />
+                      <source
                         srcSet={`${src}_tab.jpg 1x, ${src}_tab@2x.jpg 2x`}
                         media="(max-width: 1024px)"
+                      />
+                      <source
+                        srcSet={`${src}_lg.webp 1x, ${src}_lg@2x.webp 2x`}
+                        media="(max-width: 1400px)"
                       />
                       <source
                         srcSet={`${src}_lg.jpg 1x, ${src}_lg@2x.jpg 2x`}

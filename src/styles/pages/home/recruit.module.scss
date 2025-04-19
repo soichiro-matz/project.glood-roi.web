@@ -37,3 +37,17 @@
     transform: translateX(-10px);
   }
 }
+
+@supports (background-image: url("image.webp")) {
+  .recruit {
+    background-image: url("/assets/img/home/bg-recruit.webp");
+
+    @include md {
+      background-image: url("/assets/img/home/bg-recruit-tab.webp");
+    }
+
+    @include sp {
+      background-image: url("/assets/img/home/bg-recruit-sp.webp");
+    }
+  }
+}

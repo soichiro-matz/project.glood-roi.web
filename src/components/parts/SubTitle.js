@@ -61,7 +61,7 @@ export default function SubTitle({
   return (
     <p
       ref={subTitleRef}
-      lang={lang}
+      lang={lang === "en" ? "en" : ""}
       className={`${styles.subTitle} ${addClass.join(" ")} js-subTitle`}
       {...(ariaHidden ? { "aria-hidden": true } : {})}
     >

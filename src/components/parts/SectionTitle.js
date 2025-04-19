@@ -35,9 +35,10 @@ export default function SectionTitle({
       >
         {titleEn}
       </SubTitle>
-      <SubTitle lang="jp" addClass={addClass} start={start}>
+      <SubTitle lang="jp" addClass={addClass} start={start} ariaHidden={true}>
         {titleJp}
       </SubTitle>
+      <span className="sr-only">{titleJp}</span>
     </HeadingTag>
   );
 }

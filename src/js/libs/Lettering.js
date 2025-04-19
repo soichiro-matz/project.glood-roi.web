@@ -83,7 +83,7 @@ var Lettering = (function () {
             );
           })
           .join("");
-        elem.setAttribute("aria-label", original);
+        // elem.setAttribute("aria-label", original);
         elem.innerHTML = text;
       });
       return elems;

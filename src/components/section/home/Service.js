@@ -41,7 +41,7 @@ export default function Service({ service, index }) {
           serviseImage.style.transform = `translateY(-3rem)`;
         }
         backGround.style.height = `calc(${height}px + ${offset})`;
-        console.log(`calc(${height}px + ${offset})`);
+        // console.log(`calc(${height}px + ${offset})`);
       }
     };
 
