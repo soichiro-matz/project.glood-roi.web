@@ -203,13 +203,12 @@ export default function Hero() {
                         srcSet={`${src}_lg.jpg 1x, ${src}_lg@2x.jpg 2x`}
                         media="(max-width: 1400px)"
                       />
-                      <Image
+                      <img
                         src={`${src}_pc.jpg`}
                         width={5000}
                         height={3334}
                         alt="Slider Image"
                         className={styles.slideImage}
-                        priority
                       />
                     </picture>
                   </SwiperSlide>
