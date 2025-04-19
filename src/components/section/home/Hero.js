@@ -204,9 +204,9 @@ export default function Hero() {
                         media="(max-width: 1400px)"
                       />
                       <img
-                        src={`${src}_pc.jpg`}
-                        width={5000}
-                        height={3334}
+                        src={`${src}_sp.webp`}
+                        width={768}
+                        height={768}
                         alt="Slider Image"
                         className={styles.slideImage}
                       />
