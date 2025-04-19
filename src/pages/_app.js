@@ -100,7 +100,7 @@ export default function App({ Component, pageProps }) {
           if (indexMenu) {
             gsap.to(indexMenu, {
               opacity: 0,
-              duration: 1.2,
+              duration: 0.6,
               ease: "power2.out",
             });
           }

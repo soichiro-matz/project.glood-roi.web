@@ -156,7 +156,7 @@ export default function Header() {
       if (child.length > 0 && !isLargeScreen) {
         gsap.to(child, {
           opacity: 0,
-          duration: 0.5,
+          duration: 0.3,
           delay: 0,
           ease: "ease-in-out",
         });

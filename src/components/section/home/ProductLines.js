@@ -66,6 +66,8 @@ export default function ProductLines() {
           //   });
           // });
 
+          const windowWidth = window.innerWidth;
+
           // 各カテゴリアニメーション（li → div を対象）
           gsap.utils.toArray(".js-productCategory").forEach((el, i) => {
             if (!el) return;
@@ -81,7 +83,7 @@ export default function ProductLines() {
                 ease: "power3.out",
                 scrollTrigger: {
                   trigger: ".js-productCategories",
-                  start: "top 80%",
+                  start: windowWidth >= 1024 ? "top 90%" : "top bottom",
                   // markers: true,
                 },
               },
