@@ -59,13 +59,13 @@ export default function SubTitle({
     return () => ctx.revert();
   }, []);
   return (
-    <p
+    <span
       ref={subTitleRef}
       lang={lang === "en" ? "en" : ""}
       className={`${styles.subTitle} ${addClass.join(" ")} js-subTitle`}
       {...(ariaHidden ? { "aria-hidden": true } : {})}
     >
       {children}
-    </p>
+    </span>
   );
 }

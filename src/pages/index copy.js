@@ -76,5 +76,13 @@ export default function Home() {
         <div className="backGround"></div>
       </div>
     </div>
+    <picture>
+      <source srcset="/assets/img/home/img-hero-01_sp.webp 1x, /assets/img/home/img-hero-01_sp@2x.webp 2x" media="(max-width: 768px)">
+      <source srcset="/assets/img/home/img-hero-01_sp.jpg 1x, /assets/img/home/img-hero-01_sp@2x.jpg 2x" media="(max-width: 768px)">
+      <source srcset="/assets/img/home/img-hero-01_tab.webp 1x, /assets/img/home/img-hero-01_tab@2x.webp 2x" media="(max-width: 1024px)">
+      <source srcset="/assets/img/home/img-hero-01_tab.jpg 1x, /assets/img/home/img-hero-01_tab@2x.jpg 2x" media="(max-width: 1024px)">
+      <source srcset="/assets/img/home/img-hero-01_lg.webp 1x, /assets/img/home/img-hero-01_lg@2x.webp 2x" media="(max-width: 1400px)">
+      <source srcset="/assets/img/home/img-hero-01_lg.jpg 1x, /assets/img/home/img-hero-01_lg@2x.jpg 2x" media="(max-width: 1400px)">
+      <img width="768" height="768" alt="Slider Image" class="hero_slideImage__XqI5Z" src="/assets/img/home/img-hero-01_sp.webp"></picture>
   );
 }

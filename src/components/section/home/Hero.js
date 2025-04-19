@@ -203,10 +203,14 @@ export default function Hero() {
                         srcSet={`${src}_lg.jpg 1x, ${src}_lg@2x.jpg 2x`}
                         media="(max-width: 1400px)"
                       />
+                      <source
+                        srcSet={`${src}_pc.webp 1x, ${src}_pc@2x.webp 2x`}
+                        media="(min-width: 1401px)"
+                      />
                       <img
-                        src={`${src}_sp.webp`}
-                        width={768}
-                        height={768}
+                        src={`${src}_pc.jpg`}
+                        width={5000}
+                        height={3334}
                         alt="Slider Image"
                         className={styles.slideImage}
                       />
