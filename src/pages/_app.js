@@ -181,17 +181,17 @@ export default function App({ Component, pageProps }) {
   );
 }
 
-function getOffsetByScreen(target) {
-  const width = window.innerWidth;
-  let offsetAttr = "0";
+// function getOffsetByScreen(target) {
+//   const width = window.innerWidth;
+//   let offsetAttr = "0";
 
-  if (width < 768) {
-    offsetAttr = target.dataset.offsetSp;
-  } else if (width < 1024) {
-    offsetAttr = target.dataset.offsetMd;
-  } else {
-    offsetAttr = target.dataset.offsetLg;
-  }
+//   if (width < 768) {
+//     offsetAttr = target.dataset.offsetSp;
+//   } else if (width < 1024) {
+//     offsetAttr = target.dataset.offsetMd;
+//   } else {
+//     offsetAttr = target.dataset.offsetLg;
+//   }
 
-  return parseInt(offsetAttr, 10) || 0;
-}
+//   return parseInt(offsetAttr, 10) || 0;
+// }

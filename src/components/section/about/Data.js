@@ -116,7 +116,7 @@ export default function Data() {
                   {data.title}
                 </span>
               </dt>
-              <dl>
+              <dd>
                 <span className="relative">
                   <span
                     className={`${styles.num} js-num relative inline-block font-[800] leading-none text-fluid-[72,80]`}
@@ -132,7 +132,7 @@ export default function Data() {
                   </span>
                 </span>
                 <span className="sr-only">{data.unit}</span>
-              </dl>
+              </dd>
             </div>
           );
         })}

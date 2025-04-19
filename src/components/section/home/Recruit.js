@@ -86,8 +86,6 @@ export default function Recruit() {
                   zeroPad(index + 1, 2) +
                   ".svg"
                 }
-                // width={120}
-                height="auto"
                 alt=""
                 className={`${styles.iconImage} js-employee w-fluid-[56,88,350,768] md:w-fluid-[96,120]`}
                 key={index}

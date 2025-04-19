@@ -34,7 +34,7 @@ export default function Breadcrumbs({ breadcrumbs = [] }) {
           else {
             return (
               <li className={`${styles.breadcrumbItem}`} key={nanoid()}>
-                <Link rel="stylesheet" href="">
+                <Link href={item.url}>
                   <span>{item.title}</span>
                 </Link>
               </li>

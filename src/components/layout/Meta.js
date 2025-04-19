@@ -12,7 +12,7 @@ export default function Meta({
 }) {
   const router = useRouter();
   const pageTitle = title ? `${title} | ${SITE.name}` : SITE.name;
-  const fullUrl = getFullUrl(router.pathname);
+  const fullUrl = getFullUrl(router.asPath);
   const jsonLd = generateSchema();
 
   return (
