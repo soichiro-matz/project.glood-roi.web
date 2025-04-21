@@ -40,7 +40,7 @@ export default function Services() {
     <section
       className={`${styles.services} relative`}
       id="service"
-      data-offset-sp="-120"
+      data-offset-sp="120"
       data-offset-md="-140"
       data-offset-lg="-160"
     >

@@ -71,6 +71,22 @@ export function destroyLenis() {
   }
 }
 
+export function getOffsetByScreen(target) {
+  const width = window.innerWidth;
+  let offsetAttr = "0";
+
+  if (width < 768) {
+    offsetAttr = target.dataset.offsetSp;
+  } else if (width < 1024) {
+    offsetAttr = target.dataset.offsetMd;
+  } else {
+    offsetAttr = target.dataset.offsetLg;
+  }
+
+  return parseInt(offsetAttr, 10) || 0;
+}
+
+
 export function bindAnchorEvents(lenisInstance) {
   const anchors = document.querySelectorAll('a[href*="#"]');
   anchors.forEach((anchor) => {
@@ -101,19 +117,4 @@ export function bindAnchorEvents(lenisInstance) {
       }, 1200);
     });
   });
-}
-
-function getOffsetByScreen(target) {
-  const width = window.innerWidth;
-  let offsetAttr = "0";
-
-  if (width < 768) {
-    offsetAttr = target.dataset.offsetSp;
-  } else if (width < 1024) {
-    offsetAttr = target.dataset.offsetMd;
-  } else {
-    offsetAttr = target.dataset.offsetLg;
-  }
-
-  return parseInt(offsetAttr, 10) || 0;
 }

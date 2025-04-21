@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
-import { initLenis, destroyLenis, bindAnchorEvents } from "@libs/lenis";
+import { initLenis, destroyLenis, bindAnchorEvents ,getOffsetByScreen} from "@libs/lenis";
 import { ErrorBoundary } from "react-error-boundary";
 import gsap from "gsap";
 import "@/styles/globals.scss";
