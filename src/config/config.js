@@ -45,5 +45,5 @@ export const SNS = {
 };
 
 export const API_URL = {
-  news: "https://gloodroi.com/wp-json/wp/v2/posts",
+  news: "http://news.gloodroi.com/wp-json/wp/v2/posts",
 };
