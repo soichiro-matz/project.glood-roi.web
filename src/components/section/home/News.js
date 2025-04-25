@@ -55,6 +55,25 @@ export default function News({ posts }) {
     return () => ctx.revert();
   }, []);
 
+  const count = posts.length;
+  let position = "";
+
+  switch (count) {
+    case 1:
+      position = "left-[40%] top-[70%] md:left-0 md:top-[75%] lg:top-[82%]";
+      break;
+    case 2:
+      position = "left-[40%] top-[70%] md:left-0 md:top-[55%] lg:top-[65%]";
+      break;
+    case 3:
+      position = "left-[40%] top-[70%] md:left-0 md:top-[40%] lg:top-[50%]";
+      break;
+    default:
+      break;
+  }
+
+
+
   return (
     <section
       className={`${styles.news} js-newsSection pb-fluid-[120,216] pt-fluid-[80,136]`}
@@ -70,8 +89,11 @@ export default function News({ posts }) {
             align="left"
           />
           <div
-            className={`${styles.imageWrapper} absolute left-[40%] top-[70%] h-fluid-[60,80,350,768] w-fluid-[120,160,350,768] md:left-0 md:top-[40%] md:h-fluid-[80,118] md:w-fluid-[160,235] lg:top-[50%]`}
+            className={`${styles.imageWrapper} absolute h-fluid-[60,80,350,768] w-fluid-[120,160,350,768] md:h-fluid-[80,118] md:w-fluid-[160,235] ${position}`}
           >
+          {/* <div
+            className={`${styles.imageWrapper} absolute left-[40%] top-[70%] h-fluid-[60,80,350,768] w-fluid-[120,160,350,768] md:left-0 md:top-[40%] md:h-fluid-[80,118] md:w-fluid-[160,235] lg:top-[20rem]`}
+          > */}
             <Image
               src="/assets/img/home/icon-news-01.svg"
               fill
