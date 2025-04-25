@@ -72,9 +72,7 @@ export default function Home() {
         <div className="ccc"></div>
       </div>
 
-      <div className="l-container l-grid__12">
-        <div className="backGround"></div>
-      </div>
+
     </div>
   );
 }
