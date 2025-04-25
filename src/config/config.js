@@ -8,7 +8,7 @@ export const SITE = {
     "Glood roiは、良いモノをつなぎ届けることで、日常に彩りと豊かさをもたらす、価値あるショッピング体験を提供するEC企業です。",
   url: "https://gloodroi.com/",
   base: "/",
-  trackingId: "G-xxxxxxxx",
+  trackingId: "G-YT2SDPXEXF",
   tel: "048-783-2454",
 };
 
