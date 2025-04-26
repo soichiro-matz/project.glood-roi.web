@@ -1,14 +1,14 @@
 {
   "redirects": [
     {
-      "source": "/(.*)",
+      "source": "/:path*",
       "has": [
         {
           "type": "host",
           "value": "project-glood-roi-web.vercel.app"
         }
       ],
-      "destination": "https://gloodroi.com/:1",
+      "destination": "https://gloodroi.com/:path*",
       "permanent": true
     }
   ]
