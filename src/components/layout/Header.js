@@ -81,7 +81,7 @@ export default function Header() {
             chars.forEach((char,index) => {
               if (space === index + 1) {
                 console.log(space);
-                char.style.letterSpacing = "0.2em";
+                char.style.letterSpacing = "0.25em";
               }
 
             })
@@ -297,6 +297,7 @@ export default function Header() {
                         <p
                             className={`title-en js-title-en u-clip__full font-bold leading-none pb-fluid-[6,6,350,768] text-fluid-[24,26,350,768] lg:hidden`}
                             data-text={link.text_en}
+                            lang="en"
                         >
                           {link.text_en}
                         </p>
