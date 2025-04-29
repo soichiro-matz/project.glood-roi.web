@@ -37,7 +37,7 @@ export default function NewsIndex({}) {
     <>
       <Heading titleEn={title_en} titleJp={title} breadcrumbs={breadcrumbs} />
       <div className="l-container l-grid__12 py-fluid-[40,80,350,768] md:py-fluid-[80,104]">
-        <div className={`${styles.newsContainer}`}>
+        <div className={`${styles.newsContainer} min-h-[30vh]`}>
           <NewsList posts={posts} />
         </div>
       </div>
