@@ -72,9 +72,9 @@ export default function Footer() {
       </div>
       <p
         className="text-center pb-fluid-[20,24,350,768] text-fluid-[16,16] lg:pb-4"
-        lang="en"
+
       >
-        <small className="capitalize">
+        <small >
           Copyright © <time dateTime={getYear()}>{getYear()} </time>
           <Link href="/contact">{SITE.nameEn}</Link>
         </small>

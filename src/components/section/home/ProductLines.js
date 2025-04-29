@@ -122,6 +122,7 @@ export default function ProductLines() {
           titleEn="product lines"
           titleJp="取扱商品カテゴリー"
           start="110%"
+          space={7}
         />
         <ul
           className={`${styles.items} js-productCategories l-container flex flex-wrap pt-fluid-[88,120] md:pt-fluid-[120,160]`}

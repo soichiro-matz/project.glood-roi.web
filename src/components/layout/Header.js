@@ -66,7 +66,30 @@ export default function Header() {
       );
 
       titleEnElements.forEach((title, index) => {
+
         const chars = title.querySelectorAll("span");
+
+        let space = 0;
+        if (title.dataset.text === "about us") {
+          space = 5;
+        } else if(title.dataset.text === "product lines"){
+          space = 7;
+        }
+
+        if (space != 0) {
+          if(chars.length>0){
+            chars.forEach((char,index) => {
+              if (space === index + 1) {
+                console.log(space);
+                char.style.letterSpacing = "0.2em";
+              }
+
+            })
+          }
+        }
+
+
+
 
         gsap.set(chars, { clearProps: "transform" });
         // 2. GSAPで各文字をビューポート下から順にスライドイン
@@ -272,7 +295,8 @@ export default function Header() {
                         // scroll={false}
                       >
                         <p
-                          className={`title-en js-title-en u-clip__full font-bold leading-none pb-fluid-[6,6,350,768] text-fluid-[24,26,350,768] lg:hidden`}
+                            className={`title-en js-title-en u-clip__full font-bold leading-none pb-fluid-[6,6,350,768] text-fluid-[24,26,350,768] lg:hidden`}
+                            data-text={link.text_en}
                         >
                           {link.text_en}
                         </p>

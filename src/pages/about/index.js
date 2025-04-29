@@ -24,7 +24,7 @@ export default function About() {
 
   return (
     <>
-      <Heading titleEn={title_en} titleJp={title} breadcrumbs={breadcrumbs} />
+      <Heading titleEn={title_en} titleJp={title} breadcrumbs={breadcrumbs} space={5} />
       <Mvv />
       <Message />
       <Data />

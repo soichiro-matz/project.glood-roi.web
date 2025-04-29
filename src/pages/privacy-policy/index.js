@@ -22,7 +22,7 @@ export default function PrivacyPolicyIndex() {
 
   return (
     <>
-      <Heading titleEn={title_en} titleJp={title} breadcrumbs={breadcrumbs} />
+      <Heading titleEn={title_en} titleJp={title} breadcrumbs={breadcrumbs} space={7}/>
       <section>
         <div className="l-container l-grid__12">
           <div

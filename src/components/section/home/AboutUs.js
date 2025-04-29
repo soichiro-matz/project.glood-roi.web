@@ -81,6 +81,7 @@ export default function AboutUs() {
               lang="en"
               addClass={["text-fluid-[32,48,350,768]", "md:text-fluid-[48,64]"]}
               ariaHidden="true"
+              space={5}
             >
               about us
             </SubTitle>

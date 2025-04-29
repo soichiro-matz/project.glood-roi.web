@@ -10,6 +10,7 @@ export default function SubTitle({
   addClass = [],
   start = "90%",
   ariaHidden = false,
+  space = 0
 }) {
   const subTitleRef = useRef(null);
 
@@ -29,6 +30,19 @@ export default function SubTitle({
 
         if (subTitle) {
           const chars = subTitle.querySelectorAll("span");
+
+          //文字間にスペースを設ける（inline-blockでスペースが詰まるため）
+          if (space != 0) {
+            if(chars.length>0){
+              chars.forEach((char,index) => {
+                if (space === index + 1) {
+                  console.log(space);
+                  char.style.letterSpacing = "0.25em";
+                }
+
+              })
+            }
+          }
 
           // gsap.set(chars, { clearProps: "transform" });
           // 2. GSAPで各文字をビューポート下から順にスライドイン

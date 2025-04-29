@@ -8,6 +8,7 @@ export default function Heading({
   titleEn = "",
   titleJp = "",
   breadcrumbs = [],
+  space = 0,
 }) {
   useEffect(() => {
     const lettering = new Lettering(".js-headingTtitle");
@@ -23,7 +24,18 @@ export default function Heading({
         if (title) {
           const chars = title.querySelectorAll("span");
 
-          // console.log(chars);
+          //文字間にスペースを設ける（inline-blockでスペースが詰まるため）
+          if (space != 0) {
+            if(chars.length>0){
+              chars.forEach((char,index) => {
+                if (space === index + 1) {
+                  console.log(space);
+                  char.style.letterSpacing = "0.25em";
+                }
+
+              })
+            }
+          }
 
           gsap.fromTo(
             chars,
