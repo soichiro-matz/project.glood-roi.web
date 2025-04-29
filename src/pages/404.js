@@ -4,7 +4,7 @@ import Heading from "@/components/parts/Heading";
 import Button from "@/components/ui/Button";
 
 const title = "404 Not Found";
-const title_en = "404 not nound";
+const title_en = "404 not found";
 const description = "404 Not Found";
 export default function NotFound() {
   const breadcrumbs = [

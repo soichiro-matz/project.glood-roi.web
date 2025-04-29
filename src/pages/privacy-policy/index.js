@@ -5,7 +5,7 @@ import Heading from "@/components/parts/Heading";
 import styles from "@/styles/pages/privacy-policy/index.module.scss";
 
 const title = "プライバシーポリシー";
-const title_en = "privacy polycy";
+const title_en = "privacy policy";
 const description =
   SITE.description + "このページは「プライバシーポリシー」を紹介しております。";
 export default function PrivacyPolicyIndex() {

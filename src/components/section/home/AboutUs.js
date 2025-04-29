@@ -109,7 +109,7 @@ export default function AboutUs() {
             <div className={styles.buttonContainer}>
               <Button
                 tag="a"
-                linkProps={{ href: "/conact" }}
+                linkProps={{ href: "/about" }}
                 className="c-button p-button -primary"
               >
                 詳しく見る
