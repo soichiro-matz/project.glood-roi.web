@@ -100,7 +100,7 @@ export default function History() {
         className={`${styles.historiesContainer} l-container flex justify-center pt-fluid-[80,88,350,768] md:pt-fluid-[88,144]`}
       >
         <dl
-          className={`${styles.histories} js-histories grid justify-center gap-y-[2.5rem] md:gap-y-[3rem] lg:gap-y-[4rem]`}
+          className={`${styles.histories} js-histories grid justify-center gap-y-[2.5rem] md:gap-y-[3rem] lg:gap-y-[4rem] text-fluid-[15,16]`}
           data-rola-trigger01
           data-rola-transition="slide"
         >
