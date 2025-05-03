@@ -43,7 +43,7 @@
 
 /* ナビゲーションのデフォルト表示 */
 .nav-menus {
-  @apply opacity-0 fixed inset-0 flex lg:visible lg:relative lg:bg-transparent lg:opacity-100;
+  @apply invisible opacity-0 fixed inset-0 flex lg:visible lg:relative lg:bg-transparent lg:opacity-100;
 
   transition:
     opacity 0.8s cubic-bezier(0, 1.2, 0.58, 1),
@@ -65,7 +65,7 @@
   }
 
   &.open{
-    @apply opacity-100;
+    @apply opacity-100 visible;
   }
 
   .nav-menu {
