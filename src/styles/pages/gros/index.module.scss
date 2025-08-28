@@ -1,0 +1,61 @@
+@charset "UTF-8";
+@use "@/styles/base/mixins" as *;
+
+
+.privacypolicy {
+  @apply leading-[1.8];
+
+  grid-column: 3 / span 8;
+
+  @include xl {
+    grid-column: 2 / span 10;
+  }
+
+  @include sp {
+    grid-column: 1 / span 12;
+  }
+
+  h3 {
+    @apply pb-1 font-bold text-fluid-[18,22,350,768] md:text-fluid-[22,24];
+  }
+
+  ul {
+    @apply space-y-[1.5] pt-1;
+
+    margin-left: 1em;
+
+    li {
+      @apply relative pl-1;
+
+      &::before {
+        position: absolute;
+        top: 0.65em;
+        left: -0.75em;
+        display: block;
+        width: 0.75em;
+        height: 0.75em;
+        content: "";
+        background: var(--main-color);
+        border-radius: 50%;
+      }
+
+      span {
+        vertical-align: 0.2em;
+
+        @include md {
+          vertical-align: 0.05em;
+        }
+      }
+    }
+  }
+
+  a {
+    transition: 0.2s ease-in-out;
+    transition-property: opacity;
+
+    &:hover,
+    &:focus-visible {
+      opacity: 0.6;
+    }
+  }
+}
