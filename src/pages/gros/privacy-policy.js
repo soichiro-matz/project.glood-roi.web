@@ -100,7 +100,7 @@ export default function PrivacyPolicyIndex() {
             <h3>10. お問い合わせ窓口</h3>
             <p>本ポリシーに関するお問い合わせは、以下までご連絡ください。</p>
             <p className="pb-fluid-[16,24,350,768] md:pb-fluid-[24,32]">
-            E-mail：<a href="mailto:matsuo@gloodroi.co.jp">matsuo@gloodroi.co.jp</a>（システム担当：松尾）</p>
+            E-mail：<Link href="mailto:matsuo@gloodroi.co.jp">matsuo@gloodroi.co.jp</Link>（システム担当：松尾）</p>
 
           </div>
         </div>

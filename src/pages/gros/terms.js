@@ -39,7 +39,7 @@ export default function PrivacyPolicyIndex() {
 
 
             <h2>第1条（適用）</h2>
-            <p className="pb-fluid-[16,24,350,768] md:pb-fluid-[24,32]">本規約は、{SITE.name}（以下「当社」）が社内向けに提供するアプリケーション「GROS」（以下「本アプリ」）の利用条件を定めるものです。GROSに関するプライバシーポリシーは<a href="/gros/privacy-policy">こちら</a>をご確認ください（全社のプライバシーポリシーは<a href="/privacy-policy">こちら</a>）。</p>
+            <p className="pb-fluid-[16,24,350,768] md:pb-fluid-[24,32]">本規約は、{SITE.name}（以下「当社」）が社内向けに提供するアプリケーション「GROS」（以下「本アプリ」）の利用条件を定めるものです。GROSに関するプライバシーポリシーは<Link href="/gros/privacy-policy">こちら</Link>をご確認ください（全社のプライバシーポリシーは<Link href="/privacy-policy">こちら</Link>）。</p>
 
 
             <h2>第2条（利用対象者）</h2>
