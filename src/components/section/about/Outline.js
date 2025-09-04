@@ -65,7 +65,7 @@ export default function Outline() {
                     <p>埼玉県さいたま市大宮区天沼町2-18 T. M大宮ビル1階・2階</p>
                   </address>
                   <div className={`${styles.googleMap}`}>
-                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5554.922956394612!2d139.91109197732158!3d35.77882497255595!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6018845e580e3719%3A0xa2c735b69e6b93ef!2z44CSMjcwLTIyNDEg5Y2D6JGJ55yM5p2-5oi45biC5p2-5oi45paw55Sw77yS77yU4oiS77yW!5e1!3m2!1sja!2sjp!4v1750782565198!5m2!1sja!2sjp" width="600" height="450" style={{ border: 0 }} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5546.179273313231!2d139.6335133774004!3d35.90377707251632!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6018c114c773927d%3A0x6e1b68a5e6bc96d6!2z5qCq5byP5Lya56S-IEdsb29kIHJvaQ!5e1!3m2!1sja!2sjp!4v1756966274321!5m2!1sja!2sjp" width="600" height="450" style={{ border: 0 }} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
                   </div>
                 </dd>
