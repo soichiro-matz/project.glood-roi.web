@@ -96,10 +96,6 @@ export default function Outline() {
                       <dt>取締役 副社長</dt>
                       <dd>片山 渉</dd>
                     </div>
-                    <div className="flex gap-[1em]">
-                      <dt>取締役 副社長</dt>
-                      <dd>中西 純</dd>
-                    </div>
                   </dl>
                 </dd>
               </div>
@@ -159,29 +155,29 @@ export default function Outline() {
               </div>
               <div className={`c-dl__items`}>
                 <dt className={`c-dl__dt ${styles.dlDt}`}>資本金</dt>
-                <dd className={`c-dl__dd ${styles.dlDd}`}>30,000千円</dd>
+                <dd className={`c-dl__dd ${styles.dlDd}`}>3,000万円</dd>
               </div>
               <div className={`c-dl__items`}>
                 <dt className={`c-dl__dt ${styles.dlDt}`}>売上高</dt>
                 <dd className={`c-dl__dd ${styles.dlDd}`}>
-                  14億9000万円
+                  17億6,000万円
                   <time
-                    dateTime="2020-10-15"
+                    dateTime="2025-09"
                     className={`${styles.parentheses}`}
                   >
-                    2024年9月
+                    2025年9月
                   </time>
                 </dd>
               </div>
               <div className={`c-dl__items`}>
                 <dt className={`c-dl__dt ${styles.dlDt}`}>従業員</dt>
                 <dd className={`c-dl__dd ${styles.dlDd}`}>
-                  38名
+                  56名
                   <time
-                    dateTime="2020-10-15"
+                    dateTime="2025-09"
                     className={`${styles.parentheses}`}
                   >
-                    2025年3月
+                    2025年9月
                   </time>
                 </dd>
               </div>
@@ -201,8 +197,10 @@ export default function Outline() {
                   <ul className="flex flex-col gap-[2px] md:gap-1 lg:gap-2">
                     <li>武蔵野銀行 大宮支店</li>
                     <li>埼玉りそな銀行 大宮支店</li>
-                    <li>埼玉縣信用金庫 大宮支店</li>
                     <li>群馬銀行 大宮支店</li>
+                    <li>大光銀行 大宮支店</li>
+                    <li>東和銀行 大宮北支店</li>
+                    <li>埼玉縣信用金庫 大宮支店</li>
                     <li>日本政策金融公庫 大宮支店</li>
                   </ul>
                 </dd>
