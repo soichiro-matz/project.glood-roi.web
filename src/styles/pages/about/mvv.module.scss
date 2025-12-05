@@ -42,7 +42,7 @@
         }
 
         .title {
-          @apply relative ml-3 pl-[14] font-medium leading-none text-fluid-[12,14,350,780] md:ml-0 md:pl-0 md:text-fluid-[14,18];
+          @apply relative ml-3 pl-[14px] font-medium leading-none text-fluid-[12,14,350,780] md:ml-0 md:pl-0 md:text-fluid-[14,18];
 
           &::before {
             content: "・";
