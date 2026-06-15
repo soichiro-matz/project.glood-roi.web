@@ -27,6 +27,15 @@ export default async function handler(req, res) {
   );
   const json = await verify.json();
 
+  console.log("reCAPTCHA result:", {
+    success: json.success,
+    score: json.score,
+    action: json.action,
+    hostname: json.hostname,
+    errorCodes: json["error-codes"],
+  });
+
+
   if (!json.success || json.score < 0.5) {
     return res.status(400).json({ message: "Botと判定されました。" });
   }
@@ -113,9 +122,20 @@ ${SITE.url}
 `,
     });
 
-    res.status(200).json({ success: true });
+    return res.status(200).json({ success: true });
+
   } catch (err) {
-    console.error("メール送信エラー:", err);
-    res.status(500).json({ message: "メール送信に失敗しました。" });
+    // console.error("メール送信エラー:", err);
+    // res.status(500).json({ message: "メール送信に失敗しました。" });
+
+    console.error("メール送信エラー詳細:", {
+      message: err.message,
+      code: err.code,
+      command: err.command,
+      response: err.response,
+      responseCode: err.responseCode,
+    });
+
+    return res.status(500).json({ message: "メール送信に失敗しました。" });
   }
 }
