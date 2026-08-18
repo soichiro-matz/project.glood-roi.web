@@ -101,16 +101,23 @@ export default function Mvv() {
             </h3>
             <div className={`${styles.description} js-description relative`}>
               <ul className={`${styles.descriptionList}`}>
-                <li>すべての行動において正直である</li>
-                <li>チームワークを重視し、お互いを尊重し合いながら協力する</li>
                 <li>
-                  新しいことや技術を取り入れ、常にアイデア改善を追求する姿勢を持つ
+                  <dl>
+                    <dt>すぐやる</dt>
+                    <dd>失敗を恐れずにスピード感を持って行動し続ける。</dd>
+                  </dl>
                 </li>
                 <li>
-                  組織全体の成功に貢献するために、積極的な行動とその結果に対して責任を持つ
+                  <dl>
+                    <dt >やりきる</dt>
+                    <dd >主体性を持って責任を果たす。</dd>
+                  </dl>
                 </li>
                 <li>
-                  多様な価値観や意見を尊重し、すべての人が活躍できる環境を作る
+                  <dl>
+                    <dt>かわれる</dt>
+                    <dd>素直に受け入れて柔軟に変化する。</dd>
+                  </dl>
                 </li>
               </ul>
               <div
