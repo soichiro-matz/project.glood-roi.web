@@ -88,7 +88,7 @@
                 left: -1.2em;
                 content: "・";
 
-                @apply top-[4px] lg:top-[6px];
+                @apply top-[4px] md:top-[10px] lg:top-[6px];
             }
 
             dl {
