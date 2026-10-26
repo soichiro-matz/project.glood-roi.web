@@ -8,6 +8,22 @@ export default function IndexMenu({ menu }) {
   const [isIndexOpen, setIsIndexOpen] = useState(false);
   const indexMenuRef = useRef(null);
 
+  const toggleMenu = () => {
+    if (!indexMenuRef.current) return;
+    const indexMenuRight =
+      indexMenuRef.current.querySelector(".js-indexMenuRight");
+
+    if (indexMenuRight) {
+      const length = indexMenuRight.offsetWidth;
+
+      if (isIndexOpen) {
+        indexMenuRef.current.style.transform = `translateX(0)`;
+      } else {
+        indexMenuRef.current.style.transform = `translateX(${length}px)`;
+      }
+    }
+  };
+
   useEffect(() => {
     let timer;
 
@@ -68,22 +84,6 @@ export default function IndexMenu({ menu }) {
     toggleMenu();
     return () => ctx.revert();
   }, [menu]);
-
-  function toggleMenu() {
-    if (!indexMenuRef.current) return;
-    const indexMenuRight =
-      indexMenuRef.current.querySelector(".js-indexMenuRight");
-
-    if (indexMenuRight) {
-      const length = indexMenuRight.offsetWidth;
-
-      if (isIndexOpen) {
-        indexMenuRef.current.style.transform = `translateX(0)`;
-      } else {
-        indexMenuRef.current.style.transform = `translateX(${length}px)`;
-      }
-    }
-  }
 
   const closeIndexMenu = () => {
     setIsIndexOpen(false);

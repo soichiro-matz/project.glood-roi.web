@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
 import { useRouter } from "next/router";
 import { initLenis, destroyLenis, bindAnchorEvents ,getOffsetByScreen} from "@libs/lenis";
 import { ErrorBoundary } from "react-error-boundary";
@@ -15,12 +15,27 @@ import Layout from "@components/layout/Layout";
 import { getChildren } from "@/data/navLinks";
 import IndexMenu from "@/components/parts/IndexMenu";
 
+// ルートに応じてIndexMenuに渡す内容を切り替える
+function getIndexMenuItems(pathname) {
+  if (pathname.startsWith("/about")) return getChildren("about");
+  if (pathname.startsWith("/recruit")) return getChildren("recruit");
+  return undefined;
+}
+
+const subscribeNoop = () => () => {};
+
 export default function App({ Component, pageProps }) {
   const meta = Component.meta || pageProps.meta || {};
   const router = useRouter();
   const lenisRef = useRef(null);
   const pageRef = useRef(null);
-  const [menuItems, setMenuItems] = useState(undefined);
+  // IndexMenuはSSRせず、ハイドレーション後にクライアントでのみ描画する
+  const isClient = useSyncExternalStore(
+    subscribeNoop,
+    () => true,
+    () => false,
+  );
+  const menuItems = isClient ? getIndexMenuItems(router.pathname) : undefined;
 
   // const bindAnchorEvents = (lenisInstance) => {
   //   const anchors = document.querySelectorAll('a[href*="#"]');
@@ -152,17 +167,6 @@ export default function App({ Component, pageProps }) {
       router.events.off("routeChangeComplete", handleRouteChangeComplete);
     };
   }, []);
-
-  useEffect(() => {
-    // ルートに応じてIndexMenuに渡す内容を切り替える
-    if (router.pathname.startsWith("/about")) {
-      setMenuItems(getChildren("about"));
-    } else if (router.pathname.startsWith("/recruit")) {
-      setMenuItems(getChildren("recruit"));
-    } else {
-      setMenuItems(undefined);
-    }
-  }, [router.pathname]);
 
   return (
     <ErrorBoundary fallback={<div>エラーが発生しました</div>}>

@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint ."
   },
   "dependencies": {
     "@studio-freight/lenis": "^1.0.42",
@@ -14,7 +14,7 @@
     "gsap": "^3.12.7",
     "lottie-web": "^5.12.2",
     "nanoid": "^5.1.5",
-    "next": "15.5.28",
+    "next": "16.4.3",
     "nodemailer": "10.2.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -25,14 +25,13 @@
     "swiper": "14.3.0"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
     "@hilosiva/rola": "^0.1.3",
     "@markuplint/html-parser": "^4.6.18",
     "@markuplint/jsx-parser": "^4.7.18",
     "@markuplint/react-spec": "^4.5.18",
     "autoprefixer": "^10.4.21",
     "eslint": "^9",
-    "eslint-config-next": "15.5.28",
+    "eslint-config-next": "16.4.3",
     "markuplint": "^4.11.8",
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
