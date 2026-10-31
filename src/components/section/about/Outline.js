@@ -89,15 +89,8 @@ export default function Outline() {
                 <dd className={`c-dl__dd ${styles.dlDd}`}>{COMPANY.founder}</dd>
               </div>
               <div className={`c-dl__items`}>
-                <dt className={`c-dl__dt ${styles.dlDt}`}>役員</dt>
-                <dd className={`c-dl__dd ${styles.dlDd}`}>
-                  <dl className="flex flex-col gap-[2] md:gap-1 lg:gap-2">
-                    <div className="flex gap-[1em]">
-                      <dt>取締役 副社長</dt>
-                      <dd>片山 渉</dd>
-                    </div>
-                  </dl>
-                </dd>
+                <dt className={`c-dl__dt ${styles.dlDt}`}>副社長</dt>
+                <dd className={`c-dl__dd ${styles.dlDd}`}>片山 渉</dd>
               </div>
               <div className={`c-dl__items`}>
                 <dt className={`c-dl__dt ${styles.dlDt}`}>営業所</dt>
